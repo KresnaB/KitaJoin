@@ -9,7 +9,6 @@ This system is a web-based application that can make it easier for users who wan
 You need to install composer:
 - Composer
 - Laravel CLI
-- Laravel Passport
 
 ## FAQ
 
