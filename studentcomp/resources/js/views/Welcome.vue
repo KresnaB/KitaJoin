@@ -46,3 +46,8 @@
         color: #000000;
     }
 </style>
+<script>
+export default {
+    
+}
+</script>
