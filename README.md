@@ -6,10 +6,11 @@ This system is a web-based application that can make it easier for users who wan
 
 ### Prerequisites
 
-You need to install composer:
+You need to install:
 - Composer
 - Laravel CLI
 - XAMPP
+- Node.js
 
 ## FAQ
 
