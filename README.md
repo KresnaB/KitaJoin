@@ -6,6 +6,16 @@ This system is a web-based application that can make it easier for users who wan
 
 ### Prerequisites
 
-You need to install:
+You need to install composer:
 - Composer
 - Laravel CLI
+
+## FAQ
+
+**How to start a PHP server?**
+
+run the command below:
+
+```go
+php artisan server
+```
