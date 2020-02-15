@@ -9,10 +9,10 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto"></ul>      
-                    <!-- Right Side of Navbar -->
+                    <ul class="navbar-nav mr-auto"></ul>
+                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-link">Hi, There</li>
+                        <li class="nav-link"> Hi, There</li>
                     </ul>
                 </div>
             </div>
@@ -22,8 +22,6 @@
         </main>
     </div>
 </template>
-<script>
-export default {
-    
-}
+ <script>
+    export default {}
 </script>

@@ -1,7 +1,7 @@
 <template>
     <div class="flex-center position-ref full-height">
         <div class="content">
-            <div class="m-b-md">
+            <div  class="m-b-md">
                 <h2 class="title m-b-md">
                     StudentComp
                 </h2>
@@ -24,7 +24,7 @@
     .top-right {
         position: absolute;
         right: 10px;
-        top: 18p;
+        top: 18px;
     }
     .content {
         text-align: center;
@@ -47,7 +47,5 @@
     }
 </style>
 <script>
-export default {
-    
-}
+    export default {}
 </script>
