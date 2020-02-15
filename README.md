@@ -17,5 +17,5 @@ You need to install composer:
 run the command below:
 
 ```go
-php artisan server
+php artisan serve
 ```
