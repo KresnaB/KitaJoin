@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller {
     public function login() {
+        $status = 401;
+        $response = ['error' => 'Unauthorised'];
+
         $credentials = [
             'email' => request('email'),
             'password' => request('password')
@@ -21,7 +24,7 @@ class UserController extends Controller {
             return response()->json(['success' => $success]);
         }
 
-        return response()-json(['error' => 'Unauthorised'], 401);
+        return response()-json($response, $status);
     }
 
     public function register(Request $request) {
