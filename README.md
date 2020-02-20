@@ -21,6 +21,18 @@ You need to install:
 
 ## FAQ
 
+**How to naming branch?**
+
+1. Use grouping tokens (words) at the beginning of your branch names. Use these:
+`feat   Feature you are adding or expanding`
+`bug    Bug fix`
+2. Use `/` to separate parts of your branch names
+3. Use `-` to separate words after `/`
+
+Example:
+`feat/register`
+`bug/register`
+
 **How to start a PHP server?**
 
 run the command below:
