@@ -39,7 +39,7 @@
             <div class="col-md-7 offset-md-3 d-flex">
               <!-- Submit Button -->
               <v-button :loading="form.busy">
-                {{ $t('register') }}
+                {{ $t('Sign up') }}
               </v-button>
 
               <!-- GitHub Register Button -->

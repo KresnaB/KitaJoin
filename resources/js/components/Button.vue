@@ -3,7 +3,7 @@
     [`btn-${type}`]: true,
     'btn-block': block,
     'btn-lg': large,
-    'btn-loading': loading
+    'btn-loading': loading,
   }" class="btn"
   >
     <slot />
@@ -32,12 +32,12 @@ export default {
 
     block: {
       type: Boolean,
-      default: false
+      default: true
     },
 
     large: {
       type: Boolean,
-      default: false
+      default: true
     }
   }
 }
