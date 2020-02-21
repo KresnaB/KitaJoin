@@ -4,11 +4,20 @@
     'btn-block': block,
     'btn-lg': large,
     'btn-loading': loading,
-  }" class="btn"
+  }" class="btn rounded-0 font-weight-bold"
   >
     <slot />
   </button>
 </template>
+
+<style scoped>
+ button {
+   color: black;
+   font-size: 12pt;
+ }
+</style>
+
+</style>
 
 <script>
 export default {
@@ -17,7 +26,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'primary'
+      default: 'light'
     },
 
     nativeType: {
