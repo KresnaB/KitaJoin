@@ -1,45 +1,44 @@
 <template>
-  <div class="row">
-    <div class="col-lg-8 m-auto">
+  <div class="row" style="height: 100vh">
+    <div class="col-sm col-md my-auto">
       <card v-if="mustVerifyEmail" :title="$t('register')">
         <div class="alert alert-success" role="alert">
           {{ $t('verify_email_address') }}
         </div>
       </card>
-      <card v-else :title="$t('register')">
+      <card v-else class="border-0 mx-auto" style="background-color: black; max-width: 500px">
+        <h1 class="text-white">KITA <br /> JOIN</h1>
+      <p class="text-white font-weight-light">Help you find the right people</p>
         <form @submit.prevent="register" @keydown="form.onKeydown($event)">
           <!-- Name -->
           <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('name') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
+            <div class="col-md col-sm">
+              <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name" placeholder="Full Name">
               <has-error :form="form" field="name" />
             </div>
           </div>
 
           <!-- Email -->
           <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
+            <div class="col-md col-sm">
+              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email" placeholder="Email">
               <has-error :form="form" field="email" />
             </div>
           </div>
 
           <!-- Password -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
+          <div class="form-group row mb-5">
+            <div class="col-md col-sm">
+              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password" placeholder="Password">
               <has-error :form="form" field="password" />
             </div>
           </div>
 
           <div class="form-group row">
-            <div class="col-md-7 offset-md-3 d-flex">
+            <div class="col-md col-sm">
               <!-- Submit Button -->
               <v-button :loading="form.busy">
-                {{ $t('Sign up') }}
+                {{ $t('Register') }}
               </v-button>
 
               <!-- GitHub Register Button -->
@@ -47,10 +46,36 @@
             </div>
           </div>
         </form>
+        <p id="already-have-an-account" class="text-white">Already have an account? <span id="sign-in-here">Sign in here</span></p>
       </card>
     </div>
   </div>
 </template>
+
+<style scoped>
+  input {
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: white;
+    background-color: black;
+    padding-left: 0;
+    -webkit-text-fill-color: white
+  }
+
+  ::placeholder {
+    color: #9E9E9E;
+    font-weight: lighter;
+  }
+
+  #sign-in-here {
+    color: #9E9E9E;
+  }
+
+  #already-have-an-account {
+    font-size: 12px;
+    font-weight: lighter;
+  }
+</style>
 
 <script>
 import Form from 'vform'
