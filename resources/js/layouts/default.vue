@@ -1,13 +1,17 @@
 <template>
   <div class="main-layout">
-    <navbar />
-
-    <div class="container mt-4">
+    <navbar class="d-none d-sm-block"/>
+    <div class="container">
       <child />
     </div>
   </div>
 </template>
 
+<style>
+  body {
+    background-color: black;
+  }
+</style>
 <script>
 import Navbar from '~/components/Navbar'
 
