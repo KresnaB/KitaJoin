@@ -68,7 +68,7 @@ export default {
   },
 
   data: () => ({
-    appName: window.config.appName
+    appName: 'KITAJOIN'
   }),
 
   computed: mapGetters({
@@ -92,5 +92,11 @@ export default {
   width: 2rem;
   height: 2rem;
   margin: -.375rem 0;
+}
+
+.nav-item > .active {
+  background-color: black;
+  -webkit-text-fill-color: white;
+  border-radius: 12px;
 }
 </style>
