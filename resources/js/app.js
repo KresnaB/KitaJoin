@@ -7,6 +7,10 @@ import App from '~/components/App'
 import '~/plugins'
 import '~/components'
 
+import VueKonva from 'vue-konva'
+
+Vue.use(VueKonva);
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
