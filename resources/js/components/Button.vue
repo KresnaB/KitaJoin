@@ -32,12 +32,12 @@ export default {
 
     block: {
       type: Boolean,
-      default: false
+      default: true
     },
 
     large: {
       type: Boolean,
-      default: false
+      default: true
     }
   }
 }
