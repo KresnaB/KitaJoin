@@ -4,7 +4,7 @@
     'btn-block': block,
     'btn-lg': large,
     'btn-loading': loading,
-  }" class="btn rounded-0 font-weight-bold"
+  }" class="btn font-weight-bold"
   >
     <slot />
   </button>
@@ -12,11 +12,9 @@
 
 <style scoped>
  button {
-   color: black;
+   color: white;
    font-size: 12pt;
  }
-</style>
-
 </style>
 
 <script>
@@ -26,7 +24,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'light'
+      default: 'secondary'
     },
 
     nativeType: {
