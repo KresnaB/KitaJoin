@@ -130,8 +130,16 @@
     padding: 0;
   }
 
-  #register-container {
-    height: calc(100vh - 56px);
+  @media (min-width: 577px) {
+    #register-container {
+      height: calc(100vh - 56px);
+    }  
+  }
+  
+  @media (max-width: 575px) {
+    #register-container {
+      height: 100vh;
+    }
   }
 
   #kita-join-header{
