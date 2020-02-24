@@ -3,12 +3,19 @@
     [`btn-${type}`]: true,
     'btn-block': block,
     'btn-lg': large,
-    'btn-loading': loading
-  }" class="btn"
+    'btn-loading': loading,
+  }" class="btn font-weight-bold"
   >
     <slot />
   </button>
 </template>
+
+<style scoped>
+ button {
+   color: white;
+   font-size: 12pt;
+ }
+</style>
 
 <script>
 export default {
@@ -17,7 +24,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'primary'
+      default: 'secondary'
     },
 
     nativeType: {
@@ -32,12 +39,12 @@ export default {
 
     block: {
       type: Boolean,
-      default: false
+      default: true
     },
 
     large: {
       type: Boolean,
-      default: false
+      default: true
     }
   }
 }
