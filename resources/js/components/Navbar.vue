@@ -92,4 +92,10 @@ export default {
   -webkit-text-fill-color: white;
   border-radius: 12px;
 }
+
+@media (max-width: 767px) {
+  .nav-link {
+    padding: 8px;
+  }
+}
 </style>

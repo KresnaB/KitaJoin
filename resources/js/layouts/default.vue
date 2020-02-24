@@ -1,6 +1,6 @@
 <template>
   <div class="main-layout">
-    <navbar class="d-none d-sm-block d-sm-none d-md-block"/>
+    <navbar />
     <div class="container">
       <child />
     </div>
