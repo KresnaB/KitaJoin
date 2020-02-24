@@ -130,17 +130,9 @@
     padding: 0;
   }
 
-  @media (min-width: 577px) {
-    #register-container {
-      height: calc(100vh - 56px);
-    }  
-  }
-  
-  @media (max-width: 575px) {
-    #register-container {
-      height: 100vh;
-    }
-  }
+  #register-container {
+    height: calc(100vh - 56px);
+  }  
 
   #kita-join-header{
     font-size: 8vw;
