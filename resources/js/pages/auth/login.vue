@@ -25,12 +25,9 @@
           <div class="form-group row">
             <div class="col-md-3" />
             <div class="col-md-7 d-flex">
-              <checkbox v-model="remember" name="remember">
-                {{ $t('remember_me') }}
-              </checkbox>
 
               <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
-                {{ $t('forgot_password') }}
+                {{ $t('Forgot Password?') }}
               </router-link>
             </div>
           </div>
@@ -39,7 +36,7 @@
             <div class="col-md-7 offset-md-3 d-flex">
               <!-- Submit Button -->
               <v-button :loading="form.busy">
-                {{ $t('login') }}
+                {{ $t('LOGIN') }}
               </v-button>
 
               <!-- GitHub Login Button -->
