@@ -80,6 +80,7 @@
   label {
     color: #B1C1C8;
     font-size: 12px;
+    margin: 0;
   }
 
   .input-card {
