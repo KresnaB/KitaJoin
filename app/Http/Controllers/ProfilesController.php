@@ -11,21 +11,21 @@ class ProfilesController extends Controller
 {
     public function index(User $user)
     {
-        //return view('profiles.index', compact('user'));
+        $profiles = Profile::all()->toArray();
+        return array_reverse($profiles);
     }
 
-    public function users()
-    {
-        $profiles = Profile::latest()->get();
-        $users = User::latest()->get();
-        return response()->json(['users'=>$users,'profiles'=>$profiles,]);
-    }
+    // public function users()
+    // {
+    //     $profiles = Profile::latest()->get();
+    //     $users = User::latest()->get();
+    //     return response()->json(['users'=>$users,'profiles'=>$profiles,]);
+    // }
 
-    public function profile(User $id)
+    public function profile($id)
     {
-        $user = User::find($id);
         $profile = Profile::find($id);
-        return response()->json(['user'=>$user,'profile'=>$profile]);
+        return response()->json(['profile'=>$profile]);
     }
 
     // public function edit(User $user)
@@ -37,26 +37,14 @@ class ProfilesController extends Controller
 
     public function edit(Request $request,Profile $id)
     {
-        $id->update([
-            'interest' => $request->interest,
-            'department' => $request->department,
-            'program' => $request->program,
-            'semester' => $request->semester,
-            'ept' => $request->ept,
-            'ip' => $request->ip,
-            'contact' => $request->contact,
-            'experience' => $request->experience,
-            'desc' => $request->desc,
-            'bio' => $request->bio,
-        ]);
-        //return response()->json('id',$id);
+        //
     }
 
-    public function update(User $user)
+    public function update(Request $request,$id)
     {
-        $this->authorize('update', $user->profile);
-
-        $data = request()->validate([
+        $profile = Profile::find($id);
+        $validatedData = $request->validate([
+            'name' => '',
             'interest' => 'required',
             'department' => 'required',
             'program' => 'required',
@@ -69,23 +57,7 @@ class ProfilesController extends Controller
             'bio' => '',
             'image' => '',
         ]);
-
-
-        if(request('image')){
-            $imagePath = request('image')->store('profile', 'public');
-        
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000,1000);
-            $image->save();
-
-            $imageArray = ['image'=> $imagePath ];
-        }
-
-        auth()->user()->profile->update(array_merge(
-            $data,
-            $imageArray ?? []
-            
-        ));
-        $profile= Profile::find($id);
-        return response()->json($profile);
+        $profile->update($validatedData->all());
+        return response()->json('The book successfully updated');
     }
 }

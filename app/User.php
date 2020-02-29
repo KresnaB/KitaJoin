@@ -46,6 +46,7 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
 
         static::created(function ($user){
             $user->profile()->create([
+                'name' => $user->get('name'),
                 'interest' => "Empty",
                 'department' => 'Empty',
                 'program' => 'Empty',
