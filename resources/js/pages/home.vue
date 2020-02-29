@@ -6,7 +6,9 @@
       <div class="person-row">
         <img class="rounded-circle my-auto" src="person.jpg" alt=""/>
         <div class="my-auto ml-3">
-          <h6 id="person-name">Ivan Eka Putra</h6>
+          <router-link id="person-name" :to="{ name: 'profile.details' }" class="navbar-brand font-weight-bold">
+            Ivan Eka Putra
+          </router-link>
           <p id="person-interest">{{ person.interest }}</p>
         </div>
       </div>
@@ -35,6 +37,11 @@
     #person-name, #person-interest {
       font-size: 4.5vw;
     }
+  }
+
+  #person-name {
+    color: black;
+    padding: 0;
   }
 
   .person-row {
