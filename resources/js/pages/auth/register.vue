@@ -74,7 +74,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-sm col-md my-auto d-none d-sm-block d-sm-none d-md-block">
+    <div class="col-sm col-md my-auto d-none d-xl-block">
       <div style="text-align: right">
         <h1 id="kita-join-header" class="text-white">KITA <br /> JOIN</h1>
         <p id="kita-join-paragraph" class="text-white font-weight-light">Help you find the right people</p>
@@ -113,6 +113,7 @@
   label {
     color: #B1C1C8;
     font-size: 12px;
+    margin: 0;
   }
 
   .input-card {
@@ -120,10 +121,6 @@
     border-radius: 4px;
     padding-top: 4px;
     padding-bottom: 0;
-  }
-
-  label {
-    margin: 0;
   }
 
   #register-card {

@@ -1,4 +1,5 @@
 <template>
+<<<<<<< resources/js/pages/home.vue
   <div id="home-card" class="card-body">
     <h6 id="person-heading-xs" class="d-block d-sm-none">People</h6>
     <h6 id="person-heading" class="d-none d-sm-block">People</h6>
@@ -7,7 +8,7 @@
         <img class="rounded-circle my-auto" src="person.jpg" alt=""/>
         <div class="my-auto ml-3">
           <h6 id="person-name">Ivan Eka Putra</h6>
-          <p id="person-interest">Competitive Programming</p>
+          <p id="person-interest">{{profiles.interest}}</p>
         </div>
       </div>
     </card>
@@ -77,7 +78,18 @@
 <script>
 export default {
   middleware: 'auth',
-
+  data() {
+            return {
+                profiles: []
+            }
+        },
+        created() {
+            this.axios
+                .get('http://127.0.0.1:8000/api/profiles')
+                .then(response => {
+                    this.profiles = response.data;
+                });
+        },
   metaInfo () {
     return { title: this.$t('home') }
   }
