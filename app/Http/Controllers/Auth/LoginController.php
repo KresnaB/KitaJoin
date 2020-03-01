@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App\User;
+use App\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Exceptions\VerifyEmailException;
@@ -38,6 +39,9 @@ class LoginController extends Controller
         }
 
         $user = $this->guard()->user();
+        $profile = $this->guard()->user()->profile;
+        $profile->name = $user->name;
+        $profile->save();
         if ($user instanceof MustVerifyEmail && ! $user->hasVerifiedEmail()) {
             return false;
         }
