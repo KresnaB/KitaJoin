@@ -7,6 +7,9 @@
         </router-link>
       </template>
       <template v-else>
+        <router-link :to="{ name: 'AddCompetition' }">
+          {{ $t('AddCompetition') }}
+        </router-link>
         <router-link :to="{ name: 'login' }">
           {{ $t('login') }}
         </router-link>
