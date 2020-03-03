@@ -1,7 +1,7 @@
 <template>
     <form>
         <div class="form-group">
-            <label for="name">Competition Name</label>
+            <label for="com-name">Competition Name</label>
             <input type="text" class="form-control" name="nameCom" id="nameCom" >
         </div>
 
@@ -11,7 +11,7 @@
         </div>
 
         <div class="form-group">
-            <h6>Type of Competition:</h6>
+            <h6>Type of Competition</h6>
             <input type="radio" id="olahragaCom" value="Olahraga" v-model="type">
             <label for="olahragaCom">Olahraga</label><br>
             <input type="radio" id="akademikCom" value="Akademik" v-model="type">
@@ -22,24 +22,23 @@
         </div>
 
         <div class="form-group">
-            <h6>Category:</h6>
+            <h6>Category</h6>
             <select v-model="category">
                 <option disabled value="">Select Category</option>
                 <option>Individu</option>
                 <option>Group</option>
-            </select>
+            </select><br>
             <span>Selected: {{ category }}</span>
-        </div>
-
-        <div class="form-group">
-            <h6>Poster Upload:</h6>
-            <input type="file" class="form-control" v-on:change="onImageChange">
-            
         </div>
 
         <div class="form-group">
             <label for="description">Description</label>
             <textarea class="form-control" name="descCom" id="descCom" rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+            <h6>Poster Upload</h6>
+            <input type="file" class="form-control" v-on:change="onImageChange">
         </div>
 
         <button type="submit" class="btn btn-primary" @click="uploadImage">Submit Competition</button>
@@ -54,7 +53,9 @@ export default {
     middleware: 'auth',
     data(){
         return {
-        image: ''
+        image: '',
+        type: '',
+        category: ''
         }
     },
     mounted() {
