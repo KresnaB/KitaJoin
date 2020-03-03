@@ -4,7 +4,7 @@
             <div class="d-flex">
                 <img src="person.jpg" class="rounded-circle">
                 <div id="profile-identity" class="my-auto">
-                    <h4>Ivan Eka Putra</h4>
+                    <h4>{{ person.name }}</h4>
                     <h6>D3 Teknik Informatika</h6>
                 </div>
             </div>
@@ -78,3 +78,24 @@
         border-radius: 12px;
     }
 </style>
+
+<script>
+import { mapGetters } from 'vuex';
+
+export default {
+    mounted() {
+        this.$store.dispatch('fetchPerson')
+    },
+    computed: {
+        ...mapGetters([
+        'person'
+        ])
+    },
+    metaInfo () {
+        return { title: this.$t('home') }
+    },
+    created() {
+        this.person.id = this.$route.params.id;
+    }
+}
+</script>
