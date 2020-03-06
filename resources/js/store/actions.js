@@ -9,10 +9,9 @@ let actions = {
                 console.log(err)
             })
     },
-
-    fetchPerson({commit}) {
-        axios.get('/api/profiles/${to.params.id}')
-            .then(res => {
+    fetchPerson({commit}, data) {
+        axios.get('/api/profiles/' + data.id)
+            .then((res) => {
                 commit('FETCH_PERSON', res.data)
             }).catch(err => {
                 console.log(err)

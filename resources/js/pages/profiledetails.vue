@@ -2,7 +2,7 @@
     <div class="p-3">
         <card id="general-profile" class="mb-3">
             <div class="d-flex">
-                <img src="person.jpg" class="rounded-circle">
+                <img src="" class="rounded-circle">
                 <div id="profile-identity" class="my-auto">
                     <h4>{{ person.name }}</h4>
                     <h6>D3 Teknik Informatika</h6>
@@ -84,18 +84,14 @@ import { mapGetters } from 'vuex';
 
 export default {
     mounted() {
-        this.$store.dispatch('fetchPerson')
+        this.$store.dispatch('fetchPerson', {
+            id: this.$route.params.id
+        })
     },
     computed: {
         ...mapGetters([
-        'person'
+            'person'
         ])
-    },
-    metaInfo () {
-        return { title: this.$t('home') }
-    },
-    created() {
-        this.person.id = this.$route.params.id;
     }
 }
 </script>
