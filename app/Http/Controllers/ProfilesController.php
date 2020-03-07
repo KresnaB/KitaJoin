@@ -57,14 +57,7 @@ class ProfilesController extends Controller
         $profile = Profile::find($id);
         $data = request()->validate([
             'interest' => 'required',
-            'department' => 'required',
-            'program' => 'required',
-            'semester' => 'required|numeric|min:1|max:8',
-            'ept' => 'numeric|min:0|max:700',
-            'ip' => 'numeric|min:1|max:4',
             'contact' => 'required',
-            'experience' => '',
-            'desc' => '',
             'bio' => '',
             'image' => 'image',
         ]);

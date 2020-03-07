@@ -24,6 +24,14 @@ let actions = {
             }).catch(err => {
                 console.log(err)
             })
+    },
+    updatePerson(form) {
+        axios.post('/api/update/' + form.id, {image: this.form.image, name: this.form.image, about: this.form.about, telephone: this.form.telephone, interest: this.form.interest})
+            .then((res) => {
+                this.$store.dispatch('fetchPeople')
+            }).catch(err => {
+                console.log(err);
+            })
     }
 }
 

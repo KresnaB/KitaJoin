@@ -13,7 +13,7 @@
 <style scoped>
  button {
    color: white;
-   font-size: 12pt;
+   font-size: 12sp;
  }
 </style>
 
