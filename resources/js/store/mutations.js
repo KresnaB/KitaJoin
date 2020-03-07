@@ -4,6 +4,9 @@ let mutations = {
     },
     FETCH_PERSON(state, person) {
         return state.person = person
+    },
+    FETCH_USER(state, user) {
+        return state.user = user
     }
 }
 

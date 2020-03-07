@@ -16,6 +16,14 @@ let actions = {
             }).catch(err => {
                 console.log(err)
             })
+    },
+    fetchUser({commit}) {
+        axios.get('/api/user')
+            .then((res) => {
+                commit('FETCH_USER', res.data)
+            }).catch(err => {
+                console.log(err)
+            })
     }
 }
 
