@@ -2,38 +2,50 @@
     <div class="p-3">
         <card id="general-profile" class="mb-3">
             <div class="d-flex">
-                <img src="" class="rounded-circle">
+                <img :src="person.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
+                <img :src="person.image" class="rounded-circle img-responsive my-auto d-none d-sm-block" width="auto" height="130">
                 <div id="profile-identity" class="my-auto">
                     <h4>{{ person.name }}</h4>
-                    <h6>D3 Teknik Informatika</h6>
+                    <h6>{{ person.program }}</h6>
                 </div>
             </div>
         </card>
-        <card>
+        <card class="mb-3" v-if="person.bio !== null">
             <div>
-            <h6 id="about">About</h6>
-                <p>Lorem ipsum dolor sit amet, 
-                    consectetur adipiscing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                    Lectus mauris ultrices eros in cursus. 
-                    Nisi scelerisque eu ultrices vitae. 
+                <h6 id="about" class="mb-3">About</h6>
+                <p class="mb-0">{{ person.bio }}
                 </p>
+            </div>
+        </card>
+        <card class="mb-3">
+            <div>
+                <h6 id="interest" class="mb-4">Interest</h6>
+                <ul class="list-unstyled mb-0">
+                    <li class="medium-light-semibold bg-secondary d-inline-flex">{{ person.interest }}</li>
+                </ul>
+            </div>
+        </card>
+        <card v-if="person.contact !== null">
+            <div>
+                <h6 id="contact" class="mb-4">Contact</h6>
+            </div>
+            <div class="d-flex">
+                <fa icon="address-book" class="mr-4"/>
+                <div>
+                    <h6 id="telephone" class="font-weight-bold mb-0">Telephone</h6>
+                    <p class="mb-0">{{ person.contact }}</p>
+                </div>
             </div>
         </card>
     </div>
 </template>
 
 <style scoped>
-    img {
-        width: 31%;
-        height: auto;
-    }
-
-    h4, #about{
+    h4, #about, #interest, #telephone{
         color: black;
     }
 
-    h6, p {
+    h6, p{
         color: rgb(136, 148, 153);
     }
 
@@ -54,11 +66,6 @@
     }
 
     @media (min-width: 1025px) {
-        img {
-            width: 279px;
-            height: 279px;
-        }
-
         #general-profile {
             margin-top: 24vh;
             margin-bottom: 24vh;
@@ -76,6 +83,12 @@
     .card {
         padding: 12px;
         border-radius: 12px;
+    }
+
+    li {
+        color: white;
+        padding: 8px;
+        border-radius: 14px;
     }
 </style>
 
