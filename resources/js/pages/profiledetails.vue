@@ -12,9 +12,9 @@
                         <button type="button" class="btn btn-dark d-none d-sm-block mr-2" data-toggle="modal" data-target="#contact-information-modal">
                             Contact information
                         </button>
-                        <button type="button" class="btn btn-dark btn-sm" v-if="user.id === person.id">
+                        <router-link :to="{name: 'settings.profile'}" tag="button" class="btn btn-dark btn-sm" v-if="user.id === person.id">
                             Edit Profile
-                        </button>
+                        </router-link>
                     </div>
                 </div>
                 <div id="contact-information-modal" class="modal" tabindex="-1" role="dialog">
