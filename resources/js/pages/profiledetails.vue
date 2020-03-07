@@ -6,10 +6,16 @@
                 <img :src="person.image" class="rounded-circle img-responsive my-auto d-none d-sm-block" width="auto" height="130">
                 <div id="profile-identity" class="my-auto">
                     <h4>{{ person.name }}</h4>
-                    <h6 id="study-program">{{ person.program }}</h6>
-                    <button type="button" class="btn btn-dark d-none d-sm-block" data-toggle="modal" data-target="#contact-information-modal">
-                        Contact information
-                    </button>
+                    <h6 id="user-study-program" v-if="user.id === person.id">{{ person.program }}</h6>
+                    <h6 id="study-program" v-else>{{ person.program }}</h6>
+                    <div class="d-flex">
+                        <button type="button" class="btn btn-dark d-none d-sm-block mr-2" data-toggle="modal" data-target="#contact-information-modal">
+                            Contact information
+                        </button>
+                        <button type="button" class="btn btn-dark btn-sm" v-if="user.id === person.id">
+                            Edit Profile
+                        </button>
+                    </div>
                 </div>
                 <div id="contact-information-modal" class="modal" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
@@ -135,6 +141,10 @@
         #interest, #contact {
             font-size: 5vw;
         }
+
+        #user-study-program {
+            margin-bottom: 2vh;
+        }
     }
 </style>
 
@@ -145,11 +155,13 @@ export default {
     mounted() {
         this.$store.dispatch('fetchPerson', {
             id: this.$route.params.id
-        })
+        }),
+        this.$store.dispatch('fetchUser')
     },
     computed: {
         ...mapGetters([
-            'person'
+            'person',
+            'user'
         ])
     }
 }
