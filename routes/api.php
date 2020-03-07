@@ -37,3 +37,8 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
 });
+
+Route::get('add/{id}', 'ProfilesController@add');
+Route::get('profiles', 'ProfilesController@index');
+Route::get('profiles/{id}', 'ProfilesController@profile');
+Route::post('update/{id}', 'ProfilesController@update');

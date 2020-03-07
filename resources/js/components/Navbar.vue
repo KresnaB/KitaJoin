@@ -20,7 +20,7 @@
               {{ user.name }}
             </a>
             <div class="dropdown-menu">
-              <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
+              <router-link :to="{ name: 'profile.details', params: {id: user.id}}" class="dropdown-item pl-3">
                 <fa icon="user" fixed-width />
                 Profile
               </router-link>
@@ -100,6 +100,12 @@ export default {
 @media (max-width: 767px) {
   .nav-link {
     padding: 8px;
+  }
+}
+
+@media (max-width: 575px) {
+  #navbarToggler {
+    margin-top: 8px;
   }
 }
 </style>
