@@ -66,7 +66,7 @@ class ProfilesController extends Controller
             'experience' => '',
             'desc' => '',
             'bio' => '',
-            'image' => '',
+            'image' => 'image',
         ]);
 
 
