@@ -6,7 +6,32 @@
                 <img :src="person.image" class="rounded-circle img-responsive my-auto d-none d-sm-block" width="auto" height="130">
                 <div id="profile-identity" class="my-auto">
                     <h4>{{ person.name }}</h4>
-                    <h6>{{ person.program }}</h6>
+                    <h6 id="study-program">{{ person.program }}</h6>
+                    <button type="button" class="btn btn-dark d-none d-sm-block" data-toggle="modal" data-target="#contact-information-modal">
+                        Contact information
+                    </button>
+                </div>
+                <div id="contact-information-modal" class="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title font-weight-light">{{ person.name }}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h6 id="contact-information" class="font-weight-light mb-4">Contact Information</h6>
+                                <div class="d-flex">
+                                    <fa icon="address-book" class="mr-4 fa-2x my-auto"/>
+                                    <div>
+                                        <h6 id="telephone" class="font-weight-bold mb-0 telephone">Telephone</h6>
+                                        <p id="telephone-number" class="mb-0">{{ person.contact }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </card>
@@ -19,20 +44,21 @@
         </card>
         <card class="mb-3">
             <div>
-                <h6 id="interest" class="mb-4">Interest</h6>
+                <h6 id="interest" class="mb-4 font-weight-light">Interest</h6>
                 <ul class="list-unstyled mb-0">
                     <li class="medium-light-semibold bg-secondary d-inline-flex">{{ person.interest }}</li>
                 </ul>
             </div>
         </card>
-        <card v-if="person.contact !== null">
+        <card class="d-block d-sm-none" v-if="person.contact !== null">
             <div>
-                <h6 id="contact" class="mb-4">Contact</h6>
+                <h6 id="contact" class="mb-4 font-weight-light">Contact</h6>
             </div>
             <div class="d-flex">
-                <fa icon="address-book" class="mr-4"/>
+                <fa icon="address-book" class="mr-4 fa-3x my-auto d-none d-sm-block"/>
+                <fa icon="address-book" class="mr-4 fa-2x my-auto d-block d-sm-none"/>
                 <div>
-                    <h6 id="telephone" class="font-weight-bold mb-0">Telephone</h6>
+                    <h6 class="font-weight-bold mb-0 telephone">Telephone</h6>
                     <p class="mb-0">{{ person.contact }}</p>
                 </div>
             </div>
@@ -41,11 +67,11 @@
 </template>
 
 <style scoped>
-    h4, #about, #interest, #telephone{
+    h4, #about, .telephone{
         color: black;
     }
 
-    h6, p{
+    h6, p, #interest{
         color: rgb(136, 148, 153);
     }
 
@@ -65,7 +91,7 @@
         margin-left: 6vw;   
     }
 
-    @media (min-width: 1025px) {
+    @media (min-width: 768px) {
         #general-profile {
             margin-top: 24vh;
             margin-bottom: 24vh;
@@ -78,6 +104,14 @@
         h6 {
             font-size: 3vw;
         }
+
+        #profile-identity {
+            margin-left: 3vw;
+        }
+
+        #study-program {
+            margin-bottom: 24px;
+        }
     }
 
     .card {
@@ -89,6 +123,18 @@
         color: white;
         padding: 8px;
         border-radius: 14px;
+    }
+
+    @media (min-width: 1024px) {
+        #contact-information, #telephone {
+            font-size: 2vw;
+        }
+    }
+
+    @media (max-width: 414px) {
+        #interest, #contact {
+            font-size: 5vw;
+        }
     }
 </style>
 
