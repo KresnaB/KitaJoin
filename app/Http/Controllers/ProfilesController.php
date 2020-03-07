@@ -22,31 +22,7 @@ class ProfilesController extends Controller
         $profile = Profile::find($id);
         return response()->json(['profile'=>$profile]);
     }
-
-    // public function add($id)
-    // {
-    //     $username = User::find($id);
-        
-    //     // $profile = new Profile([
-    //     //     'name' => $username->pluck('name'),
-    //     //     'interest' =>  $request->input('interest'),
-    //     //     'department' =>  $request->input('department'),
-    //     //     'program' =>  $request->input('program'),
-    //     //     'semester' =>  $request->input('semester'),
-    //     //     'ept' =>  $request->input('ept'),
-    //     //     'ip' =>  $request->input('ip'),
-    //     //     'contact' =>  $request->input('contact'),
-    //     //     'experience' =>  $request->input('experience'),
-    //     //     'desc' =>  $request->input('desc'),
-    //     //     'bio' =>  $request->input('bio')
-    //     // ]);
-    //     // $profile->save();
-    //     dd($username);
-
-    //     //return response()->json('The profile successfully added');
-    // }
     
-
     public function edit(Request $request,Profile $id)
     {
         //
