@@ -43,12 +43,13 @@
               <v-button :loading="form.busy">
                 Let's find!
               </v-button>
-
+              
               <!-- GitHub Login Button -->
               <login-with-github />
             </div>
           </div>
         </form>
+        <button @click="AuthProvider('google')">auth Google</button>
       </div>
     </div>
     <div class="col-sm col-md my-auto d-none d-xl-block">
@@ -109,6 +110,7 @@
 <script>
 import Form from 'vform'
 import LoginWithGithub from '~/components/LoginWithGithub'
+import VueSocialAuth from 'vue-social-auth'
 
 export default {
   middleware: 'guest',
@@ -145,6 +147,21 @@ export default {
 
       // Redirect home.
       this.$router.push({ name: 'home' })
+    },
+    AuthProvider(provide) {
+      var self = this
+      this.$auth.authenticate(provider).then(response => {
+        self.SocialLogin(provider, response)
+      }).catch(err => {
+        console.log({err:err})
+      })
+    },
+    SocialLogin(provide, response) {
+      this.$http.post('/sociallogin/' + provider, response).then(response => {
+        console.log(response.data)
+      }).catch(err => {
+        console.log({err:err})
+      })
     }
   }
 }
