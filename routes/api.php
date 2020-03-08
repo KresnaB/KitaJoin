@@ -36,4 +36,6 @@ Route::group(['middleware' => 'guest:api'], function () {
 
     Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
+    Route::post('sociallogin/{provider}', 'Auth\AuthController@SocialSignup');
+    Route::get('auth/{provider}/callback', 'OutController@index')->where('provider', '.*');
 });
