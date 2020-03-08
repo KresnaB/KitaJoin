@@ -94,7 +94,7 @@
     }
 
     #profile-identity {
-        margin-left: 6vw;   
+        margin-left: 6vw;
     }
 
     @media (min-width: 768px) {

@@ -15,7 +15,7 @@ class ProfilesController extends Controller
         return array_reverse($profiles);
     }
 
-    
+
 
     public function profile($id)
     {
@@ -26,7 +26,7 @@ class ProfilesController extends Controller
     // public function add($id)
     // {
     //     $username = User::find($id);
-        
+
     //     // $profile = new Profile([
     //     //     'name' => $username->pluck('name'),
     //     //     'interest' =>  $request->input('interest'),
@@ -45,7 +45,7 @@ class ProfilesController extends Controller
 
     //     //return response()->json('The profile successfully added');
     // }
-    
+
 
     public function edit(Request $request,Profile $id)
     {
@@ -65,17 +65,18 @@ class ProfilesController extends Controller
 
         if(request('image')){
             $imagePath = request('image')->store('profile', 'public');
-        
+
             $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000,1000);
             $image->save();
-
-            $imageArray = ['image'=> $imagePath ];
+            $exactPath = "/storage/";
+            $exactPath = $exactPath . $imagePath;
+            $imageArray = ['image'=> $exactPath ];
         }
 
         $profile->update(array_merge(
             $data,
             $imageArray ?? []
-            
+
         ));
         return response()->json('The profile successfully updated');
     }
