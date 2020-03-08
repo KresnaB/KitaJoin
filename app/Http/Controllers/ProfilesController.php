@@ -56,28 +56,27 @@ class ProfilesController extends Controller
     {
         $profile = Profile::find($id);
         $data = request()->validate([
-            'interest' => 'required',
-            'contact' => 'required',
+            'image' => '',
             'bio' => '',
-            'image' => 'image',
+            'contact' => 'required',
+            'interest' => 'required'
         ]);
 
-
-        if(request('image')){
-            $imagePath = request('image')->store('profile', 'public');
-
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000,1000);
-            $image->save();
-            $exactPath = "/storage/";
-            $exactPath = $exactPath . $imagePath;
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extension;
+            $file->move('storage/profile', $filename);
+            $exactPath = "/storage/profile/";
+            $exactPath = $exactPath . $filename;
             $imageArray = ['image'=> $exactPath ];
         }
-
+        
         $profile->update(array_merge(
             $data,
             $imageArray ?? []
-
         ));
+        
         return response()->json('The profile successfully updated');
     }
 }

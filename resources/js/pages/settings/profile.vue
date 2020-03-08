@@ -1,6 +1,6 @@
 <template>
-  <card class="mt-3">
-    <form @submit.prevent="update" @keydown="form.onKeydown($event)" method="POST" enctype="multipart/form-data">
+  <card id="profile-card" class="mt-3 mb-3">
+    <form @submit="update" @keydown="form.onKeydown($event)" method="POST" enctype="multipart/form-data">
       <alert-success :form="form" :message="$t('info_updated')" />
 
       <div class="form-group row">
@@ -26,25 +26,12 @@
             </div>
             <div class="modal-body">
               <div>
-                <input type="file" class="form-control-file" @change="onFileChange">
+                <input id="image-input" type="file" class="form-control-file" @change="onFileChange" name="image">
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <!-- Name -->
-      <div class="row">
-        <label class="col col-form-label font-weight-bold pt-0 pb-0">Full name *</label>
-      </div>
-      <div class="form-group row">
-        <div class="col">
-          <input v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
-          <has-error :form="form" field="name" />
-        </div>
-      </div>
-
-      <hr>
 
       <!-- About -->
       <div class="row">
@@ -52,7 +39,7 @@
       </div>
       <div class="form-group row">
         <div class="col">
-          <textarea v-model="person.bio" :class="{ 'is-invalid': form.errors.has('about') }" class="form-control" name="about"></textarea>
+          <textarea v-model="person.bio" :class="{ 'is-invalid': form.errors.has('about') }" class="form-control" name="bio"></textarea>
           <has-error :form="form" field="about" />
         </div>
       </div>
@@ -61,11 +48,11 @@
 
       <!-- Telephone -->
       <div class="row">
-        <label class="col-md-3 col-form-label font-weight-bold pt-0 pb-0">Telephone</label>
+        <label class="col-md-3 col-form-label font-weight-bold pt-0 pb-0">Telephone *</label>
       </div>
       <div class="form-group row">
         <div class="col">
-          <input v-model="person.contact" :class="{ 'is-invalid': form.errors.has('telephone') }" class="form-control" type="number" name="telephone">
+          <input v-model="person.contact" :class="{ 'is-invalid': form.errors.has('telephone') }" class="form-control" type="number" name="contact">
           <has-error :form="form" field="telephone" />
         </div>
       </div>
@@ -74,7 +61,7 @@
 
       <!-- Interest -->
       <div class="row">
-        <label class="col-md-3 col-form-label font-weight-bold pt-0 pb-0">Interest</label>
+        <label class="col-md-3 col-form-label font-weight-bold pt-0 pb-0">Interest *</label>
       </div>
       <div class="form-group row">
         <div class="col">
@@ -88,7 +75,7 @@
       <!-- Submit Button -->
       <div class="row">
         <div class="col-md col-sm">
-          <v-button :loading="form.busy" @click="update(person)">
+          <v-button :loading="form.busy"">
             Save
           </v-button>
         </div>
@@ -120,6 +107,12 @@
   input:focus, textarea:focus {
     box-shadow: none !important;
   }
+
+  @media (min-width: 768px) {
+    .card {
+      margin-top: 3vh !important;
+    }
+  }
 </style>
 
 <script>
@@ -137,11 +130,11 @@ export default {
   data: () => ({
     form: new Form({
       id: '',
-      name: '',
       about: '',
       telephone: '',
       interest: ''
-    })
+    }),
+    image: ''
   }),
 
   computed: mapGetters({
@@ -163,20 +156,33 @@ export default {
   },
 
   methods: {
-    async update (person) {
-      return axios.post('/api/update/' + this.person.id, {image: this.person.image, name: this.person.name, bio: this.person.bio, contact: this.person.contact, interest: this.person.interest})
-      .then(res => {
-        this.$store.dispatch(fetchPerson, {
-          id: this.form.id
-        }).catch((err) => {
-          console.log(err);
-        })
-      })
+    update(e) {
+      e.preventDefault();
+      let currentObj = this;
+
+      const config = {
+        headers: {'content-type': 'multipart/form-data'}
+      }
+
+      let formData = new FormData();
+      var imageInput = document.getElementById('image-input');
+      if (imageInput.files.length != 0) {
+        formData.append('image', this.image);
+      }
+      formData.append('bio', this.person.bio);
+      formData.append('contact', this.person.contact);
+      formData.append('interest', this.person.interest);
+
+      axios.post('/api/update/' + this.person.id, formData, config).then(function (response) {
+        currentObj.success = response.data.success;
+      }).catch(function (error) {
+        currentObj.output = error;
+      });
     },
     onFileChange(e) {
       console.log(e.target.files[0]);
-      const file = e.target.files[0];
-      this.person.image = URL.createObjectURL(file);
+      this.image = e.target.files[0];
+      this.person.image = URL.createObjectURL(this.image);
     }
   }
 }
