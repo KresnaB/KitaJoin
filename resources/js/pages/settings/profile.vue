@@ -52,7 +52,7 @@
       </div>
       <div class="form-group row">
         <div class="col">
-          <input v-model="person.contact" :class="{ 'is-invalid': form.errors.has('telephone') }" class="form-control" type="number" name="contact">
+          <input v-model="person.contact" :class="{ 'is-invalid': form.errors.has('telephone') }" class="form-control" type="number" name="contact" required>
           <has-error :form="form" field="telephone" />
         </div>
       </div>
@@ -65,7 +65,7 @@
       </div>
       <div class="form-group row">
         <div class="col">
-          <input v-model="person.interest" :class="{ 'is-invalid': form.errors.has('interest') }" class="form-control" type="text" name="interest">
+          <input v-model="person.interest" :class="{ 'is-invalid': form.errors.has('interest') }" class="form-control" type="text" name="interest" required>
           <has-error :form="form" field="interest" />
         </div>
       </div>
