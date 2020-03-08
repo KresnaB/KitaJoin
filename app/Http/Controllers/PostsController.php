@@ -15,7 +15,7 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all()->toArray();
-        return array_reverse($profiles);
+        return array_reverse($posts);
     }
 
     /**
