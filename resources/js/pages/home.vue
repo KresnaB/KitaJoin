@@ -6,7 +6,9 @@
       <div class="person-row">
         <img class="rounded-circle my-auto" src="https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm" alt=""/>
         <div class="my-auto ml-3">
-          <p id="person-name" class="font-weight-bold">{{ person.name }}</p>
+          <router-link id="person-name" :to="{ name: 'profile.details', params: {id: person.id}}" class="navbar-brand font-weight-bold">
+            {{ person.name }}
+          </router-link>
           <p id="person-interest">{{ person.interest }}</p>
         </div>
       </div>
