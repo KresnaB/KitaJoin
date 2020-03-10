@@ -2,9 +2,9 @@
   <div id="home-card" class="card-body">
     <h6 id="person-heading-xs" class="d-block d-sm-none">People</h6>
     <h6 id="person-heading" class="d-none d-sm-block">People</h6>
-    <card v-for="person in people" v-bind:key="person.id" class="shadow-sm">
+    <card v-for="person in people" v-bind:key="person.id" class="shadow-sm mb-2">
       <div class="person-row">
-        <img class="rounded-circle my-auto" src="person.jpg" alt=""/>
+        <img class="rounded-circle my-auto" src="https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm" alt=""/>
         <div class="my-auto ml-3">
           <router-link id="person-name" :to="{ name: 'profile.details', params: {id: person.id}}" class="navbar-brand font-weight-bold">
             {{ person.name }}
