@@ -43,7 +43,7 @@
         </card>
         <card class="mb-3" v-if="person.bio !== null">
             <div>
-                <h6 id="about" class="mb-3">About</h6>
+                <h6 id="about" class="mb-3 font-weight-light">About</h6>
                 <p class="mb-0">{{ person.bio }}
                 </p>
             </div>
@@ -73,11 +73,11 @@
 </template>
 
 <style scoped>
-    h4, #about, .telephone{
+    h4, .telephone{
         color: black;
     }
 
-    h6, p, #interest{
+    h6, p, #interest, #about{
         color: rgb(136, 148, 153);
     }
 
@@ -138,7 +138,7 @@
     }
 
     @media (max-width: 414px) {
-        #interest, #contact {
+        #interest, #contact, #about {
             font-size: 5vw;
         }
 
