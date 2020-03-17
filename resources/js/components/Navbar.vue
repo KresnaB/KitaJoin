@@ -25,6 +25,11 @@
                 Profile
               </router-link>
               <div class="dropdown-divider" />
+              <router-link :to = "{ name: '' }" class="dropdown-item pl-3">
+                <fa icon="users" fixed-width />
+                Team
+              </router-link>
+              <div class="dropdown-divider" />
               <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
                 <fa icon="cog" fixed-width/>
                 Settings
