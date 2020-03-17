@@ -28,15 +28,6 @@
             </div>
           </div>
           
-          <!-- Remember Me -->
-          <div class="form-group row">
-            <div class="col-md-7">
-              <router-link id="forgot-password" :to="{ name: 'password.request' }" class="small ml-auto my-auto">
-                Don't remember your password?
-              </router-link>
-            </div>
-          </div>
-
           <div class="form-group row">
             <div class="col-md col-sm">
               <!-- Submit Button -->
