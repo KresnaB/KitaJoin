@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,16 +29,7 @@ class PostsController extends Controller
      */
     public function create(Request $request)
     {
-        // $user = User::find($id);
-        // $post  = request([
-        //     'post_name'=> $request->input('post_name'),
-        //     'location'=> $request->input('location'),
-        //     'type'=> $request->input('type'),
-        //     'category'=>$request->input('category'),
-        //     // 'poster'=$request->input('post_name');
-        //     'description'=> $request->input('description')
-        // ]);
-        // user()->posts()->save();
+        //
     }
 
     /**
@@ -45,29 +40,24 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        if(auth()->user()->id == 1){
-            $data = request()->validate([
-                'post_name'=> 'required',
-                'location'=> 'required',
-                'type'=> 'required',
-                'category'=> 'required',
-                'image' => 'required|image',
-            ]);
-            $imagePath = request('image')->store('uploads', 'public');
-            $imageExactPath = "storage/".$imagePath;
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
-            $image->save();
-            $imageArray = ['image'=>$image];
+        $data = request()->validate([
+            'post_name'=> 'required',
+            'location'=> 'required',
+            'type'=> 'required',
+            'category'=> 'required',
+            'image' => 'required|image',
+        ]);
+        $imagePath = request('image')->store('uploads', 'public');
+        $imageExactPath = "storage/".$imagePath;
+        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
+        $image->save();
+        $imageArray = ['image'=>$image];
             
-            auth()->user()->posts()->create(array_merge(
-                $data,
-                $imageArray
-            ));
-
-            return response()->json("post created");
-        }else{
-            return response()->json("not an admin");
-        }
+        auth()->user()->posts()->create(array_merge(
+            $data,
+            $imageArray
+        ));
+        return response()->json("post created");   
     }
 
     /**
