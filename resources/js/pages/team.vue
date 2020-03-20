@@ -5,7 +5,7 @@
                 <h5>Team</h5>
             </div>
             <div class="col">
-                <button class="float-right">Create</button>
+                <router-link class="float-right" :to="{name: 'create.team'}" tag="button">Create</router-link>
             </div>
         </div>
         <div class="row">
