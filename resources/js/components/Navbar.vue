@@ -25,7 +25,7 @@
                 Profile
               </router-link>
               <div class="dropdown-divider" />
-              <router-link :to = "{ name: '' }" class="dropdown-item pl-3">
+              <router-link :to = "{ name: 'team' }" class="dropdown-item pl-3">
                 <fa icon="users" fixed-width />
                 Team
               </router-link>
