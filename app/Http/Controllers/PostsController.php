@@ -42,20 +42,12 @@ class PostsController extends Controller
     {
         $data = request()->validate([
             'post_name'=> 'required',
-            'location'=> 'required',
-            'type'=> 'required',
             'category'=> 'required',
-            'image' => 'required|image',
+            'description' => 'required'
         ]);
-        $imagePath = request('image')->store('uploads', 'public');
-        $imageExactPath = "storage/".$imagePath;
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
-        $image->save();
-        $imageArray = ['image'=>$image];
             
         auth()->user()->posts()->create(array_merge(
-            $data,
-            $imageArray
+            $data
         ));
         return response()->json("post created");   
     }
