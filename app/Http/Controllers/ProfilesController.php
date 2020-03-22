@@ -22,7 +22,7 @@ class ProfilesController extends Controller
         $profile = Profile::find($id);
         return response()->json(['profile'=>$profile]);
     }
-    
+
     public function edit(Request $request,Profile $id)
     {
         //
