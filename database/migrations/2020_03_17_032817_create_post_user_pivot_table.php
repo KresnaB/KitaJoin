@@ -17,6 +17,7 @@ class CreatePostUserPivotTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('post_id');
             $table->unsignedBigInteger('user_id');
+            $table->Boolean('join_status');
             $table->timestamps();
         });
     }
