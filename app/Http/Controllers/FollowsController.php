@@ -25,13 +25,18 @@ class FollowsController extends Controller
     public function update(Request $request,$id)
     {
         //masukan berupa id yang akan di acc
-        $deniedUser = User::find($id);
+
         $user = auth()->user()->posts()->follower()->find($id);
-        if (request()->join_status == false){
-            return auth()->user()->posts()->follower()->toogle($deniedUser);
-        }else{
-            $user->update($request);
-            return response()->json('The post successfully updated');
-        }
+
+        $user->update($request);
+        return response()->json('The post successfully updated');
     }
+
+    public function delete($id)
+    {
+        //digunakan untuk menolak orang yang ingin join
+        $deniedUser = User::find($id);
+        return auth()->user()->posts()->follower()->toogle($deniedUser);
+    }
+
 }
