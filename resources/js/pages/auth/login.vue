@@ -1,47 +1,45 @@
 <template>
-  <div id="login-container" class="row">
-    <div class="col-sm col-md my-auto">
-      <div id="login-card" class="border-0 mx-auto card-body" style="background-color: black; max-width: 500px; margin:">
-        <div class="mb-5">
-          <h1 class="text-white">Log In</h1>
-        </div>
+  <div class="row">
+    <div class="col-lg-8 m-auto">
+      <card :title="$t('login')">
         <form @submit.prevent="login" @keydown="form.onKeydown($event)">
           <!-- Email -->
-          <div class="input-card card-body mb-3">
-            <div class="form-group row">
-              <div class="col-md col-sm">
-                <label for="email" class="card-title">Email</label>
-                <input id="email" v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
-                <has-error :form="form" field="email" />
-              </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
+            <div class="col-md-7">
+              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
+              <has-error :form="form" field="email" />
             </div>
           </div>
 
           <!-- Password -->
-          <div class="input-card card-body">
-            <div class="form-group row">
-              <div class="col-md col-sm">
-                <label for="password" >Password</label>
-                <input id="password" v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
-                <has-error :form="form" field="password" />
-              </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
+            <div class="col-md-7">
+              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
+              <has-error :form="form" field="password" />
             </div>
           </div>
-          
+
           <!-- Remember Me -->
           <div class="form-group row">
-            <div class="col-md-7">
-              <router-link id="forgot-password" :to="{ name: 'password.request' }" class="small ml-auto my-auto">
-                Don't remember your password?
+            <div class="col-md-3" />
+            <div class="col-md-7 d-flex">
+              <checkbox v-model="remember" name="remember">
+                {{ $t('remember_me') }}
+              </checkbox>
+
+              <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
+                {{ $t('forgot_password') }}
               </router-link>
             </div>
           </div>
 
           <div class="form-group row">
-            <div class="col-md col-sm">
+            <div class="col-md-7 offset-md-3 d-flex">
               <!-- Submit Button -->
               <v-button :loading="form.busy">
-                Let's find!
+                {{ $t('login') }}
               </v-button>
 
               <!-- GitHub Login Button -->
@@ -49,62 +47,10 @@
             </div>
           </div>
         </form>
-      </div>
-    </div>
-    <div class="col-sm col-md my-auto d-none d-xl-block">
-      <div style="text-align: right">
-        <h1 id="kita-join-header" class="text-white">KITA <br /> JOIN</h1>
-        <p id="kita-join-paragraph" class="text-white font-weight-light">Help you find the right people</p>
-      </div>
+      </card>
     </div>
   </div>
 </template>
-
-<style scoped>
-  input {
-    outline: 0;
-    border-width: 0 0 0px;
-    padding: 0;
-    -webkit-text-fill-color: black;
-    font-weight: bold;
-  }
-
-  input:focus {
-    box-shadow: none !important;
-  }
-
-  #login-card {
-    padding: 0;
-  }
-
-  label {
-    color: #B1C1C8;
-    font-size: 12px;
-    margin: 0;
-  }
-
-  .input-card {
-    background-color: white;border-radius: 4px;
-    padding-top: 4px;
-    padding-bottom: 0;
-  }
-
-  #login-container {
-    height: calc(100vh - 56px);
-  }  
-
-  #forgot-password {
-    color: #9e9e9e;
-  }
-  
-  #kita-join-header{
-    font-size: 8vw;
-  }
-
-  #kita-join-paragraph {
-    font-size: 3vw;
-  }
-</style>
 
 <script>
 import Form from 'vform'

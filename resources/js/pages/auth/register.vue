@@ -113,7 +113,6 @@
   label {
     color: #B1C1C8;
     font-size: 12px;
-    margin: 0;
   }
 
   .input-card {
@@ -121,6 +120,10 @@
     border-radius: 4px;
     padding-top: 4px;
     padding-bottom: 0;
+  }
+
+  label {
+    margin: 0;
   }
 
   #register-card {

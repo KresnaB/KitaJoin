@@ -107,10 +107,4 @@ export default {
     padding: 8px;
   }
 }
-
-@media (max-width: 575px) {
-  #navbarToggler {
-    margin-top: 8px;
-  }
-}
 </style>
