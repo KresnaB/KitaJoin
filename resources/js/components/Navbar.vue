@@ -20,7 +20,7 @@
               {{ user.name }}
             </a>
             <div class="dropdown-menu">
-              <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
+              <router-link :to="{ name: 'profile.details', params: {id: user.id}}" class="dropdown-item pl-3">
                 <fa icon="user" fixed-width />
                 Profile
               </router-link>

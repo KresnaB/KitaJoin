@@ -1,6 +1,8 @@
 let state = {
     people: [],
-    teams: []
+    teams: [],
+    person: {},
+    user: {}
 }
 
 export default state

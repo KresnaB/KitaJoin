@@ -6,6 +6,7 @@ let actions = {
             .then(res => {
                 commit('FETCH_PEOPLE', res.data)
             }).catch(err => {
+<<<<<<< HEAD
             console.log(err)
         })
     },
@@ -16,6 +17,26 @@ let actions = {
             }).catch(err => {
             console.log(err)
         })
+=======
+                console.log(err)
+            })
+    },
+    fetchPerson({commit}, data) {
+        axios.get('/api/profiles/' + data.id)
+            .then((res) => {
+                commit('FETCH_PERSON', res.data)
+            }).catch(err => {
+                console.log(err)
+            })
+    },
+    fetchUser({commit}) {
+        axios.get('/api/user')
+            .then((res) => {
+                commit('FETCH_USER', res.data)
+            }).catch(err => {
+                console.log(err)
+            })
+>>>>>>> e130a96a5b75355cf3540678bc353bf90b0c552a
     }
 
 }
