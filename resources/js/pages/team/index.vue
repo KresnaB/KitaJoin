@@ -10,8 +10,14 @@
         </div>
         <div class="row">
             <div class="col">               
-                <card>
-                    <h6>Favanzi</h6>
+                <card v-for="team in teams" v-bind:key="team.id" class="shadow-sm">
+                    <div class="person-row">
+                        <div class="my-auto ml-3">
+                            <router-link id="person-name" :to="{ name: 'team-details' }" class="navbar-brand font-weight-bold">
+                                {{ team.name }}
+                            </router-link>
+                        </div>
+                    </div>
                 </card>
             </div>
         </div>
@@ -27,3 +33,14 @@
         color: white;
     }
 </style>
+
+<script>
+    mounted() {
+        this.$store.dispatch('fetchTeams')
+    },
+    computed: {
+        ...mapGetters([
+        'teams'
+        ])
+    },
+</script>
