@@ -20,7 +20,7 @@ class ProfilesController extends Controller
     public function profile($id)
     {
         $profile = Profile::find($id);
-        return response()->json(['profile'=>$profile]);
+        return response()->json($profile);
     }
 
     public function edit(Request $request,Profile $id)
