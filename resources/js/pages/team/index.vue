@@ -35,12 +35,16 @@
 </style>
 
 <script>
-    mounted() {
-        this.$store.dispatch('fetchTeams')
-    },
-    computed: {
-        ...mapGetters([
-        'teams'
-        ])
-    },
+    import { mapGetters } from 'vuex';
+    
+    export default {
+        mounted() {
+            this.$store.dispatch('fetchTeams')
+        },
+        computed: {
+            ...mapGetters([
+            'teams'
+            ])
+        }
+    };
 </script>
