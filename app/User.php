@@ -40,6 +40,22 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user){
+            $user->profile()->create([
+                'name' => $user->get('name'),
+                'interest' => "Empty",
+                'department' => 'Empty',
+                'program' => 'Empty',
+                'semester' => '0',
+                'contact' => 'Empty',
+            ]);
+        });
+    }
+
     /**
      * The accessors to append to the model's array form.
      *
@@ -104,5 +120,9 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     public function getJWTCustomClaims()
     {
         return [];
+    }
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
     }
 }
