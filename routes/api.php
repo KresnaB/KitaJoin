@@ -41,7 +41,6 @@ Route::group(['middleware' => 'guest:api'], function () {
 // Route::get('home','ProfilesController@users');
 // Route::get('home/{id}', 'ProfilesController@profile');
 // Route::patch('home/{id}/update', 'ProfilesController@edit');
-Route::get('add/{id}', 'ProfilesController@add');
 Route::get('profiles', 'ProfilesController@index');
 Route::get('profiles/{id}', 'ProfilesController@profile');
 Route::post('update/{id}', 'ProfilesController@update');
