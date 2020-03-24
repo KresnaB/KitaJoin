@@ -49,3 +49,5 @@ Route::post('post/update/{id}', 'PostsController@update');
 Route::delete('post/delete/{id}', 'PostsController@delete');
 
 Route::post('follow/{id}', 'FollowsController@store');
+Route::post('followers', 'FollowsController@notify');
+Route::post('accept/{id}', 'FollowsController@store');

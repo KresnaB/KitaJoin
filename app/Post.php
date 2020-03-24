@@ -17,7 +17,7 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function join()
+    public function followers()
     {
         return $this->belongsToMany(User::class);
     }
