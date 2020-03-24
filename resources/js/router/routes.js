@@ -22,5 +22,6 @@ export default [
     ] },
 
   { path: '*', component: page('errors/404.vue') },
+  { path: '/profile-details', name: 'profile.details', component: page('profiledetails.vue')},
   { path: '/team', name: 'team', component: page('team.vue')}
 ]
