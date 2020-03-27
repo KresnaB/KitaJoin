@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Post;
 use Illuminate\Http\Request;
@@ -70,6 +72,18 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         return response()->json(['post'=>$post]);
+    }
+
+    /**
+     * Display the specified resource by user_id
+     * 
+     * @param int $user_id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function showByUserId($user_id) {
+        $posts = DB::table('posts')->where('user_id', $user_id)->get();
+        return response()->json($posts);     
     }
 
     /**

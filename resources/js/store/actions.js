@@ -6,20 +6,16 @@ let actions = {
             .then(res => {
                 commit('FETCH_PEOPLE', res.data)
             }).catch(err => {
-<<<<<<< HEAD
-            console.log(err)
-        })
+                console.log(err)
+            })
     },
-    fetchTeams({commit}) {
-        axios.get('/api/posts')
+    fetchTeams({commit}, data) {
+        axios.get('/api/posts/' + data.user_id)
             .then(res => {
                 commit('FETCH_TEAMS', res.data)
             }).catch(err => {
             console.log(err)
         })
-=======
-                console.log(err)
-            })
     },
     fetchPerson({commit}, data) {
         axios.get('/api/profiles/' + data.id)
@@ -36,9 +32,7 @@ let actions = {
             }).catch(err => {
                 console.log(err)
             })
->>>>>>> e130a96a5b75355cf3540678bc353bf90b0c552a
     }
-
 }
 
 export default actions
