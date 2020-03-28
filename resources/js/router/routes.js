@@ -25,5 +25,7 @@ export default [
   { path: '*', component: page('errors/404.vue') },
   { path: '/team', name: 'team', component: page('team/index.vue')},
   { path: '/team/create', name: 'create.team', component: page('team/create.vue') },
+  { path: '/team/details', name: 'team.details', component: page('team/details')},
+  { path: '/team/update', name: 'update.team', component: page('team/update')},
   { path: '/profile-details/:id', name: 'profile.details', component: page('profiledetails.vue'), props: true}
 ]
