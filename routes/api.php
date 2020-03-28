@@ -44,11 +44,12 @@ Route::get('profiles/{id}', 'ProfilesController@profile');
 Route::post('update/{id}', 'ProfilesController@update');
 
 Route::get('posts', 'PostsController@show');
+Route::get('postsInProfile', 'PostsController@showMyPosts');
 Route::post('post/create', 'PostsController@store');
 Route::post('post/update/{id}', 'PostsController@update');
 Route::delete('post/delete/{id}', 'PostsController@delete');
 
 Route::post('follow/{id}', 'FollowsController@store');
-Route::get('followers', 'FollowsController@notify');
-Route::post('accept/{id}', 'FollowsController@update');
-Route::post('decline/{id}', 'FollowsController@delete');
+Route::get('followers/{id}', 'FollowsController@notify');
+Route::post('accept/{post_id}/{user_id}', 'FollowsController@update');
+Route::delete('decline/{post_id}/{user_id}', 'FollowsController@delete');
