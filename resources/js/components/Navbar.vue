@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+  <nav class="navbar navbar-expand-sm navbar-light bg-white">
     <div class="container">
       <router-link :to="{ name: user ? 'home' : 'welcome' }" class="navbar-brand">
         {{ appName }}
@@ -10,13 +10,6 @@
       </button>
 
       <div id="navbarToggler" class="collapse navbar-collapse">
-        <ul class="navbar-nav">
-          <locale-dropdown />
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li> -->
-        </ul>
-
         <ul class="navbar-nav ml-auto">
           <!-- Authenticated -->
           <li v-if="user" class="nav-item dropdown">
@@ -27,11 +20,20 @@
               {{ user.name }}
             </a>
             <div class="dropdown-menu">
-              <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
-                <fa icon="cog" fixed-width />
-                {{ $t('settings') }}
+              <router-link :to="{ name: 'profile.details', params: {id: user.id}}" class="dropdown-item pl-3">
+                <fa icon="user" fixed-width />
+                Profile
               </router-link>
-
+              <div class="dropdown-divider" />
+              <router-link :to = "{ name: 'team' }" class="dropdown-item pl-3">
+                <fa icon="users" fixed-width />
+                Team
+              </router-link>
+              <div class="dropdown-divider" />
+              <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
+                <fa icon="cog" fixed-width/>
+                Settings
+              </router-link>
               <div class="dropdown-divider" />
               <a href="#" class="dropdown-item pl-3" @click.prevent="logout">
                 <fa icon="sign-out-alt" fixed-width />
@@ -68,7 +70,7 @@ export default {
   },
 
   data: () => ({
-    appName: window.config.appName
+    appName: 'KITAJOIN'
   }),
 
   computed: mapGetters({
@@ -92,5 +94,23 @@ export default {
   width: 2rem;
   height: 2rem;
   margin: -.375rem 0;
+}
+
+.nav-item > .active {
+  background-color: black;
+  -webkit-text-fill-color: white;
+  border-radius: 12px;
+}
+
+@media (max-width: 767px) {
+  .nav-link {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 575px) {
+  #navbarToggler {
+    margin-top: 8px;
+  }
 }
 </style>
