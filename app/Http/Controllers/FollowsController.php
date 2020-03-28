@@ -9,10 +9,11 @@ use Illuminate\Http\Request;
 
 class FollowsController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    //kalau error coba ini di jadikan comment
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
     public function store($id)
     {
         //mentoggle untuk user yang sedang login mengikuti/tidak megikuti suatu kelompok
@@ -22,9 +23,12 @@ class FollowsController extends Controller
 
     public function notify($post_id)
     {
-        //menampilkan user yang belum di acc
-        $follower = DB::table('post_user')->select('user_id', 'join_status')->where('post_id', $post_id)->get();
-        return response()->json(['user'=>$follower]);
+        $users = DB::table('profiles')
+            ->join('post_user', 'profiles.user_id', '=', 'post_user.user_id')
+            ->select('profiles.name', 'profiles.image', 'post_user.join_status', 'post_user.post_id',  'profiles.user_id')
+            ->where('post_id' , $post_id)
+            ->get();
+        return response()->json($users);
     }
 
     public function update($post_id , $user_id)

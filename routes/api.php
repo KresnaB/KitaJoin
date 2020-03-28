@@ -52,4 +52,4 @@ Route::delete('post/delete/{id}', 'PostsController@delete');
 Route::post('follow/{id}', 'FollowsController@store');
 Route::get('followers/{id}', 'FollowsController@notify');
 Route::post('accept/{post_id}/{user_id}', 'FollowsController@update');
-Route::delete('decline/{post_id}/{user_id}', 'FollowsController@delete');
+//Route::delete('decline/{post_id}/{user_id}', 'FollowsController@delete');
