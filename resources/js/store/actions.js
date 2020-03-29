@@ -10,7 +10,7 @@ let actions = {
             })
     },
     fetchTeams({commit}, data) {
-        axios.get('/api/posts/' + data.user_id)
+        axios.get('/api/posts/show/' + data.user_id)
             .then(res => {
                 commit('FETCH_TEAMS', res.data)
             }).catch(err => {
