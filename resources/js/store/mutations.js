@@ -2,6 +2,12 @@ let mutations = {
     FETCH_PEOPLE(state, people) {
         return state.people = people
     },
+    FETCH_TEAMS(state, teams) {
+        return state.teams = teams
+    },
+    FETCH_TEAM(state, team) {
+        return state.team = team
+    },
     FETCH_PERSON(state, person) {
         return state.person = person
     },

@@ -1,5 +1,8 @@
 <template>
   <div id="home-card" class="card-body">
+    <router-link :to="{ name: 'competition' }">
+      {{ $t('Competition') }}
+    </router-link>
     <h6 id="person-heading-xs" class="d-block d-sm-none">People</h6>
     <h6 id="person-heading" class="d-none d-sm-block">People</h6>
     <card v-for="person in people" v-if="person.id !== user.id" v-bind:key="person.id" class="shadow-sm mb-2">
