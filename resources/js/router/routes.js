@@ -18,10 +18,14 @@ export default [
     component: page('settings/index.vue'),
     children: [
       { path: '', redirect: { name: 'settings.profile' } },
-      { path: 'profile', name: 'settings.profile', component: page('settings/profile.vue') },
+      { path: 'profile/:id', name: 'settings.profile', component: page('settings/profile.vue'), props: true},
       { path: 'password', name: 'settings.password', component: page('settings/password.vue') }
     ] },
 
   { path: '*', component: page('errors/404.vue') },
-  { path: '/profile-details', name: 'profile.details', component: page('profiledetails.vue')}
+  { path: '/team', name: 'team', component: page('team/index.vue')},
+  { path: '/team/create', name: 'create.team', component: page('team/create.vue') },
+  { path: '/team/:id', name: 'team.details', component: page('team/details'), props: true},
+  { path: '/team/update', name: 'update.team', component: page('team/update')},
+  { path: '/profile-details/:id', name: 'profile.details', component: page('profiledetails.vue'), props: true}
 ]

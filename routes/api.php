@@ -43,8 +43,8 @@ Route::get('profiles', 'ProfilesController@index');
 Route::get('profiles/{id}', 'ProfilesController@profile');
 Route::post('update/{id}', 'ProfilesController@update');
 
-Route::get('posts', 'PostsController@show');
-Route::get('postsInProfile', 'PostsController@showMyPosts');
+Route::get('posts/{id}', 'PostsController@show');
+Route::get('posts/{user_id}', 'PostsController@showByUserId');
 Route::post('post/create', 'PostsController@store');
 Route::post('post/update/{id}', 'PostsController@update');
 Route::delete('post/delete/{id}', 'PostsController@delete');

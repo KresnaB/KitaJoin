@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Post;
 use Illuminate\Http\Request;
@@ -42,20 +44,11 @@ class PostsController extends Controller
     {
         $data = request()->validate([
             'post_name'=> 'required',
-            'location'=> 'required',
-            'type'=> 'required',
             'category'=> 'required',
-            'image' => 'required|image',
+            'description' => 'required'
         ]);
-        $imagePath = request('image')->store('uploads', 'public');
-        $imageExactPath = "storage/".$imagePath;
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
-        $image->save();
-        $imageArray = ['image'=>$image];
-
         auth()->user()->posts()->create(array_merge(
-            $data,
-            $imageArray
+            $data
         ));
         return response()->json("post created");
     }
@@ -69,7 +62,19 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return response()->json(['post'=>$post]);
+        return response()->json($post);
+    }
+
+    /**
+     * Display the specified resource by user_id
+     * 
+     * @param int $user_id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function showByUserId($user_id) {
+        $posts = DB::table('posts')->where('user_id', $user_id)->get();
+        return response()->json($posts);     
     }
 
     /**

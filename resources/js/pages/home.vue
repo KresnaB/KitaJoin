@@ -5,12 +5,12 @@
     </router-link>
     <h6 id="person-heading-xs" class="d-block d-sm-none">People</h6>
     <h6 id="person-heading" class="d-none d-sm-block">People</h6>
-    <card v-for="person in people" v-bind:key="person.id" class="shadow-sm">
+    <card v-for="person in people" v-if="person.id !== user.id" v-bind:key="person.id" class="shadow-sm mb-2">
       <div class="person-row">
-        <img class="rounded-circle my-auto" src="person.jpg" alt=""/>
+        <img class="rounded-circle my-auto" :src="person.image" alt=""/>
         <div class="my-auto ml-3">
-          <router-link id="person-name" :to="{ name: 'profile.details' }" class="navbar-brand font-weight-bold">
-            Ivan Eka Putra
+          <router-link id="person-name" :to="{ name: 'profile.details', params: {id: person.id}}" class="navbar-brand font-weight-bold">
+            {{ person.name }}
           </router-link>
           <p id="person-interest">{{ person.interest }}</p>
         </div>
@@ -90,11 +90,13 @@ import { mapGetters } from 'vuex';
 export default {
   middleware: 'auth',
   mounted() {
-    this.$store.dispatch('fetchPeople')
+    this.$store.dispatch('fetchPeople'),
+    this.$store.dispatch('fetchUser')
   },
   computed: {
     ...mapGetters([
-      'people'
+      'people',
+      'user'
     ])
   },
   metaInfo () {
