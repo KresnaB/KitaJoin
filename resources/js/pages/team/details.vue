@@ -24,7 +24,7 @@
         <card class="mb-3">
             <div>
                 <h6 id="interest" class="mb-4 font-weight-light">Request</h6>
-                <div class="d-flex">
+                <div class="d-flex" v-for="request in requests">
                     <img src="https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
                     <div id="profile-identity" class="my-auto ml-2">
                         <h5>Person Name</h5>
