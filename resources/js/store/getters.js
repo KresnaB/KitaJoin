@@ -13,6 +13,9 @@ let getters = {
     },
     user: state => {
         return state.user
+    },
+    form: state => {
+        return state.form
     }
 }
 

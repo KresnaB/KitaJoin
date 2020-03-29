@@ -3,7 +3,15 @@ let state = {
     teams: [],
     team: {},
     person: {},
-    user: {}
+    user: {},
+    form: {
+        id: '',
+        image: '',
+        name: '',
+        about: '',
+        telephone: '',
+        interest: ''
+    }
 }
 
 export default state
