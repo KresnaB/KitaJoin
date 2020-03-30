@@ -24,20 +24,23 @@
         <card class="mb-3">
             <div>
                 <h6 id="interest" class="mb-4 font-weight-light">Request</h6>
-                <div class="d-flex" v-for="request in requests">
-                    <img src="https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
-                    <div id="profile-identity" class="my-auto ml-2">
-                        <h5>Person Name</h5>
-                        <div class="d-flex">
-                            <button type="button" class="btn btn-dark btn-sm mr-2" data-toggle="modal" data-target="#contact-information-modal">
-                                Confirm
-                            </button>
-                            <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">
-                                Delete
-                            </router-link>
+                <div v-if="requests !== 'null'">
+                    <div class="d-flex" v-for="request in requests">
+                        <img src="https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
+                        <div id="profile-identity" class="my-auto ml-2">
+                            <h5>Person Name</h5>
+                            <div class="d-flex">
+                                <button type="button" class="btn btn-dark btn-sm mr-2" data-toggle="modal" data-target="#contact-information-modal">
+                                    Confirm
+                                </button>
+                                <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">
+                                    Delete
+                                </router-link>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <p v-else id="no-request-paragraph" class="mb-0">No Requests</p>
             </div>
         </card>
     </div>
@@ -50,6 +53,10 @@
 
     p {
         font-size: 2vh;
+    }
+
+    #no-request-paragraph {
+        font-size: 4vw;
     }
 
     h6, p, #interest, #about{
@@ -134,11 +141,15 @@
         mounted() {
             this.$store.dispatch('fetchTeam', {
                 id: this.$route.params.id
+            }),
+            this.$store.dispatch('fetchRequests', {
+                post_id: this.$route.params.id
             })
         },
         computed: {
             ...mapGetters([
-                'team'
+                'team',
+                'requests'
             ])
         }
     }
