@@ -22,26 +22,39 @@
             </div>
         </card>
         <card class="mb-3">
-            <div>
-                <h6 id="interest" class="mb-4 font-weight-light">Request</h6>
-                <div v-if="requests !== 'null'">
-                    <div class="d-flex" v-for="request in requests">
-                        <img src="https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
-                        <div id="profile-identity" class="my-auto ml-2">
-                            <h5>Person Name</h5>
-                            <div class="d-flex">
-                                <button type="button" class="btn btn-dark btn-sm mr-2" data-toggle="modal" data-target="#contact-information-modal">
-                                    Confirm
-                                </button>
-                                <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">
-                                    Delete
-                                </router-link>
-                            </div>
+            <div class="d-flex">
+                <h6 v-if="team.user_id === user.id" id="interest" class="mb-4 font-weight-light mr-auto my-auto">Request</h6>  
+                <h6 v-else id="interest" class="mb-4 font-weight-light mr-auto my-auto">Members</h6>  
+                <button class="btn font-weight-bold">JOIN</button>
+            </div>
+            <div v-if="team.user_id !== user.id">
+                <div class="d-flex">
+                    <img :src="person.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
+                    <div id="profile-identity" class="my-auto ml-2">
+                        <router-link id="person-name" :to="{ name: 'profile.details', params: {id: person.id}}" class="navbar-brand font-weight-bold">
+                            {{ person.name }}
+                        </router-link>
+                        <p id="person-interest" class="mb-0">{{ person.program}}</p>
+                    </div>
+                </div>
+            </div>
+            <div v-if="requests !== 'null'">
+                <div class="d-flex" v-for="request in requests">
+                    <img :src="request.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
+                    <div id="profile-identity" class="my-auto ml-2">
+                        <h5>Person Name</h5>
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-dark btn-sm mr-2" data-toggle="modal" data-target="#contact-information-modal">
+                                Confirm
+                            </button>
+                            <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">
+                                Delete
+                            </router-link>
                         </div>
                     </div>
                 </div>
-                <p v-else id="no-request-paragraph" class="mb-0">No Requests</p>
             </div>
+            <p v-else-if="team.user_id === user.id" id="no-request-paragraph" class="mb-0">No Requests</p>
         </card>
         <card class="mb-3">
             <h6 id="dangerous-area" class="mb-4 font-weight-light">Dangerous area</h6>
@@ -62,8 +75,8 @@
     #no-request-paragraph {
         font-size: 4vw;
     }
-
-    h6, p{
+    
+    h6, p, #interest, #about, button{
         color: rgb(136, 148, 153);
     }
 
@@ -89,6 +102,8 @@
 
     button {
         font-size: 4vw;
+        -webkit-box-shadow: none!important;
+        box-shadow: none!important;
     }
 
     @media (min-width: 768px) {
@@ -156,15 +171,21 @@
             this.$store.dispatch('fetchTeam', {
                 id: this.$route.params.id
             }),
+            this.$store.dispatch('fetchPerson', {
+                id: this.$route.params.user_id
+            }),
             this.$store.dispatch('fetchRequests', {
                 post_id: this.$route.params.id
-            })
+            }),
+            this.$store.dispatch('fetchUser')
         },
 
         computed: {
             ...mapGetters([
                 'team',
-                'requests'
+                'requests',
+                'user',
+                'person'
             ])
         },
 

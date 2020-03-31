@@ -1,18 +1,13 @@
 <template>
-  <div id="home-card" class="card-body">
-    <router-link :to="{ name: 'competition' }">
-      {{ $t('Competition') }}
-    </router-link>
-    <h6 id="person-heading-xs" class="d-block d-sm-none">People</h6>
-    <h6 id="person-heading" class="d-none d-sm-block">People</h6>
-    <card v-for="person in people" v-if="person.id !== user.id" v-bind:key="person.id" class="shadow-sm mb-2">
+  <div id="home-card" class="card-body">  
+    <h6 id="person-heading-xs" class="d-block d-sm-none">Teams</h6>
+    <h6 id="person-heading" class="d-none d-sm-block">Teams</h6>
+    <card v-for="team in teams" v-if="team.user_id !== user.id" v-bind:key="team.id" class="shadow-sm mb-2">
       <div class="person-row">
-        <img class="rounded-circle my-auto" :src="person.image" alt=""/>
         <div class="my-auto ml-3">
-          <router-link id="person-name" :to="{ name: 'profile.details', params: {id: person.id}}" class="navbar-brand font-weight-bold">
-            {{ person.name }}
+          <router-link id="person-name" :to="{ name: 'team.details', params: {id: team.id, user_id: team.user_id}}" class="navbar-brand font-weight-bold">
+            {{ team.post_name }}
           </router-link>
-          <p id="person-interest">{{ person.interest }}</p>
         </div>
       </div>
     </card>
@@ -85,22 +80,22 @@
 </style>
 
 <script>
-import { mapGetters } from 'vuex';
+  import { mapGetters } from 'vuex';
 
-export default {
-  middleware: 'auth',
-  mounted() {
-    this.$store.dispatch('fetchPeople'),
-    this.$store.dispatch('fetchUser')
-  },
-  computed: {
-    ...mapGetters([
-      'people',
-      'user'
-    ])
-  },
-  metaInfo () {
-    return { title: this.$t('home') }
-  }
-};
+  export default {
+    middleware: 'auth',
+    mounted() {
+      this.$store.dispatch('fetchTeams'),
+      this.$store.dispatch('fetchUser')
+    },
+    computed: {
+      ...mapGetters([
+        'teams',
+        'user'
+      ])
+    },
+    metaInfo () {
+      return { title: this.$t('home') }
+    }
+  };
 </script>

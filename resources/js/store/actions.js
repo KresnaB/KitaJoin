@@ -9,8 +9,16 @@ let actions = {
                 console.log(err)
             })
     },
-    fetchTeams({commit}, data) {
-        axios.get('/api/posts/show/' + data.user_id)
+    fetchTeams({commit}) {
+        axios.get('/api/posts')
+            .then(res => {
+                commit('FETCH_TEAMS', res.data)
+            }).catch(err => {
+            console.log(err)
+        })
+    },
+    fetchMyTeams({commit}, data) {
+        axios.get('/api/posts/' + data.user_id)
             .then(res => {
                 commit('FETCH_TEAMS', res.data)
             }).catch(err => {
