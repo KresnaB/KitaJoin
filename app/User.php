@@ -45,9 +45,9 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
         parent::boot();
 
         static::created(function ($user){
+            $username = $user->get('name');
             $user->profile()->create([
-                'name' => $user->get('name'),
-                'interest' => "Empty",
+                'interest' => 'Empty',
                 'department' => 'Empty',
                 'program' => 'Empty',
                 'semester' => '0',
@@ -124,5 +124,10 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+    
+    public function posts()
+    {
+        return $this->hasMany(Post::class)->orderBy('created_at');
     }
 }

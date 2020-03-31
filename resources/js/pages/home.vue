@@ -1,14 +1,18 @@
 <template>
-<<<<<<< resources/js/pages/home.vue
   <div id="home-card" class="card-body">
+    <router-link :to="{ name: 'competition' }">
+      {{ $t('Competition') }}
+    </router-link>
     <h6 id="person-heading-xs" class="d-block d-sm-none">People</h6>
     <h6 id="person-heading" class="d-none d-sm-block">People</h6>
-    <card class="shadow-sm">
+    <card v-for="person in people" v-if="person.id !== user.id" v-bind:key="person.id" class="shadow-sm mb-2">
       <div class="person-row">
-        <img class="rounded-circle my-auto" src="person.jpg" alt=""/>
+        <img class="rounded-circle my-auto" :src="person.image" alt=""/>
         <div class="my-auto ml-3">
-          <h6 id="person-name">Ivan Eka Putra</h6>
-          <p id="person-interest">{{profiles.interest}}</p>
+          <router-link id="person-name" :to="{ name: 'profile.details', params: {id: person.id}}" class="navbar-brand font-weight-bold">
+            {{ person.name }}
+          </router-link>
+          <p id="person-interest">{{ person.interest }}</p>
         </div>
       </div>
     </card>
@@ -36,6 +40,11 @@
     #person-name, #person-interest {
       font-size: 4.5vw;
     }
+  }
+
+  #person-name {
+    color: black;
+    padding: 0;
   }
 
   .person-row {
@@ -76,22 +85,22 @@
 </style>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   middleware: 'auth',
-  data() {
-            return {
-                profiles: []
-            }
-        },
-        created() {
-            this.axios
-                .get('http://127.0.0.1:8000/api/profiles')
-                .then(response => {
-                    this.profiles = response.data;
-                });
-        },
+  mounted() {
+    this.$store.dispatch('fetchPeople'),
+    this.$store.dispatch('fetchUser')
+  },
+  computed: {
+    ...mapGetters([
+      'people',
+      'user'
+    ])
+  },
   metaInfo () {
     return { title: this.$t('home') }
   }
-}
+};
 </script>

@@ -38,9 +38,13 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
 });
 
-// Route::get('home','ProfilesController@users');
-// Route::get('home/{id}', 'ProfilesController@profile');
-// Route::patch('home/{id}/update', 'ProfilesController@edit');
+Route::get('add/{id}', 'ProfilesController@add');
 Route::get('profiles', 'ProfilesController@index');
 Route::get('profiles/{id}', 'ProfilesController@profile');
 Route::post('update/{id}', 'ProfilesController@update');
+
+Route::get('posts/{id}', 'PostsController@show');
+Route::get('posts/{user_id}', 'PostsController@showByUserId');
+Route::post('post/create', 'PostsController@store');
+Route::post('post/update/{id}', 'PostsController@update');
+Route::delete('post/delete/{id}', 'PostsController@delete');
