@@ -56,7 +56,15 @@ let actions = {
             }).catch(err => {
                 console.log(err);
             })
-    }
+    },
+    fetchRequests({commit}, data) {
+        axios.get('/api/followers/' + data.post_id)
+            .then((res) => {
+                commit('FETCH_REQUESTS', res.data)
+            }).catch(err => {
+                console.log(err)
+            })
+    },
 }
 
 export default actions
