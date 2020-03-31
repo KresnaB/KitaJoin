@@ -13,6 +13,9 @@ let mutations = {
     },
     FETCH_USER(state, user) {
         return state.user = user
+    },
+    FETCH_REQUESTS(state, requests) {
+        return state.requests = requests
     }
 }
 

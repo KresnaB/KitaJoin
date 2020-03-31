@@ -9,7 +9,15 @@ let actions = {
                 console.log(err)
             })
     },
-    fetchTeams({commit}, data) {
+    fetchTeams({commit}) {
+        axios.get('/api/posts')
+            .then(res => {
+                commit('FETCH_TEAMS', res.data)
+            }).catch(err => {
+            console.log(err)
+        })
+    },
+    fetchMyTeams({commit}, data) {
         axios.get('/api/posts/' + data.user_id)
             .then(res => {
                 commit('FETCH_TEAMS', res.data)
@@ -48,7 +56,15 @@ let actions = {
             }).catch(err => {
                 console.log(err);
             })
-    }
+    },
+    fetchRequests({commit}, data) {
+        axios.get('/api/followers/' + data.post_id)
+            .then((res) => {
+                commit('FETCH_REQUESTS', res.data)
+            }).catch(err => {
+                console.log(err)
+            })
+    },
 }
 
 export default actions

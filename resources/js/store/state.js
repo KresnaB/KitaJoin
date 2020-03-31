@@ -11,7 +11,8 @@ let state = {
         about: '',
         telephone: '',
         interest: ''
-    }
+    },
+    requests: []
 }
 
 export default state
