@@ -47,7 +47,7 @@ Route::get('posts/{id}', 'PostsController@show');
 Route::get('posts/show/{user_id}', 'PostsController@showByUserId');
 Route::post('post/create', 'PostsController@store');
 Route::post('post/update/{id}', 'PostsController@update');
-Route::delete('post/delete/{id}', 'PostsController@delete');
+Route::delete('post/delete/{id}', 'PostsController@destroy');
 
 Route::post('follow/{id}', 'FollowsController@store');
 Route::get('followers/{post_id}', 'FollowsController@notify');

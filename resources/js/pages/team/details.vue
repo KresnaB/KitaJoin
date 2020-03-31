@@ -43,6 +43,10 @@
                 <p v-else id="no-request-paragraph" class="mb-0">No Requests</p>
             </div>
         </card>
+        <card class="mb-3">
+            <h6 id="dangerous-area" class="mb-4 font-weight-light">Dangerous area</h6>
+            <input class="btn btn-secondary btn-lg btn-block text-left font-weight-bold" type="button" value="Delete team" @click="deleteTeam()" />
+        </card>
     </div>
 </template>
 
@@ -59,7 +63,7 @@
         font-size: 4vw;
     }
 
-    h6, p, #interest, #about{
+    h6, p{
         color: rgb(136, 148, 153);
     }
 
@@ -81,6 +85,10 @@
 
     #general-profile {
         margin-top: 2vh;
+    }
+
+    button {
+        font-size: 4vw;
     }
 
     @media (min-width: 768px) {
@@ -124,7 +132,7 @@
     }
 
     @media (max-width: 414px) {
-        #interest, #contact, #about {
+        #interest, #contact, #about, #dangerous-area {
             font-size: 5vw;
         }
 
@@ -135,9 +143,15 @@
 </style>
 
 <script>
+    import Form from 'vform'
     import { mapGetters } from 'vuex'; 
+    import axios from 'axios'
 
     export default {
+        data: () => ({
+            form: new Form({})
+        }),
+
         mounted() {
             this.$store.dispatch('fetchTeam', {
                 id: this.$route.params.id
@@ -146,11 +160,26 @@
                 post_id: this.$route.params.id
             })
         },
+
         computed: {
             ...mapGetters([
                 'team',
                 'requests'
             ])
+        },
+
+        methods: {
+            deleteTeam: function() {
+                let currentObj = this;
+
+                axios.delete('/api/post/delete/' + this.$route.params.id).then(function (response) {
+                    currentObj.success = response.data.success;
+                }).catch(function (error) {
+                    currentObj.output = error;
+                });
+
+                this.$router.push({ name: 'team' });
+            }
         }
     }
 </script>
