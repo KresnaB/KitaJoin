@@ -50,7 +50,7 @@
     
     export default {
         mounted() {
-            this.$store.dispatch('fetchTeams', {
+            this.$store.dispatch('fetchMyTeams', {
                 user_id: this.user.id
             })
         },
