@@ -1,11 +1,11 @@
 <template>
-  <div id="home-card" class="card-body">
+  <div id="home-card" class="card-body">  
     <h6 id="person-heading-xs" class="d-block d-sm-none">Teams</h6>
     <h6 id="person-heading" class="d-none d-sm-block">Teams</h6>
     <card v-for="team in teams" v-if="team.user_id !== user.id" v-bind:key="team.id" class="shadow-sm mb-2">
       <div class="person-row">
         <div class="my-auto ml-3">
-          <router-link id="person-name" :to="{ name: 'team.details', params: {id: team.id}}" class="navbar-brand font-weight-bold">
+          <router-link id="person-name" :to="{ name: 'team.details', params: {id: team.id, user_id: team.user_id}}" class="navbar-brand font-weight-bold">
             {{ team.post_name }}
           </router-link>
         </div>

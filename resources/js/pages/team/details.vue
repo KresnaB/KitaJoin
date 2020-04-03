@@ -22,26 +22,43 @@
             </div>
         </card>
         <card class="mb-3">
-            <div>
-                <h6 id="interest" class="mb-4 font-weight-light">Request</h6>
-                <div v-if="requests !== 'null'">
-                    <div class="d-flex" v-for="request in requests">
-                        <img src="https://www.gravatar.com/avatar/'.md5(strtolower($this->email)).'.jpg?s=200&d=mm" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
-                        <div id="profile-identity" class="my-auto ml-2">
-                            <h5>Person Name</h5>
-                            <div class="d-flex">
-                                <button type="button" class="btn btn-dark btn-sm mr-2" data-toggle="modal" data-target="#contact-information-modal">
-                                    Confirm
-                                </button>
-                                <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">
-                                    Delete
-                                </router-link>
-                            </div>
+            <div class="d-flex">
+                <h6 v-if="team.user_id === user.id" id="interest" class="mb-4 font-weight-light mr-auto my-auto">Request</h6>  
+                <h6 v-else id="interest" class="mb-4 font-weight-light mr-auto my-auto">Members</h6>  
+                <input id="join-button" class="btn font-weight-bold" type="button" value="JOIN" @click="join()"/>
+            </div>
+            <div v-if="team.user_id !== user.id">
+                <div class="d-flex">
+                    <img :src="person.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
+                    <div id="profile-identity" class="my-auto ml-2">
+                        <router-link id="person-name" :to="{ name: 'profile.details', params: {id: person.id}}" class="navbar-brand font-weight-bold">
+                            {{ person.name }}
+                        </router-link>
+                        <p id="person-interest" class="mb-0">{{ person.program}}</p>
+                    </div>
+                </div>
+            </div>
+            <div v-if="requests !== 'null'">
+                <div class="d-flex" v-for="request in requests">
+                    <img :src="request.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
+                    <div id="profile-identity" class="my-auto ml-2">
+                        <h5>Person Name</h5>
+                        <div class="d-flex">
+                            <button type="button" class="btn btn-dark btn-sm mr-2" data-toggle="modal" data-target="#contact-information-modal">
+                                Confirm
+                            </button>
+                            <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">
+                                Delete
+                            </router-link>
                         </div>
                     </div>
                 </div>
-                <p v-else id="no-request-paragraph" class="mb-0">No Requests</p>
             </div>
+            <p v-else-if="team.user_id === user.id" id="no-request-paragraph" class="mb-0">No Requests</p>
+        </card>
+        <card v-if="team.user_id === user.id" class="mb-3">
+            <h6 id="dangerous-area" class="mb-4 font-weight-light">Dangerous area</h6>
+            <input class="btn btn-secondary btn-lg btn-block text-left font-weight-bold" type="button" value="Delete team" @click="deleteTeam()" />
         </card>
     </div>
 </template>
@@ -58,8 +75,8 @@
     #no-request-paragraph {
         font-size: 4vw;
     }
-
-    h6, p, #interest, #about{
+    
+    h6, p, #interest, #about, button{
         color: rgb(136, 148, 153);
     }
 
@@ -71,7 +88,11 @@
         font-size: 3.5vw;
     }
 
-    h5 {
+    #person-name {
+        color: black;
+    }
+
+    h5, #person-name {
         font-size: 4.5vw;
     }
 
@@ -81,6 +102,15 @@
 
     #general-profile {
         margin-top: 2vh;
+    }
+
+    button {
+        font-size: 4vw;
+    }
+
+    #join-button {
+        -webkit-box-shadow: none!important;
+        box-shadow: none!important;
     }
 
     @media (min-width: 768px) {
@@ -124,7 +154,7 @@
     }
 
     @media (max-width: 414px) {
-        #interest, #contact, #about {
+        #interest, #contact, #about, #dangerous-area {
             font-size: 5vw;
         }
 
@@ -135,22 +165,62 @@
 </style>
 
 <script>
+    import Form from 'vform'
     import { mapGetters } from 'vuex'; 
+    import axios from 'axios'
 
     export default {
+        data: () => ({
+            form: new Form({})
+        }),
+
         mounted() {
             this.$store.dispatch('fetchTeam', {
                 id: this.$route.params.id
             }),
+            this.$store.dispatch('fetchPerson', {
+                id: this.$route.params.user_id
+            }),
             this.$store.dispatch('fetchRequests', {
                 post_id: this.$route.params.id
-            })
+            }),
+            this.$store.dispatch('fetchUser')
         },
+
         computed: {
             ...mapGetters([
                 'team',
-                'requests'
+                'requests',
+                'user',
+                'person'
             ])
+        },
+
+        methods: {
+            deleteTeam: function() {
+                let currentObj = this;
+
+                axios.delete('/api/post/delete/' + this.$route.params.id).then(function (response) {
+                    currentObj.success = response.data.success;
+                }).catch(function (error) {
+                    currentObj.output = error;
+                });
+
+                this.$router.push({ name: 'team' });
+            },
+
+            join: function() {
+                let currentObj = this;
+
+                axios.post('/api/follow/' + this.team.id)
+                .then(function (response) {
+                    currentObj.success = response.data.success;
+                }).catch(function (error) {
+                    currentObj.output = error;
+                });
+
+                this.$router.push({ name: 'team.details', params: { id: this.$route.params.id }});
+            }
         }
     }
 </script>
