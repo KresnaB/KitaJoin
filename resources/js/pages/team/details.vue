@@ -25,7 +25,7 @@
             <div class="d-flex">
                 <h6 v-if="team.user_id === user.id" id="interest" class="mb-4 font-weight-light mr-auto my-auto">Request</h6>  
                 <h6 v-else id="interest" class="mb-4 font-weight-light mr-auto my-auto">Members</h6>  
-                <button class="btn font-weight-bold">JOIN</button>
+                <input id="join-button" class="btn font-weight-bold" type="button" value="JOIN" @click="join()"/>
             </div>
             <div v-if="team.user_id !== user.id">
                 <div class="d-flex">
@@ -56,7 +56,7 @@
             </div>
             <p v-else-if="team.user_id === user.id" id="no-request-paragraph" class="mb-0">No Requests</p>
         </card>
-        <card class="mb-3">
+        <card v-if="team.user_id === user.id" class="mb-3">
             <h6 id="dangerous-area" class="mb-4 font-weight-light">Dangerous area</h6>
             <input class="btn btn-secondary btn-lg btn-block text-left font-weight-bold" type="button" value="Delete team" @click="deleteTeam()" />
         </card>
@@ -88,7 +88,11 @@
         font-size: 3.5vw;
     }
 
-    h5 {
+    #person-name {
+        color: black;
+    }
+
+    h5, #person-name {
         font-size: 4.5vw;
     }
 
@@ -102,6 +106,9 @@
 
     button {
         font-size: 4vw;
+    }
+
+    #join-button {
         -webkit-box-shadow: none!important;
         box-shadow: none!important;
     }
@@ -200,6 +207,19 @@
                 });
 
                 this.$router.push({ name: 'team' });
+            },
+
+            join: function() {
+                let currentObj = this;
+
+                axios.post('/api/follow/' + this.team.id)
+                .then(function (response) {
+                    currentObj.success = response.data.success;
+                }).catch(function (error) {
+                    currentObj.output = error;
+                });
+
+                this.$router.push({ name: 'team.details', params: { id: this.$route.params.id }});
             }
         }
     }
