@@ -24,9 +24,17 @@ class FollowsController extends Controller
     public function notify($post_id)
     {
         $users = DB::table('post_user')
+            ->join('profiles', function ($join) {
+                $join->on('post_user.user_id', '=', 'profiles.id');
+            })
             ->where('post_id' , $post_id)
             ->get();
-        $exists = DB::table('post_user')->where('post_id', $post_id)->first();
+        $exists = DB::table('post_user')
+            ->join('profiles', function ($join) {
+                $join->on('post_user.user_id', '=', 'profiles.id');
+            })
+            ->where('post_id' , $post_id)
+            ->first();
         if(!$exists) {
             $users = "null";
         }
