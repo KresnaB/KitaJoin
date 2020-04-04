@@ -13,7 +13,7 @@
                 <card v-for="team in teams" v-bind:key="team.id" class="shadow-sm">
                     <div class="person-row">
                         <div class="my-auto ml-3">
-                            <router-link id="team-name" :to="{name: 'team.details', params: { id: team.id }}" class="navbar-brand font-weight-bold truncate">
+                            <router-link id="team-name" :to="{name: 'team.details', params: { id: team.id, user_id: team.user_id }}" class="navbar-brand font-weight-bold truncate">
                                 {{ team.post_name }}
                             </router-link>
                         </div>
