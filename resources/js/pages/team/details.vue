@@ -2,8 +2,11 @@
     <div class="p-3">
         <card id="general-profile" class="mb-3">
             <div>
-                <div id="profile-identity" class="my-auto">
-                    <h4 class="text-center mb-1">{{ team.post_name }}</h4>
+                <div id="profile-identity" class="my-auto text-center">
+                    <h4 class="mb-2">{{ team.post_name }}</h4>
+                    <router-link :to="{name: 'update.team', params: {id: team.id}}" tag="button" class="btn btn-dark btn-sm" v-if="team.user_id === user.id">
+                        Edit Team
+                    </router-link>
                     <div class="d-flex">
                         <button type="button" class="btn btn-dark d-none d-sm-block mr-2" data-toggle="modal" data-target="#contact-information-modal">
                             Contact information
@@ -25,7 +28,7 @@
             <div class="d-flex">
                 <h6 v-if="team.user_id === user.id" id="interest" class="mb-4 font-weight-light mr-auto my-auto">Request</h6>  
                 <h6 v-else id="interest" class="mb-4 font-weight-light mr-auto my-auto">Members</h6>  
-                <input v-if="joinStatus === 'null'" id="join-button" class="btn font-weight-bold pr-0" type="button" value="JOIN" @click="join()"/>
+                <input v-if="joinStatus === 'null' || team.user_id !== user.id" id="join-button" class="btn font-weight-bold pr-0" type="button" value="JOIN" @click="join()"/>
                 <input v-else id="requested-button" class="btn font-weight-bold pr-0" type="button" value="REQUESTED" @click="unjoin(id)"/>
             </div>
             <div v-if="team.user_id !== user.id">
@@ -43,14 +46,12 @@
                 <div v-for="request in requests" v-if="request.join_status !== 0" class="d-flex" >
                     <img :src="request.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
                     <div id="profile-identity" class="my-auto ml-2">
-                        <h5>Person Name</h5>
+                        <router-link id="person-name" :to="{ name: 'profile.details', params: {id: request.user_id}}" class="navbar-brand font-weight-bold">
+                            {{ request.name }}
+                        </router-link>
                         <div class="d-flex">
-                            <button type="button" class="btn btn-dark btn-sm mr-2" data-toggle="modal" data-target="#contact-information-modal">
-                                Confirm
-                            </button>
-                            <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">
-                                Delete
-                            </router-link>
+                            <button type="button" class="btn btn-dark btn-sm mr-2">Confirm</button>
+                            <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">Delete</router-link>
                         </div>
                     </div>
                 </div>
@@ -77,7 +78,7 @@
         font-size: 4vw;
     }
     
-    h6, p, #interest, #about, button{
+    h6, p, #interest, #about{
         color: rgb(136, 148, 153);
     }
 
