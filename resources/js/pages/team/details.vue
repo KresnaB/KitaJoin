@@ -28,7 +28,7 @@
             <div class="d-flex">
                 <h6 v-if="team.user_id === user.id" id="interest" class="mb-4 font-weight-light mr-auto my-auto">Request</h6>  
                 <h6 v-else id="interest" class="mb-4 font-weight-light mr-auto my-auto">Members</h6>  
-                <input id="join-button" class="btn font-weight-bold" type="button" value="JOIN" @click="join()"/>
+                <input v-if="team.user_id !== user.id" id="join-button" class="btn font-weight-bold" type="button" value="JOIN" @click="join()"/>
             </div>
             <div v-if="team.user_id !== user.id">
                 <div class="d-flex">
@@ -49,12 +49,8 @@
                             {{ request.name }}
                         </router-link>
                         <div class="d-flex">
-                            <button type="button" class="btn btn-dark btn-sm mr-2" data-toggle="modal" data-target="#contact-information-modal">
-                                Confirm
-                            </button>
-                            <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">
-                                Delete
-                            </router-link>
+                            <button type="button" class="btn btn-dark btn-sm mr-2">Confirm</button>
+                            <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">Delete</router-link>
                         </div>
                     </div>
                 </div>
