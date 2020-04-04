@@ -100,9 +100,8 @@ class PostsController extends Controller
         $post = Post::find($id);
         $data = request()->validate([
             'post_name'=> 'required',
-            'location'=> 'required',
-            'type'=> 'required',
             'category'=> 'required',
+            'description' => 'required'
         ]);
 
         $post->update($data);
