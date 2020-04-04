@@ -53,4 +53,6 @@ Route::delete('post/delete/{id}', 'PostsController@destroy');
 Route::post('follow/{id}', 'FollowsController@store');
 Route::get('followers/{post_id}', 'FollowsController@notify');
 Route::post('accept/{post_id}/{user_id}', 'FollowsController@update');
-//Route::delete('decline/{post_id}/{user_id}', 'FollowsController@delete');
+Route::post('joinstatus', 'FollowsController@getJoinStatus');
+Route::delete('joinstatus/delete/{user_id}/{post_id}', 'FollowsController@destroy');
+//Route::delete('decline/{post_id}/{user_id}', 'FollowsController@decline');
