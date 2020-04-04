@@ -65,6 +65,15 @@ let actions = {
                 console.log(err)
             })
     },
+    fetchJoinStatus({commit}, data) {
+        axios.post('/api/joinstatus', data)
+            .then((res) => {
+                commit('FETCH_JOIN_STATUS', res.data)
+            }).catch(err => {
+                console.log(err)
+            })
+    },
+    
 }
 
 export default actions

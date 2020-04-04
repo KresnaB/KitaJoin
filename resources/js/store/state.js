@@ -12,7 +12,8 @@ let state = {
         telephone: '',
         interest: ''
     },
-    requests: []
+    requests: [],
+    joinStatus: []
 }
 
 export default state

@@ -28,7 +28,8 @@
             <div class="d-flex">
                 <h6 v-if="team.user_id === user.id" id="interest" class="mb-4 font-weight-light mr-auto my-auto">Request</h6>  
                 <h6 v-else id="interest" class="mb-4 font-weight-light mr-auto my-auto">Members</h6>  
-                <input v-if="team.user_id !== user.id" id="join-button" class="btn font-weight-bold" type="button" value="JOIN" @click="join()"/>
+                <input v-if="joinStatus === 'null' || team.user_id !== user.id" id="join-button" class="btn font-weight-bold pr-0" type="button" value="JOIN" @click="join()"/>
+                <input v-else id="requested-button" class="btn font-weight-bold pr-0" type="button" value="REQUESTED" @click="unjoin(id)"/>
             </div>
             <div v-if="team.user_id !== user.id">
                 <div class="d-flex">
@@ -42,7 +43,7 @@
                 </div>
             </div>
             <div v-if="requests !== 'null'">
-                <div class="d-flex" v-for="request in requests">
+                <div v-for="request in requests" v-if="request.join_status !== 0" class="d-flex" >
                     <img :src="request.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
                     <div id="profile-identity" class="my-auto ml-2">
                         <router-link id="person-name" :to="{ name: 'profile.details', params: {id: request.user_id}}" class="navbar-brand font-weight-bold">
@@ -109,7 +110,7 @@
         font-size: 4vw;
     }
 
-    #join-button {
+    #join-button, #requested-button {
         -webkit-box-shadow: none!important;
         box-shadow: none!important;
     }
@@ -171,11 +172,18 @@
     import axios from 'axios'
 
     export default {
+        
         data: () => ({
-            form: new Form({})
+            form: new Form({}),
+            id: {
+                user_id: null,
+                post_id: null
+            }
         }),
 
         mounted() {
+            this.id.user_id = this.user.id,
+            this.id.post_id = this.$route.params.id,
             this.$store.dispatch('fetchTeam', {
                 id: this.$route.params.id
             }),
@@ -185,17 +193,17 @@
             this.$store.dispatch('fetchRequests', {
                 post_id: this.$route.params.id
             }),
-            this.$store.dispatch('fetchUser')
+            this.$store.dispatch('fetchUser'),
+            this.$store.dispatch('fetchJoinStatus', this.id)
         },
 
-        computed: {
-            ...mapGetters([
-                'team',
-                'requests',
-                'user',
-                'person'
-            ])
-        },
+        computed: mapGetters({
+            user: 'auth/user',
+            team: 'team',
+            requests: 'requests',
+            person : 'person',
+            joinStatus: 'joinStatus'
+        }),
 
         methods: {
             deleteTeam: function() {
@@ -220,7 +228,20 @@
                     currentObj.output = error;
                 });
 
-                this.$router.push({ name: 'team.details', params: { id: this.$route.params.id }});
+                this.$router.go();
+            },
+
+            unjoin: function(id) {
+                let currentObj = this;
+
+                axios.delete('/api/joinstatus/delete/' + this.user.id + '/' + this.$route.params.id)
+                .then(function (response) {
+                    currentObj.success = response.data.success;
+                }).catch(function (error) {
+                    currentObj.output = error;
+                });
+
+                this.$router.go();
             }
         }
     }

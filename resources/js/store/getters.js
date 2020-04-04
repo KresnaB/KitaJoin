@@ -19,6 +19,9 @@ let getters = {
     },
     requests: state => {
         return state.requests
+    },
+    joinStatus: state => {
+        return state.joinStatus
     }
 }
 

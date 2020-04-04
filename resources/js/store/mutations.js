@@ -16,6 +16,9 @@ let mutations = {
     },
     FETCH_REQUESTS(state, requests) {
         return state.requests = requests
+    },
+    FETCH_JOIN_STATUS(state, joinStatus) {
+        return state.joinStatus = joinStatus
     }
 }
 
