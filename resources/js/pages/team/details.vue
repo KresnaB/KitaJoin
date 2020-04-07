@@ -3,8 +3,8 @@
         <card id="general-profile" class="mb-3">
             <div>
                 <div id="profile-identity" class="my-auto text-center">
-                    <h4 class="mb-2">{{ team.post_name }}</h4>
-                    <router-link :to="{name: 'update.team', params: {id: team.id}}" tag="button" class="btn btn-dark btn-sm" v-if="team.user_id === user.id">
+                    <h4>{{ team.post_name }}</h4>
+                    <router-link :to="{name: 'update.team', params: {id: team.id}}" tag="button" class="btn btn-dark btn-sm mt-2" v-if="team.user_id === user.id">
                         Edit Team
                     </router-link>
                     <div class="d-flex">
@@ -28,8 +28,11 @@
             <div class="d-flex">
                 <h6 v-if="team.user_id === user.id" id="interest" class="mb-4 font-weight-light mr-auto my-auto">Request</h6>  
                 <h6 v-else id="interest" class="mb-4 font-weight-light mr-auto my-auto">Members</h6>  
-                <input v-if="joinStatus === 'null' || team.user_id !== user.id" id="join-button" class="btn font-weight-bold pr-0" type="button" value="JOIN" @click="join()"/>
-                <input v-else id="requested-button" class="btn font-weight-bold pr-0" type="button" value="REQUESTED" @click="unjoin(id)"/>
+                <div v-if="team.user_id !== user.id">
+                    <input v-if="joinStatus === 'null'" id="join-button" class="btn font-weight-bold pr-0" type="button" value="JOIN" @click="join()"/>
+                    <input v-else-if="joinStatus.join_status === 0" id="requested-button" class="btn font-weight-bold pr-0" type="button" value="REQUESTED" @click="unjoin(id)"/>
+                    <input v-else id="requested-button" class="btn font-weight-bold pr-0" type="button" value="JOINED" @click="unjoin(id)"/>
+                </div>
             </div>
             <div v-if="team.user_id !== user.id">
                 <div class="d-flex">
