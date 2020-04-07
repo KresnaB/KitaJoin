@@ -52,10 +52,11 @@
                         <router-link id="person-name" :to="{ name: 'profile.details', params: {id: request.user_id}}" class="navbar-brand font-weight-bold">
                             {{ request.name }}
                         </router-link>
-                        <div class="d-flex">
+                        <div v-if="team.user_id === user.id" class="d-flex">
                             <button type="button" class="btn btn-dark btn-sm mr-2">Confirm</button>
                             <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">Delete</router-link>
                         </div>
+                        <p v-else id="person-interest" class="mb-0">{{ person.program}}</p>
                     </div>
                 </div>
             </div>
