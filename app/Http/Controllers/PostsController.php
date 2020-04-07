@@ -47,11 +47,10 @@ class PostsController extends Controller
             'category'=> 'required',
             'description' => 'required'
         ]);
-            
         auth()->user()->posts()->create(array_merge(
             $data
         ));
-        return response()->json("post created");   
+        return response()->json("post created");
     }
 
     /**
@@ -63,7 +62,7 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return response()->json(['post'=>$post]);
+        return response()->json($post);
     }
 
     /**
@@ -101,9 +100,8 @@ class PostsController extends Controller
         $post = Post::find($id);
         $data = request()->validate([
             'post_name'=> 'required',
-            'location'=> 'required',
-            'type'=> 'required',
             'category'=> 'required',
+            'description' => 'required'
         ]);
 
         $post->update($data);
@@ -122,5 +120,11 @@ class PostsController extends Controller
         $post->delete();
 
         return response()->json("post successfully deleted");
+    }
+    public function showMyPosts($user_id)
+    {
+         $user = User::find($user_id);
+         $posts = $user->posts();
+         return response()->json(['posts'=>$posts]);
     }
 }

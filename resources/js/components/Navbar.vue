@@ -16,7 +16,6 @@
             <a class="nav-link dropdown-toggle text-dark"
                href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
             >
-              <img :src="user.photo_url" class="rounded-circle profile-photo mr-1">
               {{ user.name }}
             </a>
             <div class="dropdown-menu">
@@ -28,11 +27,6 @@
               <router-link :to = "{ name: 'team' }" class="dropdown-item pl-3">
                 <fa icon="users" fixed-width />
                 Team
-              </router-link>
-              <div class="dropdown-divider" />
-              <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
-                <fa icon="cog" fixed-width/>
-                Settings
               </router-link>
               <div class="dropdown-divider" />
               <a href="#" class="dropdown-item pl-3" @click.prevent="logout">

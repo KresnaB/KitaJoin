@@ -9,10 +9,26 @@ let actions = {
                 console.log(err)
             })
     },
-    fetchTeams({commit}, data) {
-        axios.get('/api/posts/' + data.user_id)
+    fetchTeams({commit}) {
+        axios.get('/api/posts')
             .then(res => {
                 commit('FETCH_TEAMS', res.data)
+            }).catch(err => {
+            console.log(err)
+        })
+    },
+    fetchMyTeams({commit}, data) {
+        axios.get('/api/posts/show/' + data.user_id)
+            .then(res => {
+                commit('FETCH_TEAMS', res.data)
+            }).catch(err => {
+            console.log(err)
+        })
+    },
+    fetchTeam({commit}, data) {
+        axios.get('/api/posts/' + data.id)
+            .then(res => {
+                commit('FETCH_TEAM', res.data)
             }).catch(err => {
             console.log(err)
         })
@@ -32,7 +48,32 @@ let actions = {
             }).catch(err => {
                 console.log(err)
             })
-    }
+    },
+    updatePerson(form) {
+        axios.post('/api/update/' + form.id, {image: this.form.image, name: this.form.image, about: this.form.about, telephone: this.form.telephone, interest: this.form.interest})
+            .then((res) => {
+                this.$store.dispatch('fetchPeople')
+            }).catch(err => {
+                console.log(err);
+            })
+    },
+    fetchRequests({commit}, data) {
+        axios.get('/api/followers/' + data.post_id)
+            .then((res) => {
+                commit('FETCH_REQUESTS', res.data)
+            }).catch(err => {
+                console.log(err)
+            })
+    },
+    fetchJoinStatus({commit}, data) {
+        axios.post('/api/joinstatus', data)
+            .then((res) => {
+                commit('FETCH_JOIN_STATUS', res.data)
+            }).catch(err => {
+                console.log(err)
+            })
+    },
+    
 }
 
 export default actions
