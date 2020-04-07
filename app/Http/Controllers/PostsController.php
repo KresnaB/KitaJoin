@@ -25,6 +25,25 @@ class PostsController extends Controller
     }
 
     /**
+     * Display a listing of the posts joined
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function readPostsJoined(Request $request) {
+
+        $postsJoined = DB::table('post_user')
+            ->join('posts', function ($join) {
+                $join->on('post_user.post_id', '=', 'posts.id');
+            })
+            ->where([
+                ['post_user.user_id' , $request->input('user_id')],
+                ['join_status', 1]
+            ])
+            ->get();
+        return response()->json($postsJoined);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

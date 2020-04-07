@@ -10,10 +10,19 @@
         </div>
         <div class="row">
             <div class="col">               
-                <card v-for="team in teams" v-bind:key="team.id" class="shadow-sm">
+                <card v-for="team in teamsCreated" v-bind:key="team.id" class="shadow-sm">
                     <div class="person-row">
                         <div class="my-auto ml-3">
                             <router-link id="team-name" :to="{name: 'team.details', params: { id: team.id }}" class="navbar-brand font-weight-bold truncate">
+                                {{ team.post_name }}
+                            </router-link>
+                        </div>
+                    </div>
+                </card>
+                <card v-for="team in teamsJoined" v-bind:key="team.id" class="shadow-sm">
+                    <div class="person-row">
+                        <div class="my-auto ml-3">
+                            <router-link id="team-name" :to="{name: 'team.details', params: { id: team.id, user_id: team.user_id }}" class="navbar-brand font-weight-bold truncate">
                                 {{ team.post_name }}
                             </router-link>
                         </div>
@@ -50,13 +59,18 @@
     
     export default {
         mounted() {
-            this.$store.dispatch('fetchMyTeams', {
+            this.$store.dispatch('fetchTeamsCreated', {
+                user_id: this.user.id
+            }),
+            this.$store.dispatch('fetchTeamsJoined', {
                 user_id: this.user.id
             })
         },
         computed: mapGetters({
             user: 'auth/user',
-            teams: 'teams'
+            teamsCreated: 'teamsCreated',
+            teamsJoined: 'teamsJoined'
+
         })
     };
 </script>
