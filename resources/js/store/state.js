@@ -13,7 +13,7 @@ let state = {
         interest: ''
     },
     requests: [],
-    joinStatus: []
+    joinStatus: {}
 }
 
 export default state
