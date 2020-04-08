@@ -24,6 +24,11 @@
         </div>
       </div>
     </div>
+    <div>
+      <div class="p-3">
+        <h2 id="teams" class="text-white text-center">TEAMS</h2>
+      </div>
+    </div>
     <div id="find-people-container" class="bg-light">
       <div class="p-3">
         <h2 class="text-dark">Connect with people who can join</h2>
@@ -95,6 +100,10 @@ h3 {
 
 #copyright {
   height: auto;
+}
+
+#teams {
+  letter-spacing: 8px;
 }
 
 @media (min-width: 768px) {
