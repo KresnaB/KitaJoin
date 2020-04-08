@@ -170,7 +170,11 @@ export default {
       if (imageInput.files.length != 0) {
         formData.append('image', this.image);
       }
-      formData.append('bio', this.person.bio);
+      if (this.person.bio === null) {
+        formData.append('bio', '');
+      } else {
+        formData.append('bio', this.person.bio);
+      }
       formData.append('contact', this.person.contact);
       formData.append('interest', this.person.interest);
 
