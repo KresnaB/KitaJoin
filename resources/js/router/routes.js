@@ -23,6 +23,6 @@ export default [
     ] },
 
   { path: '*', component: page('errors/404.vue') },
-  { path: '/profile-details/:id', name: 'profile.details', component: page('profiledetails.vue'), props: true}
+  { path: '/profile-details/:id', name: 'profile.details', component: page('profiledetails.vue'), props: true},
   { path: '/team', name: 'team', component: page('team.vue')}
 ]
