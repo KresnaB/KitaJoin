@@ -40,7 +40,6 @@
             </div>
           </div>
         </form>
-        <button @click="AuthProvider('google')">auth Google</button>
       </div>
     </div>
     <div class="col-sm col-md my-auto d-none d-xl-block">
