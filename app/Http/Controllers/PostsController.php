@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Post;
 use Illuminate\Http\Request;
@@ -23,6 +25,25 @@ class PostsController extends Controller
     }
 
     /**
+     * Display a listing of the posts joined
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function readPostsJoined(Request $request) {
+
+        $postsJoined = DB::table('post_user')
+            ->join('posts', function ($join) {
+                $join->on('post_user.post_id', '=', 'posts.id');
+            })
+            ->where([
+                ['post_user.user_id' , $request->input('user_id')],
+                ['join_status', 1]
+            ])
+            ->get();
+        return response()->json($postsJoined);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -42,22 +63,13 @@ class PostsController extends Controller
     {
         $data = request()->validate([
             'post_name'=> 'required',
-            'location'=> 'required',
-            'type'=> 'required',
             'category'=> 'required',
-            'image' => 'required|image',
+            'description' => 'required'
         ]);
-        $imagePath = request('image')->store('uploads', 'public');
-        $imageExactPath = "storage/".$imagePath;
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200,1200);
-        $image->save();
-        $imageArray = ['image'=>$image];
-            
         auth()->user()->posts()->create(array_merge(
-            $data,
-            $imageArray
+            $data
         ));
-        return response()->json("post created");   
+        return response()->json("post created");
     }
 
     /**
@@ -69,7 +81,19 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return response()->json(['post'=>$post]);
+        return response()->json($post);
+    }
+
+    /**
+     * Display the specified resource by user_id
+     * 
+     * @param int $user_id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function showByUserId($user_id) {
+        $posts = DB::table('posts')->where('user_id', $user_id)->get();
+        return response()->json($posts);     
     }
 
     /**
@@ -95,9 +119,8 @@ class PostsController extends Controller
         $post = Post::find($id);
         $data = request()->validate([
             'post_name'=> 'required',
-            'location'=> 'required',
-            'type'=> 'required',
             'category'=> 'required',
+            'description' => 'required'
         ]);
 
         $post->update($data);
@@ -116,5 +139,11 @@ class PostsController extends Controller
         $post->delete();
 
         return response()->json("post successfully deleted");
+    }
+    public function showMyPosts($user_id)
+    {
+         $user = User::find($user_id);
+         $posts = $user->posts();
+         return response()->json(['posts'=>$posts]);
     }
 }

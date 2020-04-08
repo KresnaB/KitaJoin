@@ -2,15 +2,17 @@
     <div>
         <h2 class="text-white text-center mt-5">Post your team on the #1 site for finding quality partners</h2>
         <card class="mt-5 mb-5">
-            <label>Team title</label>
-            <input class="form-control" type="text" name="title">
-            <label>Team category</label>
-            <input class="form-control" type="text" name="category"></input>
-            <label>Team description</label>
-            <textarea class="form-control" rows="4" name="description"></textarea>
-            <v-button class="mt-4" :loading="form.busy">
-                Proceed to checkout
-            </v-button>
+            <form @submit.prevent="create" @keydown="form.onKeydown($event)">
+                <label>Contest name *</label>
+                <input class="form-control" type="text" v-model="form.post_name" required>
+                <label>Contest category *</label>
+                <input class="form-control" type="text" v-model="form.category" required>
+                <label>Team description *</label>
+                <textarea class="form-control" rows="4" v-model="form.description" required></textarea>
+                <v-button class="mt-4" :loading="form.busy">
+                    Proceed to checkout
+                </v-button>
+            </form>
         </card>
     </div>
 </template>
@@ -27,10 +29,21 @@
     export default {
         data: () => ({
             form: new Form({
-                title: '',
+                post_name: '',
                 category: '',
                 description: ''
             })
-        })
+        }),
+
+        methods: {
+            async create() {
+
+                // Create the team
+                const { data } = await this.form.post('/api/post/create')
+
+                // Redirect home
+                this.$router.push({ name: 'team' })
+            }
+        }
     }
 </script>
