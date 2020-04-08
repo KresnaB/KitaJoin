@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div v-if="person.contact !== 'Empty' && user.id !== person.id" class="text-center mt-4">
-                <a :href="'https://wa.me/' + person.contact" class="btn fa-whatsapp text-white font-weight-bold">
+                <a :href="'https://wa.me/62' + person.contact" class="btn fa-whatsapp text-white font-weight-bold">
                     <fa :icon="['fab', 'whatsapp']" />
                     WhatsApp
                 </a>
@@ -75,7 +75,7 @@
                 <div>
                     <h6 class="font-weight-bold mb-0 telephone">Telephone</h6>
                     <p v-if="person.contact === 'Empty'" class="mb-0">-</p>
-                    <p v-else class="mb-0">{{ person.contact }}</p>
+                    <p v-else class="mb-0">+62{{ person.contact }}</p>
                 </div>
             </div>
         </card>
