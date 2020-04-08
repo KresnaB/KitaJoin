@@ -1,7 +1,7 @@
 <template>
     <div class="p-3">
         <card id="general-profile" class="mb-3">
-            <div class="d-flex">
+            <div class="d-flex mb-4">
                 <img :src="person.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
                 <img :src="person.image" class="rounded-circle img-responsive my-auto d-none d-sm-block" width="auto" height="130">
                 <div id="profile-identity" class="my-auto">
@@ -39,6 +39,12 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="text-center">
+                <a :href="'https://wa.me/' + person.contact" class="btn fa-whatsapp text-white font-weight-bold">
+                    <fa :icon="['fab', 'whatsapp']" />
+                    WhatsApp
+                </a>
             </div>
         </card>
         <card class="mb-3" v-if="person.bio !== null">
@@ -130,6 +136,28 @@
         padding: 8px;
         border-radius: 14px;
     }
+
+    .scl-btn {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 11px;
+      padding-right: 11px;
+      font-size: 25px;
+      width: 55px;
+      text-align: center;
+      margin:5px;
+      color: white;
+    }
+    
+    /* Hover Effect */
+    .scl-btn:hover {
+      opacity: 0.8;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+    }
+
+    .fa-whatsapp { background: #25D366; }
 
     @media (min-width: 1024px) {
         #contact-information, #telephone {
