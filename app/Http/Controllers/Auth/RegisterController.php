@@ -71,6 +71,10 @@ class RegisterController extends Controller
         ]);
         $profile = $user->profile;
         $profile->name = $data['name'];
+
+        $exactPath = "/storage/profile/avatar.png";
+        $profile->image = $exactPath;
+
         $profile->save();
         return $user;
     }
