@@ -35,12 +35,14 @@
 </style>
 
 <script>
-    mounted() {
-        this.$store.dispatch('fetchTeams')
-    },
-    computed: {
-        ...mapGetters([
-        'teams'
-        ])
-    },
+    export default {
+        mounted() {
+            this.$store.dispatch('fetchTeams')
+        },
+        computed: {
+            ...mapGetters([
+            'teams'
+            ])
+        }
+    }
 </script>
