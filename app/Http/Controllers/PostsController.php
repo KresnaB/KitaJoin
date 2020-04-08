@@ -47,11 +47,10 @@ class PostsController extends Controller
             'category'=> 'required',
             'description' => 'required'
         ]);
-            
         auth()->user()->posts()->create(array_merge(
             $data
         ));
-        return response()->json("post created");   
+        return response()->json("post created");
     }
 
     /**
@@ -122,5 +121,11 @@ class PostsController extends Controller
         $post->delete();
 
         return response()->json("post successfully deleted");
+    }
+    public function showMyPosts($user_id)
+    {
+         $user = User::find($user_id);
+         $posts = $user->posts();
+         return response()->json(['posts'=>$posts]);
     }
 }
