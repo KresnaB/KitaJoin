@@ -1,5 +1,6 @@
 let state = {
     people: [],
+    teams: [],
     teamsCreated: [],
     teamsJoined: [],
     team: {},
