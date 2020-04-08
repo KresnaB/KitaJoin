@@ -41,14 +41,31 @@ class FollowsController extends Controller
         return response()->json($users);
     }
 
-    public function update($post_id , $user_id)
+    public function update(Request $request)
     {
         //masukan berupa id post yang  yang akan di acc
-        $status = DB::table('post_user')->where('post_id', $post_id)->where('user_id', $user_id)->pluck('join_status');
-        if($status == false){DB::table('post_user')->where('post_id', $post_id)->where('user_id', $user_id)->update(['join_status' => true]);}
-        else{DB::table('post_user')->where('post_id', $post_id)->where('user_id', $user_id)->update(['join_status' => false]);}
-
-        return response()->json('The join status successfully updated');
+        $status = DB::table('post_user')
+            ->where([
+                ['post_id', $request->input('post_id')],
+                ['user_id', $request->input('user_id')]
+            ])
+            ->value('join_status');
+        if($status == 0) {
+            DB::table('post_user')
+                ->where([
+                    ['post_id', $request->input('post_id')],
+                    ['user_id', $request->input('user_id')]
+                ])
+                ->update(['join_status' => 1]);
+        } else {
+            DB::table('post_user')
+                ->where([
+                    ['post_id', $request->input('post_id')],
+                    ['user_id', $request->input('user_id')]
+                ])
+                ->update(['join_status' => 0]);
+        }
+        return response()->json("Confirm successfully");
     }
 
     public function getJoinStatus(Request $request) {
