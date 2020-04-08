@@ -24,9 +24,17 @@ class FollowsController extends Controller
     public function notify($post_id)
     {
         $users = DB::table('post_user')
+            ->join('profiles', function ($join) {
+                $join->on('post_user.user_id', '=', 'profiles.id');
+            })
             ->where('post_id' , $post_id)
             ->get();
-        $exists = DB::table('post_user')->where('post_id', $post_id)->first();
+        $exists = DB::table('post_user')
+            ->join('profiles', function ($join) {
+                $join->on('post_user.user_id', '=', 'profiles.id');
+            })
+            ->where('post_id' , $post_id)
+            ->first();
         if(!$exists) {
             $users = "null";
         }
@@ -43,7 +51,35 @@ class FollowsController extends Controller
         return response()->json('The join status successfully updated');
     }
 
-//    public function delete($post_id , $user_id)
+    public function getJoinStatus(Request $request) {
+       
+        $joinStatus = DB::table('post_user')
+            ->where([
+                ['user_id' , $request->input('user_id')],
+                ['post_id', $request->input('post_id')]
+            ])
+            ->first();
+        if(!$joinStatus) {
+            $joinStatus = "null";
+        }
+        return response()->json($joinStatus);
+    }
+
+    public function destroy(Request $request, $user_id, $post_id) {
+       
+        $status = DB::table('post_user')
+            ->where([
+                ['user_id' , $user_id],
+                ['post_id', $post_id]
+            ])
+            ->delete();
+        if ($status) {
+            return response()->json("You successfully unjoin");
+        } else {
+            return response()->json("You failed unjoin");
+        }
+    }
+//    public function decline($post_id , $user_id)
 //    {
 //        //digunakan untuk menolak orang yang ingin join
 //        $deniedUser = User::find($user_id);

@@ -9,11 +9,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import {
-  faGithub
+  faGithub, faWhatsapp
 } from '@fortawesome/free-brands-svg-icons'
 
 library.add(
-  faUser, faLock, faSignOutAlt, faCog, faGithub, faUsers, faAddressBook, faEdit
+  faUser, faLock, faSignOutAlt, faCog, faGithub, faUsers, faAddressBook, faEdit, faWhatsapp
 )
 
 Vue.component('fa', FontAwesomeIcon)

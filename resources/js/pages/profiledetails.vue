@@ -6,8 +6,10 @@
                 <img :src="person.image" class="rounded-circle img-responsive my-auto d-none d-sm-block" width="auto" height="130">
                 <div id="profile-identity" class="my-auto">
                     <h4>{{ person.name }}</h4>
-                    <h6 id="user-study-program" v-if="user.id === person.id">{{ person.program }}</h6>
-                    <h6 id="study-program" v-else>{{ person.program }}</h6>
+                    <div v-if="person.program !== 'Empty'">
+                        <h6 id="user-study-program" v-if="user.id === person.id">{{ person.program }}</h6>
+                        <h6 id="study-program" v-else>{{ person.program }}</h6>
+                    </div>
                     <div class="d-flex">
                         <button type="button" class="btn btn-dark d-none d-sm-block mr-2" data-toggle="modal" data-target="#contact-information-modal">
                             Contact information
@@ -40,6 +42,12 @@
                     </div>
                 </div>
             </div>
+            <div v-if="person.contact !== 'Empty' && user.id !== person.id" class="text-center mt-4">
+                <a :href="'https://wa.me/62' + person.contact" class="btn fa-whatsapp text-white font-weight-bold">
+                    <fa :icon="['fab', 'whatsapp']" />
+                    WhatsApp
+                </a>
+            </div>
         </card>
         <card class="mb-3" v-if="person.bio !== null">
             <div>
@@ -52,7 +60,8 @@
             <div>
                 <h6 id="interest" class="mb-4 font-weight-light">Interest</h6>
                 <ul class="list-unstyled mb-0">
-                    <li class="medium-light-semibold bg-secondary d-inline-flex">{{ person.interest }}</li>
+                    <li v-if="person.interest === 'Empty'" class="medium-light-semibold bg-secondary d-inline-flex">-</li>
+                    <li v-else class="medium-light-semibold bg-secondary d-inline-flex">{{ person.interest }}</li>
                 </ul>
             </div>
         </card>
@@ -65,7 +74,8 @@
                 <fa icon="address-book" class="mr-4 fa-2x my-auto d-block d-sm-none"/>
                 <div>
                     <h6 class="font-weight-bold mb-0 telephone">Telephone</h6>
-                    <p class="mb-0">{{ person.contact }}</p>
+                    <p v-if="person.contact === 'Empty'" class="mb-0">-</p>
+                    <p v-else class="mb-0">+62{{ person.contact }}</p>
                 </div>
             </div>
         </card>
@@ -130,6 +140,28 @@
         padding: 8px;
         border-radius: 14px;
     }
+
+    .scl-btn {
+      padding-top: 5px;
+      padding-bottom: 5px;
+      padding-left: 11px;
+      padding-right: 11px;
+      font-size: 25px;
+      width: 55px;
+      text-align: center;
+      margin:5px;
+      color: white;
+    }
+    
+    /* Hover Effect */
+    .scl-btn:hover {
+      opacity: 0.8;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+    }
+
+    .fa-whatsapp { background: #25D366; }
 
     @media (min-width: 1024px) {
         #contact-information, #telephone {
