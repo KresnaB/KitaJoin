@@ -60,7 +60,7 @@
             <div>
                 <h6 id="interest" class="mb-4 font-weight-light">Interest</h6>
                 <ul class="list-unstyled mb-0">
-                    <li v-if="person.interest === 'Empty'" class="medium-light-semibold bg-secondary d-inline-flex">-</li>
+                    <li v-if="person.interest === ''" class="medium-light-semibold bg-secondary d-inline-flex">-</li>
                     <li v-else class="medium-light-semibold bg-secondary d-inline-flex">{{ person.interest }}</li>
                 </ul>
             </div>
@@ -74,7 +74,7 @@
                 <fa icon="address-book" class="mr-4 fa-2x my-auto d-block d-sm-none"/>
                 <div>
                     <h6 class="font-weight-bold mb-0 telephone">Telephone</h6>
-                    <p v-if="person.contact === 'Empty'" class="mb-0">-</p>
+                    <p v-if="person.contact === ''" class="mb-0">-</p>
                     <p v-else class="mb-0">+62{{ person.contact }}</p>
                 </div>
             </div>
