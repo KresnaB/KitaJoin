@@ -38,10 +38,19 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
 });
 
-// Route::get('home','ProfilesController@users');
-// Route::get('home/{id}', 'ProfilesController@profile');
-// Route::patch('home/{id}/update', 'ProfilesController@edit');
 Route::get('add/{id}', 'ProfilesController@add');
 Route::get('profiles', 'ProfilesController@index');
 Route::get('profiles/{id}', 'ProfilesController@profile');
 Route::post('update/{id}', 'ProfilesController@update');
+
+Route::get('posts/{id}', 'PostsController@show');
+Route::get('posts/show/{user_id}', 'PostsController@showByUserId');
+Route::get('posts', 'PostsController@index');
+Route::post('post/create', 'PostsController@store');
+Route::post('post/update/{id}', 'PostsController@update');
+Route::delete('post/delete/{id}', 'PostsController@delete');
+
+Route::post('follow/{id}', 'FollowsController@store');
+Route::get('followers/{post_id}', 'FollowsController@notify');
+Route::post('accept/{post_id}/{user_id}', 'FollowsController@update');
+//Route::delete('decline/{post_id}/{user_id}', 'FollowsController@delete');
