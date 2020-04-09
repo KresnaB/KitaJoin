@@ -20,10 +20,10 @@ class ProfilesController extends Controller
     public function profile($id)
     {
         $profile = Profile::find($id);
-        if ($profile->contact == 'Empty') {
+        if ($profile->contact === 'Empty') {
             $profile->contact = '';
         }
-        if ($profile->interest == 'Empty') {
+        if ($profile->interest === 'Empty') {
             $profile->interest = '';
         }
         return response()->json($profile);

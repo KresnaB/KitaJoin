@@ -39,6 +39,9 @@
               <login-with-github />
             </div>
           </div>
+          <div class="mt-3 pt-5 text-center">
+            <router-link id="register-button" :to="{ name: 'register' }" tag="button" class="btn btn-dark text-white"><u>Register</u></router-link>
+          </div>
         </form>
       </div>
     </div>
@@ -94,6 +97,16 @@
 
   #kita-join-paragraph {
     font-size: 3vw;
+  }
+
+  #register-button {
+    background-color: black;
+    border-color: black;
+  }
+
+  #register-button:focus, #register-button:active {
+    outline: none !important;
+    box-shadow: none;
   }
 </style>
 

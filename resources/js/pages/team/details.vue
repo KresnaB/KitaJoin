@@ -3,7 +3,7 @@
         <card id="general-profile" class="mb-3">
             <div>
                 <div id="profile-identity" class="my-auto text-center">
-                    <h4>{{ team.post_name }}</h4>
+                    <h4 class="mb-0">{{ team.post_name }}</h4>
                     <router-link :to="{name: 'update.team', params: {id: team.id}}" tag="button" class="btn btn-dark btn-sm mt-2" v-if="team.user_id === user.id">
                         Edit Team
                     </router-link>
@@ -34,34 +34,31 @@
                     <input v-else id="requested-button" class="btn font-weight-bold pr-0" type="button" value="JOINED" @click="unjoin(id)"/>
                 </div>
             </div>
-            <div v-if="team.user_id !== user.id">
+            <div v-if="team.user_id !== user.id" class="mt-2">
                 <div class="d-flex">
                     <img :src="person.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
                     <div id="profile-identity" class="my-auto ml-2">
                         <router-link id="person-name" :to="{ name: 'profile.details', params: {id: person.id}}" class="navbar-brand font-weight-bold">
                             {{ person.name }}
                         </router-link>
-                        <p id="person-interest" class="mb-0">{{ person.program}}</p>
+                        <p v-if="person.program === 'Empty'" id="person-interest" class="mb-0"></p>
+                        <p v-else id="person-interest" class="mb-0">{{ person.program}}</p>
                     </div>
                 </div>
             </div>
             <div v-if="requests !== 'null'">
-                <div v-for="request in requests" v-if="request.join_status !== 0 || team.user_id === user.id" class="d-flex" >
+                <div v-for="request in requests" v-if="request.join_status !== 0 || team.user_id === user.id" class="d-flex mt-2" >
                     <img :src="request.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
                     <div id="profile-identity" class="my-auto ml-2">
                         <router-link id="person-name" :to="{ name: 'profile.details', params: {id: request.user_id}}" class="navbar-brand font-weight-bold">
                             {{ request.name }}
                         </router-link>
-<<<<<<< HEAD
                         <div v-if="team.user_id === user.id" class="d-flex">
-                            <button type="button" class="btn btn-dark btn-sm mr-2">Confirm</button>
-                            <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">Delete</router-link>
+                            <button v-if="request.join_status === 0" type="button" class="btn btn-dark btn-sm btn-block mr-2" @click="confirm(request.user_id)">Confirm</button>
+                            <button v-else type="button" class="btn btn-secondary btn-sm btn-block mr-2" @click="deleteRequest(request.user_id)">Delete</button>                        
                         </div>
-                        <p v-else id="person-interest" class="mb-0">{{ person.program}}</p>
-=======
-                        <button v-if="request.join_status === 0" type="button" class="btn btn-dark btn-sm btn-block mr-2" @click="confirm(request.user_id)">Confirm</button>
-                        <button v-else type="button" class="btn btn-secondary btn-sm btn-block mr-2" @click="deleteRequest(request.user_id)">Delete</button>                        
->>>>>>> feat/update-team
+                        <p v-else-if="request.program === 'Empty'" id="person-interest" class="mb-0">-</p>
+                        <p v-else id="person-interest" class="mb-0">{{ request.program}}</p>
                     </div>
                 </div>
             </div>

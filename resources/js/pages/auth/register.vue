@@ -1,5 +1,5 @@
 <template>
-  <div id="register-container" class="row">
+  <div id="register-container" class="row pt-2">
     <div class="col-sm col-md my-auto">
       <card v-if="mustVerifyEmail" :title="$t('register')">
         <div class="alert alert-success" role="alert">
@@ -7,7 +7,7 @@
         </div>
       </card>
       <div id="register-card" v-else class="border-0 mx-auto card-body" style="background-color: black; max-width: 500px">
-        <div class="d-block d-sm-none mb-5">
+        <div class="d-block d-sm-none mt-5 mb-5">
           <h1 class="text-white">KITA <br /> JOIN</h1>
           <p class="text-white font-weight-light">Help you find the right people</p>
         </div>
@@ -178,7 +178,7 @@ export default {
       if (data.status) {
         this.mustVerifyEmail = true
       } else {
-        // Redirect home.
+        // Redirect home
         this.$router.push({ name: 'home' })
       }
     }
