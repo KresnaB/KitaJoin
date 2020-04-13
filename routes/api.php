@@ -39,3 +39,5 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('sociallogin/{provider}', 'Auth\AuthController@SocialSignup');
     Route::get('auth/{provider}/callback', 'OutController@index')->where('provider', '.*');
 });
+Route::get('/redirect', 'SocialAuthGoogleController@redirect');
+Route::get('/callback', 'SocialAuthGoogleController@callback');
