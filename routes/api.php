@@ -39,5 +39,19 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('sociallogin/{provider}', 'Auth\AuthController@SocialSignup');
     Route::get('auth/{provider}/callback', 'OutController@index')->where('provider', '.*');
 });
+<<<<<<< HEAD
 Route::get('/redirect', 'SocialAuthGoogleController@redirect');
 Route::get('/callback', 'SocialAuthGoogleController@callback');
+=======
+
+Route::get('add/{id}', 'ProfilesController@add');
+Route::get('profiles', 'ProfilesController@index');
+Route::get('profiles/{id}', 'ProfilesController@profile');
+Route::post('update/{id}', 'ProfilesController@update');
+
+Route::get('posts/{id}', 'PostsController@show');
+Route::get('posts/{user_id}', 'PostsController@showByUserId');
+Route::post('post/create', 'PostsController@store');
+Route::post('post/update/{id}', 'PostsController@update');
+Route::delete('post/delete/{id}', 'PostsController@delete');
+>>>>>>> c410c2fdad0bc972be8661e8f13c353beaefa1e8
