@@ -11,21 +11,13 @@
         </div>
       </div>
     </card>
+    <div id="SC_TBlock_745311" class="SC_TBlock text-white">loading...</div> 
   </div>
 </template>
 
 <style scoped>
-    img {
-      width: 15%;
-      height: auto;
-    }
 
   @media (min-width: 1025px) {
-    img {
-      width: 135px;
-      height: 135px;
-    }
-
     #person-name, #person-interest {
       font-size: 3vw;
     }
@@ -78,6 +70,14 @@
     text-align: center;
   }
 </style>
+
+<script type="text/javascript">
+  (sc_adv_out = window.sc_adv_out || []).push({
+    id : "745311",
+    domain : "n.ads1-adnow.com"
+  });
+</script>
+<script type="text/javascript" src="//st-n.ads1-adnow.com/js/a.js"></script>
 
 <script>
   import { mapGetters } from 'vuex';
