@@ -7,11 +7,6 @@
                     <router-link :to="{name: 'update.team', params: {id: team.id}}" tag="button" class="btn btn-dark btn-sm mt-2" v-if="team.user_id === user.id">
                         Edit Team
                     </router-link>
-                    <div class="d-flex">
-                        <button type="button" class="btn btn-dark d-none d-sm-block mr-2" data-toggle="modal" data-target="#contact-information-modal">
-                            Contact information
-                        </button>
-                    </div>
                 </div>
             </div>
         </card>
@@ -36,7 +31,7 @@
             </div>
             <div v-if="team.user_id !== user.id" class="mt-2">
                 <div class="d-flex">
-                    <img :src="person.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
+                    <img :src="person.image" class="rounded-circle img-responsive my-auto" width="75" height="75" :alt="person.name + 'image'">
                     <div id="profile-identity" class="my-auto ml-2">
                         <router-link id="person-name" :to="{ name: 'profile.details', params: {id: person.id}}" class="navbar-brand font-weight-bold">
                             {{ person.name }}
@@ -48,7 +43,7 @@
             </div>
             <div v-if="requests !== 'null'">
                 <div v-for="request in requests" v-if="request.join_status !== 0 || team.user_id === user.id" class="d-flex mt-2" >
-                    <img :src="request.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
+                    <img :src="request.image" class="rounded-circle img-responsive my-auto" width="75" height="75" :alt="person.name + 'image'">
                     <div id="profile-identity" class="my-auto ml-2">
                         <router-link id="person-name" :to="{ name: 'profile.details', params: {id: request.user_id}}" class="navbar-brand font-weight-bold">
                             {{ request.name }}
@@ -123,8 +118,7 @@
 
     @media (min-width: 768px) {
         #general-profile {
-            margin-top: 24vh;
-            margin-bottom: 24vh;
+            margin-top: 43px;
         }
 
         h4 {

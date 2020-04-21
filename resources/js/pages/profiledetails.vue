@@ -2,8 +2,8 @@
     <div class="p-3">
         <card id="general-profile" class="mb-3">
             <div class="d-flex">
-                <img :src="person.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
-                <img :src="person.image" class="rounded-circle img-responsive my-auto d-none d-sm-block" width="auto" height="130">
+                <img :src="person.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75" :alt="person.name + 'image'">
+                <img :src="person.image" class="rounded-circle img-responsive my-auto d-none d-sm-block" width="auto" height="130" :alt="person.name + 'image'">
                 <div id="profile-identity" class="my-auto">
                     <h4>{{ person.name }}</h4>
                     <div v-if="person.program !== 'Empty'">
@@ -34,7 +34,7 @@
                                     <fa icon="address-book" class="mr-4 fa-2x my-auto"/>
                                     <div>
                                         <h6 id="telephone" class="font-weight-bold mb-0 telephone">Telephone</h6>
-                                        <p id="telephone-number" class="mb-0">{{ person.contact }}</p>
+                                        <p id="telephone-number" class="mb-0">+62{{ person.contact }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -109,8 +109,7 @@
 
     @media (min-width: 768px) {
         #general-profile {
-            margin-top: 24vh;
-            margin-bottom: 24vh;
+            margin-top: 43px;
         }
 
         h4 {

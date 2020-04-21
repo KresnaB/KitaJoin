@@ -14,8 +14,8 @@
             <div class="col mt-2">               
                 <card v-for="team in teamsCreated" v-bind:key="team.id" class="shadow-sm mb-4">
                     <div class="person-row">
-                        <div class="my-auto ml-3">
-                            <router-link id="team-name" :to="{name: 'team.details', params: { id: team.id, user_id: team.user_id }}" class="navbar-brand font-weight-bold truncate">
+                        <div class="my-auto overflow-hidden">
+                            <router-link id="team-name" :to="{name: 'team.details', params: { id: team.id, user_id: team.user_id }}" class="navbar-brand font-weight-bold">
                                 {{ team.post_name }}
                             </router-link>
                         </div>
@@ -23,8 +23,8 @@
                 </card>
                 <card v-for="team in teamsJoined" v-bind:key="team.id" class="shadow-sm mb-4">
                     <div class="person-row">
-                        <div class="my-auto ml-3">
-                            <router-link id="team-name" :to="{name: 'team.details', params: { id: team.id, user_id: team.user_id }}" class="navbar-brand font-weight-bold truncate">
+                        <div class="my-auto overflow-hidden">
+                            <router-link id="team-name" :to="{name: 'team.details', params: { id: team.id, user_id: team.user_id }}" class="navbar-brand font-weight-bold">
                                 {{ team.post_name }}
                             </router-link>
                         </div>
@@ -71,7 +71,7 @@
     import { mapGetters } from 'vuex';
     
     export default {
-        mounted() {
+        created() {
             this.$store.dispatch('fetchTeamsCreated', {
                 user_id: this.user.id
             }),

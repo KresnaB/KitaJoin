@@ -1,53 +1,61 @@
 <template>
-  <div>
+  <div class="w-100">
     <navbar />
-
-    <div class="d-block d-sm-none">
-      <div class="p-3">
-        <div>
-          <h1 class="text-white font-weight-light">Welcome to your competitive community</h1>
-        </div>
-      </div>
-      <div class="mb-4">
-        <img src="updated-resume.svg" class="img-fluid" alt="">
+    <div id="not-available" class="d-none d-sm-block d-sm-none d-md-block">
+      <div id="not-available-container" class="bg-white text-center pt-3 pb-3">
+        <fa id="laptop" icon="laptop"></fa>
+        <h1 id="oops" class="font-weight-normal">Oops!</h1>
+        <p class="mt-4 font-weight-normal">Sorry, we're only available in mobile right now. We'll let you know as soon as we are!</p>
       </div>
     </div>
-    <div class="d-none d-sm-block d-sm-none d-md-block">
-      <div class="container p-3">
-        <div class="row">
-          <div class="col my-auto">
-            <h1 class="text-white font-weight-light">Welcome to your competitive community</h1>
+    <div class="d-block d-sm-none d-none d-sm-block d-md-none">
+        <div class="d-block d-sm-none">
+          <div class="p-3">
+            <div>
+              <h1 class="text-white font-weight-light">Welcome to your competitive community</h1>
+            </div>
           </div>
-          <div class="col">
-            <img src="updated-resume.svg" class="img-fluid" alt="">
+          <div class="mb-4">
+            <img src="updated-resume.svg" class="img-fluid" alt="illustration">
           </div>
         </div>
-      </div>
-    </div>
-    <div id="find-people-container" class="bg-light pb-5">
-      <div class="p-3">
-        <h2 class="text-dark h-text-white">Connect with people who can join</h2>
-      </div>
-      <div id="find-people-button" class="pl-3 pb-4 pr-3 mb-5">
-        <router-link id="find-people-you-need-button" :to="{ name: 'login' }" tag="button" class="btn btn-dark btn-lg h-text-white mb-5">Find people you need</router-link>
-      </div>
-    </div>
-    <div id="kita-join-users-container " class="bg-white pt-5 pb-5 mt-5">
-      <div class="p-3 text-center">
-        <h2 class="text-dark heading-text-white">Who is KITAJOIN for?</h2>
-        <h3 class="font-weight-light text-dark">Any Bandung State Polytechnic student looking to navigate their life</h3>
-      </div>
-    </div>
-    <div class="bg-white pt-5 pb-5">
-      <div class="p-3 text-center">
-        <h2 id="join-teams-text" class="font-weight-light mb-4">Join your colleagues, classmates, and friends teams on KITAJOIN.</h2>
-        <router-link id="get-started-button" :to="{ name: 'login' }" tag="button" class="btn btn-lg text-white">Get started</router-link>
-      </div>
-    </div>
-    <div id="kita-join-users-container " class="bg-black">
-      <div class="p-3">
-        <p id="footer-copy-text" class="text-white font-weight-light text-center mb-0">KITAJOIN © 2020</p>
-      </div>
+        <div class="d-none d-sm-block d-sm-none d-md-block">
+          <div class="container p-3">
+            <div class="row">
+              <div class="col my-auto">
+                <h1 class="text-white font-weight-light">Welcome to your competitive community</h1>
+              </div>
+              <div class="col">
+                <img src="updated-resume.svg" class="img-fluid" alt="illustration">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="find-people-container" class="bg-light">
+          <div>
+            <h2 class="text-dark h-text-white">Connect with people who can join</h2>
+          </div>
+          <div id="find-people-button" class="mt-3">
+            <router-link id="find-people-you-need-button" :to="{ name: 'login' }" tag="button" class="btn btn-dark btn-lg h-text-white">Find people you need</router-link>
+          </div>
+        </div>
+        <div id="kita-join-users-container "class="bg-white">
+          <div class="p-3 text-center">
+            <h2 class="text-dark heading-text-white">Who is KITAJOIN for?</h2>
+            <h3 class="font-weight-light text-dark">Any Bandung State Polytechnic student looking to navigate their life</h3>
+          </div>
+        </div>
+        <div class="bg-light pt-5 pb-5">
+          <div class="p-3 text-center">
+            <h2 id="join-teams-text" class="font-weight-light mb-4">Join your colleagues, classmates, and friends teams on KITAJOIN.</h2>
+            <router-link id="get-started-button" :to="{ name: 'login' }" tag="button" class="btn btn-lg text-white">Get started</router-link>
+          </div>
+        </div>
+        <div id="kita-join-users-container " class="bg-black">
+          <div class="p-3">
+            <p id="footer-copy-text" class="text-white font-weight-light text-center mb-0">KITAJOIN © 2020</p>
+          </div>
+        </div>
     </div>
   </div>
 </template>
@@ -121,6 +129,40 @@ h3 {
   background-color: black;
 }
 
+#find-people-container {
+  padding: 0 16px 152px 16px;
+}
+
+#not-available {
+  padding: 120px;
+}
+
+#not-available p {
+  margin-bottom: 36px;
+  font-size: 1.125em;
+  color: #A7A7A7;
+}
+
+#not-available-container {
+  padding-left: 80px;
+  padding-right: 80px;
+}
+
+#laptop {
+  width: 180px;
+  height: 216px;
+}
+
+#laptop, #oops {
+  color: black;
+}
+
+@media (max-width: 767px) {
+  #find-people-container {
+    padding: 16px 16px 28px 16px;
+  }
+}
+
 @media (min-width: 768px) {
   h1 {
     font-size: 7vw;
@@ -150,6 +192,6 @@ h3 {
 
   #get-started-button {
     font-size: 4vw;
-}
+  }
 }
 </style>
