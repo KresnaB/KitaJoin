@@ -48,4 +48,9 @@ return [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
     ],
+
+    'google' => [
+        'client_id' => '942955366785-s04263asrpleog3seiklune3dpm6i9rl.apps.googleusercontent.com',
+        'client_secret' => 'cs1Gb-bzvD7VFHneaVq-6ipK',
+        'redirect' => 'http://localhost:8000/callback'],
 ];

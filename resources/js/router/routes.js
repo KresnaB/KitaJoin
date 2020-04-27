@@ -24,6 +24,12 @@ export default [
     ] },
 
   { path: '*', component: page('errors/404.vue') },
+
+  { path: '/auth/:provider/callback',
+      component: {
+        template: '<div class="auth-component"></div>'
+      } 
+  },
   { path: '/team', name: 'team', component: page('team/index.vue')},
   { path: '/team/create', name: 'create.team', component: page('team/create.vue') },
   { path: '/team/:id', name: 'team.details', component: page('team/details'), props: true},
