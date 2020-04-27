@@ -179,7 +179,7 @@ export default {
         this.mustVerifyEmail = true
       } else {
         // Redirect home.
-        this.$router.push({ name: 'home' })
+        this.$router.push({ name: 'email.confirmation' })
       }
     }
   }
