@@ -179,7 +179,7 @@ export default {
       if (data.status) {
         this.mustVerifyEmail = true;
         const { user } = await axios.post('/api/registerid/get/' + this.form.email)
-        this.$router.push({ name: 'email.confirmation' })
+        this.$router.push({ name: 'email.confirmation', params: {id: user.id} })
       } else {
         // Redirect home.
         this.$router.push({ name: 'home' })
