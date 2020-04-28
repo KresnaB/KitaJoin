@@ -78,4 +78,16 @@ class RegisterController extends Controller
         $profile->save();
         return $user;
     }
+
+    /**
+     * Get register data id 
+     *
+     * @param  String  $email
+     * @return \Illuminate\Http\Response
+     */
+    public function getRegisterId($email)
+    {
+        $user = DB::table('users')->where('email', $email)->get();
+        return response()->json($user);  
+    }
 }
