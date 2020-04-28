@@ -147,6 +147,7 @@
 <script>
 import Form from 'vform'
 import LoginWithGithub from '~/components/LoginWithGithub'
+import axios from 'axios'
 
 export default {
   middleware: 'guest',
@@ -177,6 +178,7 @@ export default {
       // Must verify email fist.
       if (data.status) {
         this.mustVerifyEmail = true;
+        const { user } = await axios.post('/api/registerid/get/' + this.form.email)
         this.$router.push({ name: 'email.confirmation' })
       } else {
         // Redirect home.
