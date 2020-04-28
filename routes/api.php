@@ -54,3 +54,6 @@ Route::post('follow/{id}', 'FollowsController@store');
 Route::get('followers/{post_id}', 'FollowsController@notify');
 Route::post('accept/{post_id}/{user_id}', 'FollowsController@update');
 //Route::delete('decline/{post_id}/{user_id}', 'FollowsController@delete');
+
+Route::get('searchresult/{post_name}', 'SearchController@search_result');
+Route::get('filterresult/{category}', 'SearchController@filter_result');
