@@ -176,10 +176,11 @@ export default {
 
       // Must verify email fist.
       if (data.status) {
-        this.mustVerifyEmail = true
+        this.mustVerifyEmail = true;
+        this.$router.push({ name: 'email.confirmation' })
       } else {
         // Redirect home.
-        this.$router.push({ name: 'email.confirmation' })
+        this.$router.push({ name: 'home' })
       }
     }
   }
