@@ -21,7 +21,7 @@
                 <div class="text-center text-white">
                     <p class="mb-0">Didn't see it?</p>
                     <p class="mb-0">Check your spam for an e-mail from <span class="text-secondary font-weight-bold">KITAJOIN</span></p>
-                    <p class="mb-0">or <span class="text-secondary font-weight-bold">send again</span></p>
+                    <p class="mb-0">or <span class="text-secondary font-weight-bold"><a>send again</a></span></p>
                 </div>
                 
             </div>
