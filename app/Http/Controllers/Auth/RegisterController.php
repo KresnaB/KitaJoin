@@ -88,7 +88,7 @@ class RegisterController extends Controller
      */
     public function getRegisterId($email)
     {
-        $user = DB::table('users')->where('email', $email)->get();
-        return response()->json($user);  
+        $id = DB::table('users')->select('id')->where('email', $email)->first();
+        return response()->json($id);  
     }
 }
