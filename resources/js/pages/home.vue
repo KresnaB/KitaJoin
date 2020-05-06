@@ -1,36 +1,23 @@
 <template>
-  <div id="home-card" class="card-body">
-    <router-link :to="{ name: 'competition' }">
-      {{ $t('Competition') }}
-    </router-link>
-    <h6 id="person-heading-xs" class="d-block d-sm-none">People</h6>
-    <h6 id="person-heading" class="d-none d-sm-block">People</h6>
-    <card v-for="person in people" v-if="person.id !== user.id" v-bind:key="person.id" class="shadow-sm mb-2">
+  <div id="home-card" class="card-body">  
+    <h6 id="person-heading-xs" class="d-block d-sm-none mb-3">Teams</h6>
+    <h6 id="person-heading" class="d-none d-sm-block">Teams</h6>
+    <card v-for="team in teams" v-if="team.user_id !== user.id" v-bind:key="team.id" class="shadow-sm mb-3">
       <div class="person-row">
-        <img class="rounded-circle my-auto" :src="person.image" alt=""/>
-        <div class="my-auto ml-3">
-          <router-link id="person-name" :to="{ name: 'profile.details', params: {id: person.id}}" class="navbar-brand font-weight-bold">
-            {{ person.name }}
+        <div class="my-auto">
+          <router-link id="person-name" :to="{ name: 'team.details', params: {id: team.id, user_id: team.user_id}}" class="navbar-brand font-weight-bold">
+            {{ team.post_name }}
           </router-link>
-          <p id="person-interest">{{ person.interest }}</p>
         </div>
       </div>
     </card>
+    <div id="SC_TBlock_745311" class="SC_TBlock text-white">loading...</div> 
   </div>
 </template>
 
 <style scoped>
-    img {
-      width: 15%;
-      height: auto;
-    }
 
   @media (min-width: 1025px) {
-    img {
-      width: 135px;
-      height: 135px;
-    }
-
     #person-name, #person-interest {
       font-size: 3vw;
     }
@@ -84,23 +71,31 @@
   }
 </style>
 
-<script>
-import { mapGetters } from 'vuex';
+<script type="text/javascript">
+  (sc_adv_out = window.sc_adv_out || []).push({
+    id : "745311",
+    domain : "n.ads1-adnow.com"
+  });
+</script>
+<script type="text/javascript" src="//st-n.ads1-adnow.com/js/a.js"></script>
 
-export default {
-  middleware: 'auth',
-  mounted() {
-    this.$store.dispatch('fetchPeople'),
-    this.$store.dispatch('fetchUser')
-  },
-  computed: {
-    ...mapGetters([
-      'people',
-      'user'
-    ])
-  },
-  metaInfo () {
-    return { title: this.$t('home') }
-  }
-};
+<script>
+  import { mapGetters } from 'vuex';
+
+  export default {
+    middleware: 'auth',
+    mounted() {
+      this.$store.dispatch('fetchTeams'),
+      this.$store.dispatch('fetchUser')
+    },
+    computed: {
+      ...mapGetters([
+        'teams',
+        'user'
+      ])
+    },
+    metaInfo () {
+      return { title: this.$t('home') }
+    }
+  };
 </script>

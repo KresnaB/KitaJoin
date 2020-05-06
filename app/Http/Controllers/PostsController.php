@@ -25,6 +25,25 @@ class PostsController extends Controller
     }
 
     /**
+     * Display a listing of the posts joined
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function readPostsJoined(Request $request) {
+
+        $postsJoined = DB::table('post_user')
+            ->join('posts', function ($join) {
+                $join->on('post_user.post_id', '=', 'posts.id');
+            })
+            ->where([
+                ['post_user.user_id' , $request->input('user_id')],
+                ['join_status', 1]
+            ])
+            ->get();
+        return response()->json($postsJoined);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -47,11 +66,10 @@ class PostsController extends Controller
             'category'=> 'required',
             'description' => 'required'
         ]);
-            
         auth()->user()->posts()->create(array_merge(
             $data
         ));
-        return response()->json("post created");   
+        return response()->json("post created");
     }
 
     /**
@@ -101,9 +119,8 @@ class PostsController extends Controller
         $post = Post::find($id);
         $data = request()->validate([
             'post_name'=> 'required',
-            'location'=> 'required',
-            'type'=> 'required',
             'category'=> 'required',
+            'description' => 'required'
         ]);
 
         $post->update($data);
@@ -122,5 +139,11 @@ class PostsController extends Controller
         $post->delete();
 
         return response()->json("post successfully deleted");
+    }
+    public function showMyPosts($user_id)
+    {
+         $user = User::find($user_id);
+         $posts = $user->posts();
+         return response()->json(['posts'=>$posts]);
     }
 }
