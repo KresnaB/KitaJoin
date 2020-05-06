@@ -174,12 +174,33 @@
 
   #laptop, #oops {
     color: black;
+    
+  #jumbotron {
+      background-color: black;
+  }
+
+  #illustrator {
+      width: 188px;
+  }
+
+  #container {
+      padding: 86px 27px;
+  }
+
+  #gotologin {
+      border-radius: 4px;
+      font-size: 1rem;
+  }
+
+  .card-title p {
+      font-size: 0.75rem
   }
 </style>
 
 <script>
 import Form from 'vform'
 import LoginWithGithub from '~/components/LoginWithGithub'
+import axios from 'axios'
 
 export default {
   middleware: 'guest',
@@ -199,7 +220,8 @@ export default {
       password: '',
       password_confirmation: ''
     }),
-    mustVerifyEmail: false
+    mustVerifyEmail: false,
+    user: ''
   }),
 
   methods: {
@@ -209,11 +231,16 @@ export default {
 
       // Must verify email fist.
       if (data.status) {
-        this.mustVerifyEmail = true
+        this.mustVerifyEmail = true;
+        this.user = await axios.post('/api/registerid/get/' + this.form.email);
       } else {
         // Redirect home
         this.$router.push({ name: 'home' })
       }
+    },
+
+    resend() {
+      this.form.post('/api/email/resend')
     }
   }
 }

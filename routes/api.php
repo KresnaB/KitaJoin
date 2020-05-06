@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 Route::group(['middleware' => 'guest:api'], function () {
     Route::post('login', 'Auth\LoginController@login');
     Route::post('register', 'Auth\RegisterController@register');
-
+    Route::post('registerid/get/{email}', 'Auth\RegisterController@getRegisterId');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
@@ -39,6 +39,10 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('sociallogin/{provider}', 'Auth\AuthController@SocialSignup');
     Route::get('auth/{provider}/callback', 'OutController@index')->where('provider', '.*');
 });
+
+Route::get('/redirect', 'SocialAuthGoogleController@redirect');
+Route::get('/callback', 'SocialAuthGoogleController@callback');
+
 
 Route::get('add/{id}', 'ProfilesController@add');
 Route::get('profiles', 'ProfilesController@index');

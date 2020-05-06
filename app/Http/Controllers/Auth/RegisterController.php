@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -33,7 +34,7 @@ class RegisterController extends Controller
     protected function registered(Request $request, User $user)
     {
         if ($user instanceof MustVerifyEmail) {
-            $user->sendEmailVerificationNotification();
+            //$user->sendEmailVerificationNotification();
 
             return response()->json(['status' => trans('verification.sent')]);
         }
@@ -77,5 +78,17 @@ class RegisterController extends Controller
 
         $profile->save();
         return $user;
+    }
+
+    /**
+     * Get register data id 
+     *
+     * @param  String  $email
+     * @return \Illuminate\Http\Response
+     */
+    public function getRegisterId($email)
+    {
+        $id = DB::table('users')->select('id')->where('email', $email)->first();
+        return response()->json($id);  
     }
 }
