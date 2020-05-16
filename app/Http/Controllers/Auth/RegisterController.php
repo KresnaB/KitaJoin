@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -33,7 +34,7 @@ class RegisterController extends Controller
     protected function registered(Request $request, User $user)
     {
         if ($user instanceof MustVerifyEmail) {
-            $user->sendEmailVerificationNotification();
+            //$user->sendEmailVerificationNotification();
 
             return response()->json(['status' => trans('verification.sent')]);
         }
@@ -52,7 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6',
         ]);
     }
 
@@ -64,10 +65,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        $profile = $user->profile;
+        $profile->name = $data['name'];
+
+        $exactPath = "/storage/profile/avatar.png";
+        $profile->image = $exactPath;
+
+        $profile->save();
+        return $user;
+    }
+
+    /**
+     * Get register data id 
+     *
+     * @param  String  $email
+     * @return \Illuminate\Http\Response
+     */
+    public function getRegisterId($email)
+    {
+        $id = DB::table('users')->select('id')->where('email', $email)->first();
+        return response()->json($id);  
     }
 }

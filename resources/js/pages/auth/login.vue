@@ -1,60 +1,154 @@
 <template>
-  <div class="row">
-    <div class="col-lg-8 m-auto">
-      <card :title="$t('login')">
-        <form @submit.prevent="login" @keydown="form.onKeydown($event)">
-          <!-- Email -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('email') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
-              <has-error :form="form" field="email" />
+  <div class="w-100">
+    <div id="not-available" class="d-none d-sm-block d-sm-none d-md-block">
+      <div id="not-available-container" class="bg-white text-center pt-3 pb-3">
+        <fa id="laptop" icon="laptop"></fa>
+        <h1 id="oops" class="font-weight-normal">Oops!</h1>
+        <p class="mt-4 font-weight-normal">Sorry, we're only available in mobile right now. We'll let you know as soon as we are!</p>
+      </div>
+    </div>
+    <div class=" d-block d-sm-none d-none d-sm-block d-md-none">
+      <div id="login-container" class="row">
+        <div class="col-sm col-md my-auto">
+          <div id="login-card" class="border-0 mx-auto card-body" style="background-color: black; max-width: 500px; margin:">
+            <div class="mb-5">
+              <h1 class="text-white">Log In</h1>
             </div>
+            <form @submit.prevent="login" @keydown="form.onKeydown($event)">
+              <!-- Email -->
+              <div class="input-card card-body mb-3">
+                <div class="form-group row">
+                  <div class="col-md col-sm">
+                    <label for="email" class="card-title">Email <span class="text-danger">*</span></label>
+                    <input id="email" v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
+                    <has-error :form="form" field="email" />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Password -->
+              <div class="input-card card-body">
+                <div class="form-group row">
+                  <div class="col-md col-sm">
+                    <label for="password" >Password <span class="text-danger">*</span></label>
+                    <input id="password" v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
+                    <has-error :form="form" field="password" />
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group row">
+                <div class="col-md col-sm">
+                  <!-- Submit Button -->
+                  <v-button :loading="form.busy">
+                    Let's find!
+                  </v-button>
+                  
+                  <!-- GitHub Login Button -->
+                  <login-with-github />
+                </div>
+              </div>
+              <div class="mt-3 pt-5 text-center">
+                <router-link id="register-button" :to="{ name: 'register' }" tag="button" class="btn btn-dark text-white"><u>Register</u></router-link>
+              </div>
+            </form>
           </div>
-
-          <!-- Password -->
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label text-md-right">{{ $t('password') }}</label>
-            <div class="col-md-7">
-              <input v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
-              <has-error :form="form" field="password" />
-            </div>
+        </div>
+        <div class="col-sm col-md my-auto d-none d-xl-block">
+          <div style="text-align: right">
+            <h1 id="kita-join-header" class="text-white">KITA <br /> JOIN</h1>
+            <p id="kita-join-paragraph" class="text-white font-weight-light">Help you find the right people</p>
           </div>
-
-          <!-- Remember Me -->
-          <div class="form-group row">
-            <div class="col-md-3" />
-            <div class="col-md-7 d-flex">
-              <checkbox v-model="remember" name="remember">
-                {{ $t('remember_me') }}
-              </checkbox>
-
-              <router-link :to="{ name: 'password.request' }" class="small ml-auto my-auto">
-                {{ $t('forgot_password') }}
-              </router-link>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <div class="col-md-7 offset-md-3 d-flex">
-              <!-- Submit Button -->
-              <v-button :loading="form.busy">
-                {{ $t('login') }}
-              </v-button>
-
-              <!-- GitHub Login Button -->
-              <login-with-github />
-            </div>
-          </div>
-        </form>
-      </card>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
+<style scoped>
+  input {
+    outline: 0;
+    border-width: 0 0 0px;
+    padding: 0;
+    -webkit-text-fill-color: black;
+    font-weight: bold;
+  }
+
+  input:focus {
+    box-shadow: none !important;
+  }
+
+  #login-card {
+    padding: 0;
+  }
+
+  label {
+    color: #B1C1C8;
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .input-card {
+    background-color: white;border-radius: 4px;
+    padding-top: 4px;
+    padding-bottom: 0;
+  }
+
+  #login-container {
+    height: calc(100vh - 56px);
+  }  
+
+  #forgot-password {
+    color: #9e9e9e;
+  }
+  
+  #kita-join-header{
+    font-size: 8vw;
+  }
+
+  #kita-join-paragraph {
+    font-size: 3vw;
+  }
+
+  #register-button {
+    background-color: black;
+    border-color: black;
+  }
+
+  #register-button:focus, #register-button:active {
+    outline: none !important;
+    box-shadow: none;
+  }
+
+  #not-available {
+    padding: 120px;
+  }
+
+  #not-available p {
+    margin-bottom: 36px;
+    font-size: 1.125em;
+    color: #A7A7A7;
+  }
+
+  #not-available-container {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  #laptop {
+    width: 180px;
+    height: 216px;
+  }
+
+  #laptop, #oops {
+    color: black;
+  }
+</style>
+
 <script>
 import Form from 'vform'
 import LoginWithGithub from '~/components/LoginWithGithub'
+import VueSocialAuth from 'vue-social-auth'
 
 export default {
   middleware: 'guest',
@@ -91,6 +185,21 @@ export default {
 
       // Redirect home.
       this.$router.push({ name: 'home' })
+    },
+    AuthProvider(provide) {
+      var self = this
+      this.$auth.authenticate(provider).then(response => {
+        self.SocialLogin(provider, response)
+      }).catch(err => {
+        console.log({err:err})
+      })
+    },
+    SocialLogin(provide, response) {
+      this.$http.post('/sociallogin/' + provider, response).then(response => {
+        console.log(response.data)
+      }).catch(err => {
+        console.log({err:err})
+      })
     }
   }
 }
