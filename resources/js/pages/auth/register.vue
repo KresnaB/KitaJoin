@@ -31,7 +31,7 @@
                 <div class="col-md col-sm">
                   <label for="fullName" class="card-title">Full Name <span class="text-danger">*</span></label>
                   <input id="fullName" v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
-                  <has-error :form="form" field="name" />
+                  <has-error :form="form" field="name" class="alert alert-danger" />
                 </div>
               </div>
             </div>
@@ -42,7 +42,7 @@
                 <div class="col-md col-sm">
                   <label for="email" class="card-title">Email <span class="text-danger">*</span></label>
                   <input id="email" v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
-                  <has-error :form="form" field="email" />
+                  <has-error :form="form" field="email" class="alert alert-danger" />
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@
                 <div class="col-md col-sm">
                   <label for="password" class="card-title">Password <span class="text-danger">*</span></label>
                   <input id="password" v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
-                  <has-error :form="form" field="password" />
+                  <has-error :form="form" field="password" class="alert alert-danger" />
                 </div>
               </div>
             </div>
@@ -103,6 +103,10 @@
 
   input:focus {
     box-shadow: none !important;
+  }
+
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
   }
 
   #sign-in-here {
@@ -174,7 +178,8 @@
 
   #laptop, #oops {
     color: black;
-    
+  }
+
   #jumbotron {
       background-color: black;
   }
