@@ -5,6 +5,12 @@ let mutations = {
     FETCH_TEAMS(state, teams) {
         return state.teams = teams
     },
+    FETCH_TEAMS_CREATED(state, teamsCreated) {
+        return state.teamsCreated = teamsCreated
+    },
+    FETCH_TEAMS_JOINED(state, teamsJoined) {
+        return state.teamsJoined = teamsJoined
+    },
     FETCH_TEAM(state, team) {
         return state.team = team
     },
@@ -13,6 +19,12 @@ let mutations = {
     },
     FETCH_USER(state, user) {
         return state.user = user
+    },
+    FETCH_REQUESTS(state, requests) {
+        return state.requests = requests
+    },
+    FETCH_JOIN_STATUS(state, joinStatus) {
+        return state.joinStatus = joinStatus
     }
 }
 

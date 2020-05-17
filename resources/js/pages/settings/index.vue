@@ -25,6 +25,10 @@ export default {
           icon: 'lock',
           name: this.$t('password'),
           route: 'settings.password'
+        },
+        {
+          name: 'team',
+          route: 'settings.team'
         }
       ]
     }
