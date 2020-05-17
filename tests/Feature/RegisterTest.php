@@ -13,7 +13,7 @@ class RegisterTest extends TestCase
     {
         $this->postJson('/api/register', [
             'name' => 'Test User',
-            'email' => 'test@test.app',
+            'email' => 'test@polban.ac.id',
             'password' => 'secret',
             'password_confirmation' => 'secret',
         ])
@@ -22,7 +22,7 @@ class RegisterTest extends TestCase
         // Lihat di database, tabel users, data user yang register sudah masuk
         $this->assertDatabaseHas('users', [
             'name'  => 'Test User',
-            'email' => 'test@test.app',
+            'email' => 'test@polban.ac.id',
         ]);
 
         // Cek hash password yang tersimpan cocok dengan password yang diinput
@@ -32,11 +32,11 @@ class RegisterTest extends TestCase
     /** @test */
     public function can_not_register_with_existing_email()
     {
-        factory(User::class)->create(['email' => 'test@test.app']);
+        factory(User::class)->create(['email' => 'test@polban.ac.id']);
 
         $this->postJson('/api/register', [
             'name' => 'Test User',
-            'email' => 'test@test.app',
+            'email' => 'test@polban.ac.id',
             'password' => 'secret',
             'password_confirmation' => 'secret',
         ])
@@ -50,7 +50,7 @@ class RegisterTest extends TestCase
         // Submit form untuk register dengan field 'name' kosong.
         $response = $this->postJson('/api/register', [
             'name'                  => '',
-            'email'                 => 'test@test.app',
+            'email'                 => 'test@polban.ac.id',
             'password'              => 'secret',
             'password_confirmation' => 'secret',
         ]);
@@ -65,7 +65,7 @@ class RegisterTest extends TestCase
         // Submit form untuk register dengan field 'name' 260 karakter.
         $response = $this->postJson('/api/register', [
             'name'                  => str_repeat('Test User ', 26),
-            'email'                 => 'test@test.app',
+            'email'                 => 'test@polban.ac.id',
             'password'              => 'secret',
             'password_confirmation' => 'secret',
         ]);
@@ -95,7 +95,7 @@ class RegisterTest extends TestCase
         // Submit form untuk register dengan field 'email' tidak valid.
         $response = $this->postJson('/api/register', [
             'name'                  => 'Test User',
-            'email'                 => 'test.test.app',
+            'email'                 => 'test.polban.ac.id',
             'password'              => 'secret',
             'password_confirmation' => 'secret',
         ]);
@@ -110,7 +110,7 @@ class RegisterTest extends TestCase
         // Submit form untuk register dengan field 'email' 260 karakter.
         $response = $this->postJson('/api/register', [
             'name'                  => 'Test User',
-            'email'                 => str_repeat('test@test.app', 13),
+            'email'                 => str_repeat('test@polban.ac.id', 13),
             'password'              => 'secret',
             'password_confirmation' => 'secret',
         ]);
@@ -123,13 +123,13 @@ class RegisterTest extends TestCase
     public function user_email_must_be_unique_on_users_table()
     {
         // Buat satu user baru
-        $user = factory(User::class)->create(['email' => 'test@test.app']);
+        $user = factory(User::class)->create(['email' => 'test@polban.ac.id']);
 
         // Submit form untuk register dengan field
         // 'email' yang sudah ada di tabel users.
         $response = $this->postJson('/api/register', [
             'name'                  => 'Test User',
-            'email'                 => 'test@test.app',
+            'email'                 => 'test@polban.ac.id',
             'password'              => 'secret',
             'password_confirmation' => 'secret',
         ]);
@@ -144,7 +144,7 @@ class RegisterTest extends TestCase
         // Submit form untuk register dengan field 'password' kosong.
         $response = $this->postJson('/api/register', [
             'name'                  => 'Test User',
-            'email'                 => 'test@test.app',
+            'email'                 => 'test@polban.ac.id',
             'password'              => '',
             'password_confirmation' => 'secret',
         ]);
@@ -159,9 +159,23 @@ class RegisterTest extends TestCase
         // Submit form untuk register dengan field 'password' 5 karakter.
         $response = $this->postJson('/api/register', [
             'name'                  => 'Test User',
-            'email'                 => 'test@test.app',
+            'email'                 => 'test@polban.ac.id',
             'password'              => 'ecret',
             'password_confirmation' => 'ecret',
+        ]);
+
+        // Cek pada session apakah ada error untuk field 'password'.
+        $response->assertStatus(422);
+    }
+
+    public function user_email_ends_with_polban_ac_id()
+    {
+        // Submit form untuk register dengan field 'password' 5 karakter.
+        $response = $this->postJson('/api/register', [
+            'name'                  => 'Test User',
+            'email'                 => 'test@test.app',
+            'password'              => 'secret',
+            'password_confirmation' => 'secret',
         ]);
 
         // Cek pada session apakah ada error untuk field 'password'.
