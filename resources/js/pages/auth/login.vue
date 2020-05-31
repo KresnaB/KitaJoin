@@ -21,7 +21,7 @@
                   <div class="col-md col-sm">
                     <label for="email" class="card-title">Email <span class="text-danger">*</span></label>
                     <input id="email" v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
-                    <has-error :form="form" field="email" />
+                    <has-error :form="form" field="email" class="alert alert-danger"/>
                   </div>
                 </div>
               </div>
@@ -32,7 +32,7 @@
                   <div class="col-md col-sm">
                     <label for="password" >Password <span class="text-danger">*</span></label>
                     <input id="password" v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
-                    <has-error :form="form" field="password" />
+                    <has-error :form="form" field="password" class="alert alert-danger"/>
                   </div>
                 </div>
               </div>
