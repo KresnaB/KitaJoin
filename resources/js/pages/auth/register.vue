@@ -9,11 +9,33 @@
     </div>
     <div id="register-container" class="row pt-2 d-block d-sm-none d-none d-sm-block d-md-none">
       <div class="col-sm col-md my-auto">
-        <card v-if="mustVerifyEmail" :title="$t('register')">
-          <div class="alert alert-success" role="alert">
-            {{ $t('verify_email_address') }}
-          </div>
-        </card>
+              <div v-if="mustVerifyEmail" id="container">
+                <div id="jumbotron" class="jumbotron p-0 mb-0">
+                  <!-- Card image -->
+                  <div class="view overlay text-center">
+                      <img src="storage/emailconfirmationhint.svg" id="illustrator" class="img-fluid" alt="Email Confirmation Hint Illustration">
+                  </div>
+
+                  <!-- Card content -->
+                  <div class="card-title mb-0">
+
+                    <!-- Title -->
+                    <h3 class="card-title h3 my-4 text-white text-center"><strong>Thank You!</strong></h3>
+                    <!-- Text -->
+                    <p class="card-text text-white text-justify my-4">We will send you a confirmation e-mail shortly with an activation link to get you started with kitajoin.</p>
+                    <!-- Button -->
+                    <router-link :to="{ name: 'login' }" id="gotologin" class="btn btn-secondary btn-block btn-lg mb-4">
+                        GO TO LOG IN
+                    </router-link>
+                    <!-- Text -->
+                    <div class="text-center text-white">
+                      <p class="mb-0">Didn't see it?</p>
+                      <p class="mb-0">Check your spam for an e-mail from <span class="font-weight-bold">KITAJOIN</span></p>
+                      <p class="mb-0">or <span><a class="text-secondary font-weight-bold" href="#" @click="resend()">send again</a></span></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
         <div id="register-card" v-else class="border-0 mx-auto card-body" style="background-color: black; max-width: 500px">
           <div class="d-block d-sm-none mt-5 mb-5">
             <h1 class="text-white">KITA <br /> JOIN</h1>
