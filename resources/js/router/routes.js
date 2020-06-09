@@ -7,6 +7,7 @@ export default [
 
   { path: '/login', name: 'login', component: page('auth/login.vue') },
   { path: '/register', name: 'register', component: page('auth/register.vue') },
+  { path: '/email-confirmation/:id', name: 'email.confirmation', component: page('emailconfirmation.vue'), props: true},
   { path: '/competition', name: 'competition', component: page('competition.vue') },
   { path: '/password/reset', name: 'password.request', component: page('auth/password/email.vue') },
   { path: '/password/reset/:token', name: 'password.reset', component: page('auth/password/reset.vue') },
@@ -23,9 +24,15 @@ export default [
     ] },
 
   { path: '*', component: page('errors/404.vue') },
+
+  { path: '/auth/:provider/callback',
+      component: {
+        template: '<div class="auth-component"></div>'
+      } 
+  },
   { path: '/team', name: 'team', component: page('team/index.vue')},
   { path: '/team/create', name: 'create.team', component: page('team/create.vue') },
-  { path: '/team/:id', name: 'team.details', component: page('team/details'), props: true},
-  { path: '/team/update', name: 'update.team', component: page('team/update')},
+  { path: '/team-details/:id/:user_id', name: 'team.details', component: page('team/details'), props: true},
+  { path: '/team/update/:id', name: 'update.team', component: page('team/update'), props: true},
   { path: '/profile-details/:id', name: 'profile.details', component: page('profiledetails.vue'), props: true}
 ]
