@@ -12,11 +12,11 @@
         <div class="d-block d-sm-none">
           <div class="p-3">
             <div>
-              <h1 class="text-white font-weight-light">Welcome to your competitive community</h1>
+              <h1 class="text-black">Welcome to your competitive community</h1>
             </div>
           </div>
-          <div class="mb-4">
-            <img src="updated-resume.svg" class="img-fluid" alt="illustration">
+          <div>
+            <img src="/svg/Team building importance in business success.svg" class="img-fluid" alt="illustration">
           </div>
         </div>
         <div class="d-none d-sm-block d-sm-none d-md-block">
@@ -32,21 +32,18 @@
           </div>
         </div>
         <div id="find-people-container" class="bg-light">
-          <div>
-            <h2 class="text-dark h-text-white">Connect with people who can join</h2>
-          </div>
-          <div id="find-people-button" class="mt-3">
-            <router-link id="find-people-you-need-button" :to="{ name: 'login' }" tag="button" class="btn btn-dark btn-lg h-text-white">Find people you need</router-link>
+          <div id="find-people-button" class="text-center">
+            <router-link id="find-people-you-need-button" :to="{ name: 'login' }" tag="button" class="btn btn-dark btn-lg h-text-white">Find team you need</router-link>
           </div>
         </div>
-        <div id="kita-join-users-container "class="bg-white">
-          <div class="p-3 text-center">
+        <div id="kita-join-users-container" class="bg-white">
+          <div class="text-center">
             <h2 class="text-dark heading-text-white">Who is KITAJOIN for?</h2>
             <h3 class="font-weight-light text-dark">Any Bandung State Polytechnic student looking to navigate their life</h3>
           </div>
         </div>
-        <div class="bg-light pt-5 pb-5">
-          <div class="p-3 text-center">
+        <div id="get-started" class="bg-light">
+          <div class="text-center">
             <h2 id="join-teams-text" class="font-weight-light mb-4">Join your colleagues, classmates, and friends teams on KITAJOIN.</h2>
             <router-link id="get-started-button" :to="{ name: 'login' }" tag="button" class="btn btn-lg text-white">Get started</router-link>
           </div>
@@ -98,10 +95,6 @@ export default {
 
 #find-people-you-need-button {
   border-radius: 28px !important;
-}
-
-h1 {
-  font-size: 12vw;
 }
 
 h2 {
@@ -157,9 +150,22 @@ h3 {
   color: black;
 }
 
-@media (max-width: 767px) {
+.text-black {
+  color: black;
+}
+
+@media (max-width: 1000px) {
   #find-people-container {
-    padding: 16px 16px 28px 16px;
+    margin: 40px 0 0 0;
+    padding: 0;
+  }
+
+  #kita-join-users-container {
+    margin: 40px 0 0 0;
+  }
+
+  #get-started {
+    margin: 100px 0 24px 0;
   }
 }
 
