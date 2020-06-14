@@ -36,22 +36,22 @@
                   </div>
                 </div>
               </div>
-        <div id="register-card" v-else class="border-0 mx-auto card-body" style="background-color: black; max-width: 500px">
+        <div id="register-card" v-else class="border-0 mx-auto card-body background-color-white" style="max-width: 500px">
           <div class="d-block d-sm-none mt-5 mb-5">
-            <h1 class="text-white">KITA <br /> JOIN</h1>
-            <p class="text-white font-weight-light">Help you find the right people</p>
+            <h1 class="text-black">KITA <br /> JOIN</h1>
+            <p class="text-black font-weight-light">Help you find the right team</p>
           </div>
           <div class="d-none d-sm-block d-sm-none d-md-block mb-5">
             <h1 class="text-white">Register to KITAJOIN</h1>
             <p class="text-secondary font-weight-light">Join to KITAJOIN you will get the best people for your team.</p>
           </div>
-          <hr class="mb-5">
+          <hr class="mb-5 border-black">
           <form @submit.prevent="register" @keydown="form.onKeydown($event)">
             <!-- Name -->
             <div class="input-card card-body mb-3">
               <div class="form-group row">
-                <div class="col-md col-sm">
-                  <label for="fullName" class="card-title">Full Name <span class="text-danger">*</span></label>
+                <div class="col-md col-sm border border-black rounded">
+                  <label for="fullName" class="card-title text-black">Full Name <span class="text-danger">*</span></label>
                   <input id="fullName" v-model="form.name" :class="{ 'is-invalid': form.errors.has('name') }" class="form-control" type="text" name="name">
                   <has-error :form="form" field="name" class="alert alert-danger" />
                 </div>
@@ -61,8 +61,8 @@
             <!-- Email -->
             <div class="input-card card-body mb-3">
               <div class="form-group row">
-                <div class="col-md col-sm">
-                  <label for="email" class="card-title">Email <span class="text-danger">*</span></label>
+                <div class="col-md col-sm border border-black rounded">
+                  <label for="email" class="card-title text-black">Email <span class="text-danger">*</span></label>
                   <input id="email" v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
                   <has-error :form="form" field="email" class="alert alert-danger" />
                 </div>
@@ -72,8 +72,8 @@
             <!-- Password -->
             <div class="input-card card-body mb-5">
               <div class="form-group row">
-                <div class="col-md col-sm">
-                  <label for="password" class="card-title">Password <span class="text-danger">*</span></label>
+                <div class="col-md col-sm border border-black rounded">
+                  <label for="password" class="card-title text-black">Password <span class="text-danger">*</span></label>
                   <input id="password" v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
                   <has-error :form="form" field="password" class="alert alert-danger" />
                 </div>
@@ -83,7 +83,7 @@
             <div class="form-group row">
               <div class="col-md col-sm">
                 <!-- Submit Button -->
-                <v-button :loading="form.busy">
+                <v-button :loading="form.busy" class="background-color-black">
                   {{ $t('REGISTER') }}
                 </v-button>
 
@@ -94,10 +94,10 @@
           </form>
           <ul id="already-have-an-account" class="list-inline">
             <li class="list-inline-item">
-                <p class="text-white">Already have an account?</p>
+                <p class="text-black">Already have an account?</p>
             </li>
             <li class="list-inline-item">
-              <router-link id="sign-in-here" :to="{ name: 'login' }" class="nav-link" active-class="active">
+              <router-link id="sign-in-here" :to="{ name: 'login' }" class="nav-link text-1" active-class="active">
                 {{ $t('Sign in here') }}
               </router-link>
             </li>
@@ -132,7 +132,7 @@
   }
 
   #sign-in-here {
-    color: #9E9E9E;
+    color: #F38704;
     padding-left: 0;
   }
 
@@ -221,6 +221,22 @@
 
   .card-title p {
       font-size: 0.75rem
+  }
+
+  .background-color-white {
+    background-color: white;
+  }
+
+  .background-color-black {
+    background-color: black;
+  }
+
+  .border-black {
+    border-color: black !important;
+  }
+
+  .text-black {
+    color: black;
   }
 </style>
 
