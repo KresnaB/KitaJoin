@@ -79,4 +79,10 @@ class VerificationController extends Controller
 
         return response()->json(['status' => trans('verification.sent')]);
     }
+
+    public function getUserEmail($id)
+    {
+        $user = User::find($id);
+        return response()->json($user->id);
+    }
 }
