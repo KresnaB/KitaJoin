@@ -7,13 +7,13 @@
         <p class="mt-4 font-weight-normal">Sorry, we're only available in mobile right now. We'll let you know as soon as we are!</p>
       </div>
     </div>
-    <div id="register-container" class="row pt-2 d-block d-sm-none d-none d-sm-block d-md-none">
+    <div id="register-container" class="row d-block d-sm-none d-none d-sm-block d-md-none">
       <div class="col-sm col-md my-auto">
               <div v-if="mustVerifyEmail" id="container">
-                <div id="jumbotron" class="jumbotron p-0 mb-0">
+                <div id="jumbotron" class="jumbotron mb-0 p-38 rounded-0">
                   <!-- Card image -->
                   <div class="view overlay text-center">
-                      <img src="storage/emailconfirmationhint.svg" id="illustrator" class="img-fluid" alt="Email Confirmation Hint Illustration">
+                      <img src="storage/emailconfirmationhint.svg" id="illustrator" class="img-fluid mt-39" alt="Email Confirmation Hint Illustration">
                   </div>
 
                   <!-- Card content -->
@@ -24,16 +24,17 @@
                     <!-- Text -->
                     <p class="card-text text-white text-justify my-4">We will send you a confirmation e-mail shortly with an activation link to get you started with kitajoin.</p>
                     <!-- Button -->
-                    <router-link :to="{ name: 'login' }" id="gotologin" class="btn btn-secondary btn-block btn-lg mb-4">
+                    <router-link :to="{ name: 'login' }" id="gotologin" class="btn btn-secondary btn-block btn-lg">
                         GO TO LOG IN
                     </router-link>
-                    <!-- Text -->
-                    <div class="text-center text-white">
-                      <p class="mb-0">Didn't see it?</p>
-                      <p class="mb-0">Check your spam for an e-mail from <span class="font-weight-bold">KITAJOIN</span></p>
-                      <p class="mb-0">or <span><a class="text-secondary font-weight-bold" href="#" @click="resend()">send again</a></span></p>
-                    </div>
                   </div>
+                </div>
+
+                <!-- Text -->
+                <div id="send-again-container" class="background-color-white text-center text-black py-38 border border-black">
+                  <p class="mb-0">Didn't see it?</p>
+                  <p class="mb-0">Check your spam for an e-mail from <span class="font-weight-bold">KITAJOIN</span></p>
+                  <p class="mb-0">or <span><a class="text-1 font-weight-bold" href="#" @click="resend()">send again</a></span></p>
                 </div>
               </div>
         <div id="register-card" v-else class="border-0 mx-auto card-body background-color-white" style="max-width: 500px">
@@ -211,7 +212,7 @@
   }
 
   #container {
-      padding: 86px 27px;
+      padding: 17px 0;
   }
 
   #gotologin {
@@ -237,6 +238,33 @@
 
   .text-black {
     color: black;
+  }
+
+  .text-1 {
+    color: #F38704;
+  }
+
+  @media (max-width: 1000px) {
+    .background-color-black {
+      background-color: black;
+    }
+
+    .p-38 {
+      padding: 38px;
+    }
+
+    .mt-39 {
+      margin-top: 39px;
+    }
+
+    .py-38 {
+      padding-top: 38px;
+      padding-bottom: 38px;
+    }
+
+    #send-again-container {
+      font-size: 0.75rem;
+    }
   }
 </style>
 
