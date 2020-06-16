@@ -1,6 +1,5 @@
 <template>
   <div class="w-100">
-    <navbar />
     <div id="not-available" class="d-none d-sm-block d-sm-none d-md-block">
       <div id="not-available-container" class="bg-white text-center pt-3 pb-3">
         <fa id="laptop" icon="laptop"></fa>
