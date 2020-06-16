@@ -6,10 +6,10 @@ use App\Notifications\VerifyEmail;
 use App\Notifications\ResetPassword;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
+class User extends Authenticatable implements JWTSubject , MustVerifyEmail
 {
     use Notifiable;
 
@@ -39,6 +39,22 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($user){
+            $username = $user->get('name');
+            $user->profile()->create([
+                'interest' => 'Empty',
+                'department' => 'Empty',
+                'program' => 'Empty',
+                'semester' => '0',
+                'contact' => 'Empty',
+            ]);
+        });
+    }
 
     /**
      * The accessors to append to the model's array form.
@@ -104,5 +120,17 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     public function getJWTCustomClaims()
     {
         return [];
+    }
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+    public function posts()
+    {
+        return $this->hasMany(Post::class)->orderBy('created_at', 'DESC');
+    }
+    public function following()
+    {
+        return $this->belongsToMany(Post::class);
     }
 }
