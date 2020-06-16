@@ -11,19 +11,19 @@
     <div class="d-block d-sm-none d-none d-sm-block d-md-none">
       <div class="row">
         <div class="col-lg-8 m-auto">
-          <card>
+          <card class="background-color-black">
             <div id="container">
-              <div id="jumbotron" class="jumbotron p-0 mb-0">
+              <div id="jumbotron" class="jumbotron p-0 mb-0 background-color-black">
 
                 <!-- Card image -->
                 <div class="view overlay text-center">
                   <img src="/storage/emailconfirmationhint.svg" id="illustrator" class="img-fluid" alt="Email Confirmation Hint Illustration">
                 </div>
 
-                <h1 class="text-center font-weight-bold">Email Verification</h1>
+                <h1 class="text-center text-white font-weight-bold">Email Verification</h1>
 
                 <!-- Text -->
-                <p id="verification-link-text" class="card-text text-secondary text-center font-weight-bold mt-3 mb-5">We will send you an <span>Activation Link</span> to get you started with kitajoin.</p>
+                <p id="verification-link-text" class="card-text text-white text-center mt-3 mb-5">We will send you an <span class="text-1">Activation Link</span> to get you started with kitajoin.</p>
 
                 <!-- Card content -->
                 <div class="card-title mb-0">
@@ -31,10 +31,10 @@
 
                     <!-- Email -->
                     <div id="form-email" class="form-group">
-                      <label id="enter-email-label" class="col-md-3 col-form-label text-md-right text-center text-secondary font-weight-bold p-0">Enter Email</label>
+                      <label id="enter-email-label" class="col-md-3 col-form-label text-md-right text-center text-white font-weight-bold p-0">Enter Email</label>
                       <div>
-                        <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control font-weight-bold" type="email" name="email">
-                        <hr class="mt-0">
+                        <input id="email-input" v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control font-weight-bold background-color-black" type="email" name="email">
+                        <hr class="mt-0 border-white">
                         <has-error :form="form" field="email" />
                       </div>
                     </div>
@@ -42,7 +42,7 @@
                     <!-- Submit Button -->
                     <div id="form-button">
                       <!-- Button -->
-                      <button id="resend" class="btn btn-dark btn-block btn-lg mb-4 font-weight-bold" type="submit">
+                      <button id="resend" class="btn btn-secondary btn-block btn-lg mb-4 font-weight-bold" type="submit">
                           GET LINK
                       </button>
                     </div>
@@ -82,6 +82,23 @@
   #laptop, #oops {
     color: black;
   }
+
+  .background-color-black {
+    background-color: black !important;
+  }
+
+  .text-1 {
+    color: #F38704 !important;
+  }
+
+  .border-white {
+    border-color: white;
+  }
+
+  .card {
+    border-radius: 4px;
+  }
+
   @media screen and (max-width: 1000px) {
     card {
       padding: 86px 27px;
@@ -126,11 +143,20 @@
       outline: 0;
       border-width: 0 0 0px;
       padding: 0;
-      -webkit-text-fill-color: black;
+      -webkit-text-fill-color: white;
+      background-color: black !important;
     }
 
     input:focus{
       box-shadow: none !important;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active  {
+        -webkit-box-shadow: 0 0 0 30px black inset !important;
+        border-radius: 0;
     }
 
     hr {
