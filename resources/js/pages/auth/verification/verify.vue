@@ -10,7 +10,7 @@
     <div class="d-block d-sm-none d-none d-sm-block d-md-none">
       <div class="row">
         <div class="col-lg-8 m-auto">
-          <card>
+          <card class="border-black">
             <template v-if="success">
               <div id="container">
                 <div id="jumbotron" class="jumbotron p-0 mb-0">
@@ -26,7 +26,7 @@
                     
                     <div class="pl-4 pr-4">
                       <!-- Button -->
-                      <router-link id="login" class="btn btn-dark btn-block btn-lg mb-4" :to="{ name: 'login' }">
+                      <router-link id="login" class="btn btn-block btn-lg mb-4 background-color-1 text-white" :to="{ name: 'login' }">
                           Log In
                       </router-link>
                     </div>
@@ -51,7 +51,7 @@
 
                       <!-- Email -->
                       <div id="form-email" class="form-group">
-                        <label id="enter-email-label" class="col-md-3 col-form-label text-md-right text-center text-secondary p-0">Enter Email</label>
+                        <label id="enter-email-label" class="col-md-3 col-form-label text-md-right text-center text-1 p-0">Enter Email</label>
                         <div>
                           <input v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control font-weight-bold" type="email" name="email">
                           <hr class="mt-0">
@@ -62,7 +62,7 @@
                       <!-- Submit Button -->
                       <div id="form-button">
                         <!-- Button -->
-                        <button id="resend" class="btn btn-dark btn-block btn-lg mb-4 font-weight-bold" type="submit">
+                        <button id="resend" class="btn btn-dark btn-block btn-lg mb-4 font-weight-bold background-color-1 border-0" type="submit">
                             SEND
                         </button>
                       </div>
@@ -102,6 +102,18 @@
 
   #laptop, #oops {
     color: black;
+  }
+
+  .border-black {
+    border-color: black;
+  }
+
+  .text-1 {
+    color: #F38704;
+  }
+
+  .background-color-1 {
+    background-color: #F38704;
   }
   
   @media screen and (max-width: 1000px) {
