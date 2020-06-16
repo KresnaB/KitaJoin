@@ -10,16 +10,16 @@
     <div class=" d-block d-sm-none d-none d-sm-block d-md-none">
       <div id="login-container" class="row">
         <div class="col-sm col-md my-auto">
-          <div id="login-card" class="border-0 mx-auto card-body" style="background-color: black; max-width: 500px; margin:">
+          <div id="login-card" class="border-0 mx-auto card-body background-color-white" style="max-width: 500px; margin:">
             <div class="mb-5">
-              <h1 class="text-white">Log In</h1>
+              <h1>Log In</h1>
             </div>
             <form @submit.prevent="login" @keydown="form.onKeydown($event)">
               <!-- Email -->
               <div class="input-card card-body mb-3">
                 <div class="form-group row">
-                  <div class="col-md col-sm">
-                    <label for="email" class="card-title">Email <span class="text-danger">*</span></label>
+                  <div class="col-md col-sm border border-black rounded">
+                    <label for="email" class="card-title text-black">Email <span class="text-danger">*</span></label>
                     <input id="email" v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control" type="email" name="email">
                     <has-error :form="form" field="email" class="alert alert-danger"/>
                   </div>
@@ -29,8 +29,8 @@
               <!-- Password -->
               <div class="input-card card-body">
                 <div class="form-group row">
-                  <div class="col-md col-sm">
-                    <label for="password" >Password <span class="text-danger">*</span></label>
+                  <div class="col-md col-sm border border-black rounded">
+                    <label for="password" class="text-black">Password <span class="text-danger">*</span></label>
                     <input id="password" v-model="form.password" :class="{ 'is-invalid': form.errors.has('password') }" class="form-control" type="password" name="password">
                     <has-error :form="form" field="password" class="alert alert-danger"/>
                   </div>
@@ -40,7 +40,7 @@
               <div class="form-group row">
                 <div class="col-md col-sm">
                   <!-- Submit Button -->
-                  <v-button :loading="form.busy">
+                  <v-button :loading="form.busy" class="background-color-black">
                     Let's find!
                   </v-button>
                   
@@ -49,7 +49,7 @@
                 </div>
               </div>
               <div class="mt-3 pt-5 text-center">
-                <router-link id="register-button" :to="{ name: 'register' }" tag="button" class="btn btn-dark text-white"><u>Register</u></router-link>
+                <router-link :to="{ name: 'register' }"><u class="background-color-white text-1">Register</u></router-link>
               </div>
             </form>
           </div>
@@ -142,6 +142,26 @@
 
   #laptop, #oops {
     color: black;
+  }
+
+  .background-color-white {
+    background-color: white;
+  }
+
+  .background-color-black {
+    background-color: black;
+  }
+
+  .border-black {
+    border-color: black !important;
+  }
+
+  .text-black {
+    color: black;
+  }
+
+  .text-1 {
+    color: #F38704;
   }
 </style>
 
