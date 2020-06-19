@@ -66,3 +66,6 @@ Route::delete('joinstatus/delete/{user_id}/{post_id}', 'FollowsController@destro
 Route::post('request/accept', 'FollowsController@update');
 Route::post('request/delete', 'FollowsController@update');
 //Route::delete('decline/{post_id}/{user_id}', 'FollowsController@decline');
+
+Route::get('searchresult/{post_name}', 'SearchController@search_result');
+Route::get('filterresult/{category}', 'SearchController@filter_result');
