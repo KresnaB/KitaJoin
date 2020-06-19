@@ -5,6 +5,12 @@ let getters = {
     teams: state => {
         return state.teams
     },
+    teamsCreated: state => {
+        return state.teamsCreated
+    },
+    teamsJoined: state => {
+        return state.teamsJoined
+    },
     team: state => {
         return state.team
     },
@@ -19,6 +25,9 @@ let getters = {
     },
     requests: state => {
         return state.requests
+    },
+    joinStatus: state => {
+        return state.joinStatus
     }
 }
 
