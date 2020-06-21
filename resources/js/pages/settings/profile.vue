@@ -5,7 +5,7 @@
 
       <div class="form-group row">
         <div class="col">
-          <img id="user-photo" class="rounded-circle" :src="person.image" alt="">
+          <img id="user-photo" class="rounded-circle" :src="person.image" alt="User image">
         </div>
       </div>
 
@@ -48,11 +48,12 @@
 
       <!-- Telephone -->
       <div class="row">
-        <label class="col-md-3 col-form-label font-weight-bold pt-0 pb-0">Telephone *</label>
+        <label class="col-md-3 col-form-label font-weight-bold pt-0 pb-0">Telephone <span class="text-danger">*</span></label>
       </div>
       <div class="form-group row">
-        <div class="col">
-          <input v-model="person.contact" :class="{ 'is-invalid': form.errors.has('telephone') }" class="form-control" type="number" name="contact" required>
+        <div class="col input-group">
+          <div class="input-group-addon my-auto">+62</div>
+          <input v-model="person.contact" :class="{ 'is-invalid': form.errors.has('telephone') }" class="form-control" type="tel" name="contact" required>
           <has-error :form="form" field="telephone" />
         </div>
       </div>
@@ -61,7 +62,7 @@
 
       <!-- Interest -->
       <div class="row">
-        <label class="col-md-3 col-form-label font-weight-bold pt-0 pb-0">Interest *</label>
+        <label class="col-md-3 col-form-label font-weight-bold pt-0 pb-0">Interest <span class="text-danger">*</span></label>
       </div>
       <div class="form-group row">
         <div class="col">
@@ -169,7 +170,11 @@ export default {
       if (imageInput.files.length != 0) {
         formData.append('image', this.image);
       }
-      formData.append('bio', this.person.bio);
+      if (this.person.bio === null) {
+        formData.append('bio', '');
+      } else {
+        formData.append('bio', this.person.bio);
+      }
       formData.append('contact', this.person.contact);
       formData.append('interest', this.person.interest);
 
@@ -178,6 +183,8 @@ export default {
       }).catch(function (error) {
         currentObj.output = error;
       });
+
+      this.$router.go();
     },
     onFileChange(e) {
       console.log(e.target.files[0]);

@@ -3,15 +3,10 @@
         <card id="general-profile" class="mb-3">
             <div>
                 <div id="profile-identity" class="my-auto text-center">
-                    <h4>{{ team.post_name }}</h4>
+                    <h4 class="mb-0">{{ team.post_name }}</h4>
                     <router-link :to="{name: 'update.team', params: {id: team.id}}" tag="button" class="btn btn-dark btn-sm mt-2" v-if="team.user_id === user.id">
                         Edit Team
                     </router-link>
-                    <div class="d-flex">
-                        <button type="button" class="btn btn-dark d-none d-sm-block mr-2" data-toggle="modal" data-target="#contact-information-modal">
-                            Contact information
-                        </button>
-                    </div>
                 </div>
             </div>
         </card>
@@ -29,34 +24,36 @@
                 <h6 v-if="team.user_id === user.id" id="interest" class="mb-4 font-weight-light mr-auto my-auto">Request</h6>  
                 <h6 v-else id="interest" class="mb-4 font-weight-light mr-auto my-auto">Members</h6>  
                 <div v-if="team.user_id !== user.id">
-                    <input v-if="joinStatus === 'null'" id="join-button" class="btn font-weight-bold pr-0" type="button" value="JOIN" @click="join()"/>
+                    <input v-if="joinStatus === 'null' && team.user_id !== user.id" id="join-button" class="btn font-weight-bold pr-0" type="button" value="JOIN" @click="join()"/>
                     <input v-else-if="joinStatus.join_status === 0" id="requested-button" class="btn font-weight-bold pr-0" type="button" value="REQUESTED" @click="unjoin(id)"/>
                     <input v-else id="requested-button" class="btn font-weight-bold pr-0" type="button" value="JOINED" @click="unjoin(id)"/>
                 </div>
             </div>
-            <div v-if="team.user_id !== user.id">
+            <div v-if="team.user_id !== user.id" class="mt-2">
                 <div class="d-flex">
-                    <img :src="person.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
+                    <img :src="person.image" class="rounded-circle img-responsive my-auto" width="75" height="75" :alt="person.name + 'image'">
                     <div id="profile-identity" class="my-auto ml-2">
                         <router-link id="person-name" :to="{ name: 'profile.details', params: {id: person.id}}" class="navbar-brand font-weight-bold">
                             {{ person.name }}
                         </router-link>
-                        <p id="person-interest" class="mb-0">{{ person.program}}</p>
+                        <p v-if="person.program === 'Empty'" id="person-interest" class="mb-0"></p>
+                        <p v-else id="person-interest" class="mb-0">{{ person.program}}</p>
                     </div>
                 </div>
             </div>
             <div v-if="requests !== 'null'">
-                <div v-for="request in requests" v-if="request.join_status !== 0" class="d-flex" >
-                    <img :src="request.image" class="rounded-circle img-responsive my-auto d-block d-sm-none" width="75" height="75">
+                <div v-for="request in requests" v-if="request.join_status !== 0 || team.user_id === user.id" class="d-flex mt-2" >
+                    <img :src="request.image" class="rounded-circle img-responsive my-auto" width="75" height="75" :alt="person.name + 'image'">
                     <div id="profile-identity" class="my-auto ml-2">
                         <router-link id="person-name" :to="{ name: 'profile.details', params: {id: request.user_id}}" class="navbar-brand font-weight-bold">
                             {{ request.name }}
                         </router-link>
                         <div v-if="team.user_id === user.id" class="d-flex">
-                            <button type="button" class="btn btn-dark btn-sm mr-2">Confirm</button>
-                            <router-link :to="{name: ''}" tag="button" class="btn btn-secondary btn-sm">Delete</router-link>
+                            <button v-if="request.join_status === 0" type="button" class="btn btn-dark btn-sm btn-block mr-2" @click="confirm(request.user_id)">Confirm</button>
+                            <button v-else type="button" class="btn btn-secondary btn-sm btn-block mr-2" @click="deleteRequest(request.user_id)">Delete</button>                        
                         </div>
-                        <p v-else id="person-interest" class="mb-0">{{ person.program}}</p>
+                        <p v-else-if="request.program === 'Empty'" id="person-interest" class="mb-0">-</p>
+                        <p v-else id="person-interest" class="mb-0">{{ request.program}}</p>
                     </div>
                 </div>
             </div>
@@ -121,8 +118,7 @@
 
     @media (min-width: 768px) {
         #general-profile {
-            margin-top: 24vh;
-            margin-bottom: 24vh;
+            margin-top: 43px;
         }
 
         h4 {
@@ -182,6 +178,10 @@
             id: {
                 user_id: null,
                 post_id: null
+            },
+            requestId: {
+                user_id: null,
+                post_id: null
             }
         }),
 
@@ -239,6 +239,38 @@
                 let currentObj = this;
 
                 axios.delete('/api/joinstatus/delete/' + this.user.id + '/' + this.$route.params.id)
+                .then(function (response) {
+                    currentObj.success = response.data.success;
+                }).catch(function (error) {
+                    currentObj.output = error;
+                });
+
+                this.$router.go();
+            },
+
+            confirm: function(user_id) {
+                let currentObj = this;
+
+                this.requestId.user_id = user_id;
+                this.requestId.post_id = this.$route.params.id;
+
+                axios.post('/api/request/accept', this.requestId)
+                .then(function (response) {
+                    currentObj.success = response.data.success;
+                }).catch(function (error) {
+                    currentObj.output = error;
+                });
+
+                this.$router.go();
+            },
+
+            deleteRequest: function(user_id) {
+                let currentObj = this;
+
+                this.requestId.user_id = user_id;
+                this.requestId.post_id = this.$route.params.id;
+
+                axios.post('/api/request/delete', this.requestId)
                 .then(function (response) {
                     currentObj.success = response.data.success;
                 }).catch(function (error) {

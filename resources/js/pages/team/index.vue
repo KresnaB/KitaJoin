@@ -1,28 +1,30 @@
 <template>
-    <div>
+    <div class="mt-4">
         <div id="header" class="row">
-            <div class="col">
-                <h5>Team</h5>
+            <div class="col my-auto">
+                <h5 class="mb-0">Teams</h5>
             </div>
             <div class="col">
-                <router-link class="float-right" :to="{name: 'create.team'}" tag="button">Create</router-link>
+                <router-link id="create-button" class="text-white float-right p-0" :to="{name: 'create.team'}" tag="button">
+                    <fa icon="plus"></fa>
+                </router-link>
             </div>
         </div>
         <div class="row">
-            <div class="col">               
-                <card v-for="team in teamsCreated" v-bind:key="team.id" class="shadow-sm">
+            <div class="col mt-2">               
+                <card v-for="team in teamsCreated" v-bind:key="team.id" class="shadow-sm mb-4">
                     <div class="person-row">
-                        <div class="my-auto ml-3">
-                            <router-link id="team-name" :to="{name: 'team.details', params: { id: team.id }}" class="navbar-brand font-weight-bold truncate">
+                        <div class="my-auto overflow-hidden">
+                            <router-link id="team-name" :to="{name: 'team.details', params: { id: team.id, user_id: team.user_id }}" class="navbar-brand font-weight-bold">
                                 {{ team.post_name }}
                             </router-link>
                         </div>
                     </div>
                 </card>
-                <card v-for="team in teamsJoined" v-bind:key="team.id" class="shadow-sm">
+                <card v-for="team in teamsJoined" v-bind:key="team.id" class="shadow-sm mb-4">
                     <div class="person-row">
-                        <div class="my-auto ml-3">
-                            <router-link id="team-name" :to="{name: 'team.details', params: { id: team.id, user_id: team.user_id }}" class="navbar-brand font-weight-bold truncate">
+                        <div class="my-auto overflow-hidden">
+                            <router-link id="team-name" :to="{name: 'team.details', params: { id: team.id, user_id: team.user_id }}" class="navbar-brand font-weight-bold">
                                 {{ team.post_name }}
                             </router-link>
                         </div>
@@ -52,13 +54,24 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    #create-button {
+        background-color: black;
+        border-color: black;
+        font-size: 6vw;
+    }
+
+    #create-button:focus, #create-button:active {
+        outline: none !important;
+        box-shadow: none;
+    }
 </style>
 
 <script>
     import { mapGetters } from 'vuex';
     
     export default {
-        mounted() {
+        created() {
             this.$store.dispatch('fetchTeamsCreated', {
                 user_id: this.user.id
             }),

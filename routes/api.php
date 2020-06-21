@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 Route::group(['middleware' => 'guest:api'], function () {
     Route::post('login', 'Auth\LoginController@login');
     Route::post('register', 'Auth\RegisterController@register');
-
+    Route::post('registerid/get/{email}', 'Auth\RegisterController@getRegisterId');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
@@ -36,7 +36,13 @@ Route::group(['middleware' => 'guest:api'], function () {
 
     Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
+    Route::post('sociallogin/{provider}', 'Auth\AuthController@SocialSignup');
+    Route::get('auth/{provider}/callback', 'OutController@index')->where('provider', '.*');
 });
+
+Route::get('/redirect', 'SocialAuthGoogleController@redirect');
+Route::get('/callback', 'SocialAuthGoogleController@callback');
+
 
 Route::get('add/{id}', 'ProfilesController@add');
 Route::get('profiles', 'ProfilesController@index');
@@ -56,4 +62,10 @@ Route::post('follow/{id}', 'FollowsController@store');
 Route::get('followers/{post_id}', 'FollowsController@notify');
 Route::post('joinstatus', 'FollowsController@getJoinStatus');
 Route::delete('joinstatus/delete/{user_id}/{post_id}', 'FollowsController@destroy');
+
+Route::post('request/accept', 'FollowsController@update');
+Route::post('request/delete', 'FollowsController@update');
 //Route::delete('decline/{post_id}/{user_id}', 'FollowsController@decline');
+
+Route::get('searchresult/{post_name}', 'SearchController@search_result');
+Route::get('filterresult/{category}', 'SearchController@filter_result');
