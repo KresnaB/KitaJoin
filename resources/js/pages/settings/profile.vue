@@ -84,7 +84,7 @@
         <!-- Submit Button -->
         <div class="row mt-24">
           <div class="col-md col-sm">
-            <v-button :loading="form.busy"">
+            <v-button :loading="form.busy" class="background-color-1">
               Save
             </v-button>
           </div>
@@ -167,6 +167,10 @@
 
   #laptop, #oops {
     color: black;
+  }
+
+  .background-color-1 {
+    background-color: #F38704;
   }
 
   @media (max-width: 1000px) {
