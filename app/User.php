@@ -6,10 +6,10 @@ use App\Notifications\VerifyEmail;
 use App\Notifications\ResetPassword;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
+class User extends Authenticatable implements JWTSubject , MustVerifyEmail
 {
     use Notifiable;
 
@@ -124,5 +124,13 @@ class User extends Authenticatable implements JWTSubject //, MustVerifyEmail
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+    public function posts()
+    {
+        return $this->hasMany(Post::class)->orderBy('created_at', 'DESC');
+    }
+    public function following()
+    {
+        return $this->belongsToMany(Post::class);
     }
 }

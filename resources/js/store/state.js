@@ -1,5 +1,9 @@
 let state = {
     people: [],
+    teams: [],
+    teamsCreated: [],
+    teamsJoined: [],
+    team: {},
     person: {},
     user: {},
     form: {
@@ -9,7 +13,9 @@ let state = {
         about: '',
         telephone: '',
         interest: ''
-    }
+    },
+    requests: [],
+    joinStatus: {}
 }
 
 export default state

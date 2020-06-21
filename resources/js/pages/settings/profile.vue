@@ -5,7 +5,7 @@
 
       <div class="form-group row">
         <div class="col">
-          <img id="user-photo" class="rounded-circle" :src="person.image" alt="">
+          <img id="user-photo" class="rounded-circle" :src="person.image" alt="User image">
         </div>
       </div>
 
@@ -48,7 +48,7 @@
 
       <!-- Telephone -->
       <div class="row">
-        <label class="col-md-3 col-form-label font-weight-bold pt-0 pb-0">Telephone *</label>
+        <label class="col-md-3 col-form-label font-weight-bold pt-0 pb-0">Telephone <span class="text-danger">*</span></label>
       </div>
       <div class="form-group row">
         <div class="col input-group">
@@ -62,7 +62,7 @@
 
       <!-- Interest -->
       <div class="row">
-        <label class="col-md-3 col-form-label font-weight-bold pt-0 pb-0">Interest *</label>
+        <label class="col-md-3 col-form-label font-weight-bold pt-0 pb-0">Interest <span class="text-danger">*</span></label>
       </div>
       <div class="form-group row">
         <div class="col">
@@ -170,7 +170,11 @@ export default {
       if (imageInput.files.length != 0) {
         formData.append('image', this.image);
       }
-      formData.append('bio', this.person.bio);
+      if (this.person.bio === null) {
+        formData.append('bio', '');
+      } else {
+        formData.append('bio', this.person.bio);
+      }
       formData.append('contact', this.person.contact);
       formData.append('interest', this.person.interest);
 
