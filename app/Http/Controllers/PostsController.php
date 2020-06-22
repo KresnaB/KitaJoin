@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Post;
 use Illuminate\Http\Request;
@@ -9,7 +11,7 @@ class PostsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
     /**
      * Display a listing of the resource.
@@ -20,6 +22,25 @@ class PostsController extends Controller
     {
         $posts = Post::all()->toArray();
         return array_reverse($posts);
+    }
+
+    /**
+     * Display a listing of the posts joined
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function readPostsJoined(Request $request) {
+
+        $postsJoined = DB::table('post_user')
+            ->join('posts', function ($join) {
+                $join->on('post_user.post_id', '=', 'posts.id');
+            })
+            ->where([
+                ['post_user.user_id' , $request->input('user_id')],
+                ['join_status', 1]
+            ])
+            ->get();
+        return response()->json($postsJoined);
     }
 
     /**
@@ -45,11 +66,10 @@ class PostsController extends Controller
             'category'=> 'required',
             'description' => 'required'
         ]);
-            
         auth()->user()->posts()->create(array_merge(
             $data
         ));
-        return response()->json("post created");   
+        return response()->json("post created");
     }
 
     /**
@@ -61,7 +81,19 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return response()->json(['post'=>$post]);
+        return response()->json($post);
+    }
+
+    /**
+     * Display the specified resource by user_id
+     * 
+     * @param int $user_id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function showByUserId($user_id) {
+        $posts = DB::table('posts')->where('user_id', $user_id)->get();
+        return response()->json($posts);     
     }
 
     /**
@@ -87,9 +119,8 @@ class PostsController extends Controller
         $post = Post::find($id);
         $data = request()->validate([
             'post_name'=> 'required',
-            'location'=> 'required',
-            'type'=> 'required',
             'category'=> 'required',
+            'description' => 'required'
         ]);
 
         $post->update($data);
@@ -108,5 +139,11 @@ class PostsController extends Controller
         $post->delete();
 
         return response()->json("post successfully deleted");
+    }
+    public function showMyPosts($user_id)
+    {
+         $user = User::find($user_id);
+         $posts = $user->posts();
+         return response()->json(['posts'=>$posts]);
     }
 }
