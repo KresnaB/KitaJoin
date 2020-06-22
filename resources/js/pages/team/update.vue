@@ -1,14 +1,21 @@
 <template>
     <div>
-        <card class="mt-3 mb-5">
+        <div id="not-available" class="d-none d-sm-block d-sm-none d-md-block">
+            <div id="not-available-container" class="bg-white text-center pt-3 pb-3">
+                <fa id="laptop" icon="laptop"></fa>
+                <h1 id="oops" class="font-weight-normal">Oops!</h1>
+                <p class="mt-4 font-weight-normal">Sorry, we're only available in mobile right now. We'll let you know as soon as we are!</p>
+            </div>
+        </div>
+        <card class="d-block d-sm-none d-none d-sm-block d-md-none mt-3 mb-5 background-color-black">
             <form @submit.prevent="update" @keydown="form.onKeydown($event)" method="POST">
-                <label>Contest name <span class="text-danger">*</span></label>
-                <input class="form-control" type="text" v-model="team.post_name" required>
-                <label class="mt-4">Contest category <span class="text-danger">*</span></label>
-                <input class="form-control" type="text" v-model="team.category" required>
-                <label class="mt-4">Team description <span class="text-danger">*</span></label>
-                <textarea class="form-control" rows="4" v-model="team.description" required></textarea>
-                <v-button class="mt-4" :loading="form.busy">
+                <label class="text-white">Team name <span class="text-danger">*</span></label>
+                <input id="contest-name-input" class="form-control background-color-black" type="text" v-model="team.post_name" required>
+                <label class="mt-4 text-white">Contest category <span class="text-danger">*</span></label>
+                <input id="contest-category-input" class="form-control background-color-black" type="text" v-model="team.category" required>
+                <label class="mt-4 text-white">Team description <span class="text-danger">*</span></label>
+                <textarea id="team-description-textarea" class="form-control background-color-black" rows="4" v-model="team.description" required></textarea>
+                <v-button class="mt-4 background-color-1" :loading="form.busy">
                    Save
                 </v-button>
             </form>
@@ -19,6 +26,43 @@
 <style scoped>
     .card {
         padding: 8px;
+    }
+
+    .background-color-black {
+        background-color: black;
+    }
+
+    .background-color-1 {
+        background-color: #F38704;
+    }
+
+    #contest-name-input, #contest-category-input, #team-description-textarea {
+        -webkit-text-fill-color: white;
+    }
+
+    input:focus, textarea:focus {
+        box-shadow: none !important;
+        border-color: white;
+    }
+
+    #not-available {
+        padding: 120px;
+    }
+
+    #not-available p {
+        margin-bottom: 36px;
+        font-size: 1.125em;
+        color: #A7A7A7;
+    }
+
+    #not-available-container {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
+    #laptop {
+        width: 180px;
+        height: 216px;
     }
 </style>
 
