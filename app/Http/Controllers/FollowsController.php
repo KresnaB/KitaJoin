@@ -75,14 +75,8 @@ class FollowsController extends Controller
                 ['user_id' , $request->input('user_id')],
                 ['post_id', $request->input('post_id')]
             ])
-            ->get();
-        $exists = DB::table('post_user')
-            ->where([
-                ['user_id' , $request->input('user_id')],
-                ['post_id', $request->input('post_id')]
-            ])
             ->first();
-        if(!$exists) {
+        if(!$joinStatus) {
             $joinStatus = "null";
         }
         return response()->json($joinStatus);

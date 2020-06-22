@@ -2,11 +2,11 @@
     <div>
         <card class="mt-3 mb-5">
             <form @submit.prevent="update" @keydown="form.onKeydown($event)" method="POST">
-                <label>Contest name *</label>
+                <label>Contest name <span class="text-danger">*</span></label>
                 <input class="form-control" type="text" v-model="team.post_name" required>
-                <label>Contest category *</label>
+                <label class="mt-4">Contest category <span class="text-danger">*</span></label>
                 <input class="form-control" type="text" v-model="team.category" required>
-                <label>Team description *</label>
+                <label class="mt-4">Team description <span class="text-danger">*</span></label>
                 <textarea class="form-control" rows="4" v-model="team.description" required></textarea>
                 <v-button class="mt-4" :loading="form.busy">
                    Save
@@ -72,7 +72,7 @@
                     currentObj.output = error;
                 });
 
-                this.$router.push({ name: 'team.details', params: {id: this.$route.params.id} })
+                this.$router.push({ name: 'team.details', params: {id: this.$route.params.id, user_id: this.team.user_id} })
             },
         }
     }

@@ -1,6 +1,8 @@
 let state = {
     people: [],
     teams: [],
+    teamsCreated: [],
+    teamsJoined: [],
     team: {},
     person: {},
     user: {},
@@ -13,7 +15,7 @@ let state = {
         interest: ''
     },
     requests: [],
-    joinStatus: []
+    joinStatus: {}
 }
 
 export default state
