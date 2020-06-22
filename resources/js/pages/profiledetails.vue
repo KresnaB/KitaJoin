@@ -15,8 +15,8 @@
                         <div id="profile-identity" class="my-auto">
                             <h4 class="text-white">{{ person.name }}</h4>
                             <div v-if="person.program !== 'Empty'">
-                                <h6 id="user-study-program" v-if="user.id === person.id">{{ person.program }}</h6>
-                                <h6 id="study-program" v-else>{{ person.program }}</h6>
+                                <h6 id="user-study-program" class="text-white" v-if="user.id === person.id">{{ person.program }}</h6>
+                                <h6 id="study-program" class="text-white" v-else>{{ person.program }}</h6>
                             </div>
                             <div class="d-flex">
                                 <button type="button" class="btn btn-dark d-none d-sm-block mr-2" data-toggle="modal" data-target="#contact-information-modal">
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div v-if="person.contact !== 'Empty' && user.id !== person.id" class="text-center mt-4">
-                        <a :href="'https://wa.me/62' + person.contact" class="btn fa-whatsapp text-white font-weight-bold">
+                        <a :href="'https://wa.me/62' + person.contact" id="whatsapp-anchor" class="btn fa-whatsapp text-white font-weight-bold">
                             <fa :icon="['fab', 'whatsapp']" />
                             WhatsApp
                         </a>
@@ -171,8 +171,13 @@
     }
 
     @media (max-width: 1000px) {
-        #about-value, #interest-value, #null-interest, #telephone-header {
+        #about-value, #interest-value, #null-interest, #telephone-header, #user-study-program, #study-program {
             font-size: 0.825rem !important;
+        }
+
+        #whatsapp-anchor {
+            border-radius: 0.75rem;
+            font-size: 0.825rem;
         }
     }
 
