@@ -1,55 +1,48 @@
 <template>
   <div class="w-100">
-    <div id="not-available" class="d-none d-sm-block d-sm-none d-md-block">
-      <div id="not-available-container" class="bg-white text-center pt-3 pb-3">
-        <fa id="laptop" icon="laptop"></fa>
-        <h1 id="oops" class="font-weight-normal">Oops!</h1>
-        <p class="mt-4 font-weight-normal">Sorry, we're only available in mobile right now. We'll let you know as soon as we are!</p>
-      </div>
-    </div>
-    <div id="register-container" class="row d-block d-sm-none d-none d-sm-block d-md-none">
+    <div id="register-container" class="row">
       <div class="col-sm col-md my-auto">
-              <div v-if="mustVerifyEmail" id="container">
-                <div id="jumbotron" class="jumbotron mb-0 p-38 rounded-0">
-                  <!-- Card image -->
-                  <div class="view overlay text-center">
-                      <img src="storage/emailconfirmationhint.svg" id="illustrator" class="img-fluid mt-39" alt="Email Confirmation Hint Illustration">
-                  </div>
+        <div v-if="mustVerifyEmail" id="container">
+          <div id="jumbotron" class="jumbotron mb-0 p-38 rounded-0">
+            <!-- Card image -->
+            <div class="view overlay text-center">
+              <img src="storage/emailconfirmationhint.svg" id="illustrator" class="img-fluid mt-39" alt="Email Confirmation Hint Illustration">
+            </div>
 
-                  <!-- Card content -->
-                  <div class="card-title mb-0">
+            <!-- Card content -->
+              <div class="card-title mb-0">
 
-                    <!-- Title -->
-                    <h3 class="card-title h3 my-4 text-white text-center"><strong>Thank You!</strong></h3>
-                    <!-- Text -->
-                    <p class="card-text text-white text-justify my-4">We will send you a confirmation e-mail shortly with an activation link to get you started with kitajoin.</p>
-                    <!-- Button -->
-                    <router-link :to="{ name: 'login' }" id="gotologin" class="btn btn-secondary btn-block btn-lg">
-                        GO TO LOG IN
-                    </router-link>
-                  </div>
-                </div>
-
+                <!-- Title -->
+                <h3 class="card-title h3 my-4 text-white text-center"><strong>Thank You!</strong></h3>
                 <!-- Text -->
-                <div id="send-again-container" class="background-color-white text-center text-black py-38 border border-black">
-                  <p class="mb-0">Didn't see it?</p>
-                  <p class="mb-0">Check your spam for an e-mail from <span class="font-weight-bold">KITAJOIN</span></p>
-                  <p class="mb-0">or <span><a class="text-1 font-weight-bold" href="#" @click="resend()">send again</a></span></p>
-                </div>
+                <p class="card-text text-white text-justify my-4">We will send you a confirmation e-mail shortly with an activation link to get you started with kitajoin.</p>
+                <!-- Button -->
+                <router-link :to="{ name: 'login' }" id="gotologin" class="btn btn-secondary btn-block btn-lg">
+                  GO TO LOG IN
+                </router-link>
               </div>
+            </div>
+
+            <!-- Text -->
+            <div id="send-again-container" class="background-color-white text-center text-black py-38 border border-black">
+              <p class="mb-0">Didn't see it?</p>
+              <p class="mb-0">Check your spam for an e-mail from <span class="font-weight-bold">KITAJOIN</span></p>
+              <p class="mb-0">or <span><a class="text-1 font-weight-bold" href="#" @click="resend()">send again</a></span></p>
+            </div>
+          </div>
         <div id="register-card" v-else class="border-0 mx-auto card-body background-color-white" style="max-width: 500px">
           <div class="d-block d-sm-none mt-5 mb-5">
             <h1 class="text-black">KITA <br /> JOIN</h1>
             <p class="text-black font-weight-light">Help you find the right team</p>
           </div>
-          <div class="d-none d-sm-block d-sm-none d-md-block mb-5">
-            <h1 class="text-white">Register to KITAJOIN</h1>
-            <p class="text-secondary font-weight-light">Join to KITAJOIN you will get the best people for your team.</p>
+          <div class="d-none d-sm-block d-sm-none d-md-block text-center">
+            <img src="/png/logo.png" id="logo-image" class="img-fluid w-88 mt-39" alt="Logo">
+            <p class="mt-3 mb-0 text-secondary font-weight-light">Join to KITAJOIN you will get the best people for your team.</p>
           </div>
-          <hr class="mb-5 border-black">
-          <form @submit.prevent="register" @keydown="form.onKeydown($event)">
+          <hr class="mt-3 border-black">
+          <form class="mt-4" @submit.prevent="register" @keydown="form.onKeydown($event)">
             <!-- Name -->
-            <div class="input-card card-body mb-3">
+            <div class="input-card card-body">
               <div class="form-group row">
                 <div class="col-md col-sm border border-black rounded">
                   <label for="fullName" class="card-title text-black">Full Name <span class="text-danger">*</span></label>
@@ -60,7 +53,7 @@
             </div>
 
             <!-- Email -->
-            <div class="input-card card-body mb-3">
+            <div class="input-card card-body mt-3">
               <div class="form-group row">
                 <div class="col-md col-sm border border-black rounded">
                   <label for="email" class="card-title text-black">Email <span class="text-danger">*</span></label>
@@ -71,7 +64,7 @@
             </div>
 
             <!-- Password -->
-            <div class="input-card card-body mb-5">
+            <div class="input-card card-body mt-3">
               <div class="form-group row">
                 <div class="col-md col-sm border border-black rounded">
                   <label for="password" class="card-title text-black">Password <span class="text-danger">*</span></label>
@@ -81,11 +74,11 @@
               </div>
             </div>
 
-            <div class="form-group row">
+            <div class="form-group row mt-5">
               <div class="col-md col-sm">
                 <!-- Submit Button -->
-                <v-button :loading="form.busy" class="background-color-black">
-                  {{ $t('REGISTER') }}
+                <v-button :loading="form.busy" class="background-color-1 border-0">
+                  Join
                 </v-button>
 
                 <!-- GitHub Register Button -->
@@ -93,22 +86,16 @@
               </div>
             </div>
           </form>
-          <ul id="already-have-an-account" class="list-inline">
+          <ul id="already-have-an-account" class="list-inline text-center">
             <li class="list-inline-item">
                 <p class="text-black">Already have an account?</p>
             </li>
             <li class="list-inline-item">
-              <router-link id="sign-in-here" :to="{ name: 'login' }" class="nav-link text-1" active-class="active">
+              <router-link id="sign-in-here" :to="{ name: 'login' }" class="nav-link text-secondary font-weight-bold" active-class="active">
                 {{ $t('Sign in here') }}
               </router-link>
             </li>
           </ul>
-        </div>
-      </div>
-      <div class="col-sm col-md my-auto d-none d-xl-block">
-        <div style="text-align: right">
-          <h1 id="kita-join-header" class="text-white">KITA <br /> JOIN</h1>
-          <p id="kita-join-paragraph" class="text-white font-weight-light">Help you find the right people</p>
         </div>
       </div>
     </div>
@@ -232,6 +219,10 @@
     background-color: black;
   }
 
+  .background-color-1 {
+    background-color: #F7AB4F;
+  }
+
   .border-black {
     border-color: black !important;
   }
@@ -242,6 +233,10 @@
 
   .text-1 {
     color: #F38704;
+  }
+
+  .w-88 {
+    width: 88px;
   }
 
   @media (max-width: 1000px) {
