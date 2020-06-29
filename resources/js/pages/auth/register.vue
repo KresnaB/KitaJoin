@@ -1,8 +1,8 @@
 <template>
   <div class="w-100">
     <div id="register-container" class="row">
-      <div class="col-sm col-md my-auto">
-        <div v-if="mustVerifyEmail" id="container">
+      <div class="col my-auto">
+        <div v-if="mustVerifyEmail" id="container" class="mx-140">
           <div id="jumbotron" class="jumbotron mb-0 p-38 rounded-0">
             <!-- Card image -->
             <div class="view overlay text-center">
@@ -10,24 +10,26 @@
             </div>
 
             <!-- Card content -->
-              <div class="card-title mb-0">
+              <div id="card-content" class="card-title mb-0">
 
                 <!-- Title -->
-                <h3 class="card-title h3 my-4 text-white text-center"><strong>Thank You!</strong></h3>
+                <h1 id="thank-you" class="card-title my-4 text-white text-center"><strong>Thank You!</strong></h1>
                 <!-- Text -->
-                <p class="card-text text-white text-justify my-4">We will send you a confirmation e-mail shortly with an activation link to get you started with kitajoin.</p>
+                <p id="confirmation-email" class="card-text text-white text-center mt-4 mb-4 mx-5">We will send you a confirmation e-mail shortly with an activation link to get you started with kitajoin.</p>
                 <!-- Button -->
-                <router-link :to="{ name: 'login' }" id="gotologin" class="btn btn-secondary btn-block btn-lg">
-                  GO TO LOG IN
-                </router-link>
+                <div class="text-center">
+                  <router-link :to="{ name: 'login' }" id="gotologin" class="btn btn-1 btn-lg px-5 text-white">
+                    Return to log in
+                  </router-link>
+                </div>
               </div>
             </div>
 
             <!-- Text -->
             <div id="send-again-container" class="background-color-white text-center text-black py-38 border border-black">
-              <p class="mb-0">Didn't see it?</p>
-              <p class="mb-0">Check your spam for an e-mail from <span class="font-weight-bold">KITAJOIN</span></p>
-              <p class="mb-0">or <span><a class="text-1 font-weight-bold" href="#" @click="resend()">send again</a></span></p>
+              <p id="see" class="mb-0">Didn't see it?</p>
+              <p id="spam" class="mb-0">Check your spam for an e-mail from <span class="font-weight-bold">KITAJOIN</span></p>
+              <p id="send-again" class="mb-0">or <span><a class="text-1 font-weight-bold" href="#" @click="resend()">send again</a></span></p>
             </div>
           </div>
         <div id="register-card" v-else class="border-0 mx-auto card-body background-color-white" style="max-width: 500px">
@@ -101,6 +103,15 @@
     </div>
   </div>
 </template>
+
+<style>
+  @media(max-width: 1000px) {
+    .container {
+      padding-left: 17px;
+      padding-right: 17px;
+    }
+  }
+</style>
 
 <style scoped>
   input {
@@ -204,7 +215,7 @@
 
   #gotologin {
       border-radius: 4px;
-      font-size: 1rem;
+      font-size: 1.5rem;
   }
 
   .card-title p {
@@ -235,8 +246,34 @@
     color: #F38704;
   }
 
+  .mx-140 {
+    margin-left: 140px;
+    margin-right: 140px;
+  }
+
+  .mb-52 {
+    margin-bottom: 60px;
+  }
+
   .w-88 {
     width: 88px;
+  }
+
+  .btn-1 {
+    background-color: #F38704;
+  }
+
+  .py-38 {
+    padding-top: 38px;
+    padding-bottom: 38px;
+  }
+
+  #thank-you {
+    font-size: 3rem;
+  }
+
+  #confirmation-email, #see, #spam, #send-again {
+    font-size: 1rem;
   }
 
   @media (max-width: 1000px) {
@@ -252,13 +289,38 @@
       margin-top: 39px;
     }
 
-    .py-38 {
-      padding-top: 38px;
-      padding-bottom: 38px;
-    }
-
     #send-again-container {
       font-size: 0.75rem;
+    }
+
+    #container {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    #card-content {
+      margin-top: 0 !important;
+    }
+
+    #thank-you {
+      padding-top: 0 !important;
+      font-size: 28px;
+    }
+
+    #confirmation-email {
+      margin-left: 16px !important;
+      margin-right: 16px !important;
+      margin-bottom: 24px !important;
+    }
+
+    #confirmation-email, #see, #spam, #send-again {
+      font-size: 12px;
+    }
+
+    #gotologin {
+      padding-top: 11px;
+      padding-bottom: 11px;
+      font-size: 16px;
     }
   }
 </style>
