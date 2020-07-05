@@ -3,7 +3,7 @@
       <div id="verification-status-container" class="row">
         <div id="template-container-2" class="col my-auto">
           <card id="template-container" class="border-0">
-            <template v-if="!success">
+            <template v-if="success">
               <div id="container">
                 <div id="jumbotron" class="jumbotron p-0 mb-0">
                   
