@@ -43,7 +43,7 @@
                     </div>
 
                     <!-- Title -->
-                    <h2 id="expired" class="card-title mt-5 mb-4 text-center"><strong>Expired!</strong></h2>
+                    <h2 id="expired" class="card-title mt-4 mb-4 text-center"><strong>Expired!</strong></h2>
                     
                     <!-- Text -->
                     <p id="sorry" class="card-text text-secondary text-center mt-4 mx-236 mb-5">Sorry! The verification link is invalid. We will send you a <span id="verification-link-text">verification link</span> on this email</p>
@@ -69,7 +69,7 @@
                             Send
                         </button>
                       </div>
-                      <alert-success id="success-alert" class="mt-5 mx-236 alert-dark" :form="form" message="We have sent your verification link!" />
+                      <alert-success id="success-alert" class="mt-5 mx-236 mb-0 alert-dark" :form="form" message="We have sent your verification link!" />
                     </form>
                   </div>
                 </div>
