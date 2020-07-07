@@ -1,7 +1,7 @@
 <template>
-  <div id="home-container" class="row">
-    <div id="home-card" class="card-body col my-auto">  
-      <div v-if="teams.length">
+  <div>
+    <div id="home-container" class="row">  
+      <div v-if="teams.length" id="home-card-1" class="col">
         <div class="row">
           <div class="col my-auto">
             <h2 id="person-heading">All Teams</h2>
@@ -35,7 +35,7 @@
           </router-link>
         </card>
       </div>
-      <div v-else class="text-center">
+      <div v-else id="home-card-2" class="text-center col my-auto">
         <img class="w-284" src="svg/undraw_no_data_qbuo.svg" alt="No Teams Illustration">
         <div class="mt-5">
           <h4 class="font-weight-bold">No Team</h4>
@@ -56,7 +56,12 @@
 <style scoped>
 
   @media (max-width: 1000px) {
-    #home-card {
+    #home-card-1 {
+      margin-top: 28px !important;
+      margin-bottom: 28px !important;
+    }
+    
+    #home-card-2 {
       margin-top: 56px !important;
       margin-bottom: 56px !important;
     }
@@ -139,8 +144,9 @@
     padding-right: 12px;
   }
 
-  #home-card {
-    padding: 0;
+  #home-card-1 {
+    margin-top: 56px !important;
+    margin-bottom: 56px !important;
   }
 
   #person-heading, #person-heading-xs, #create-button{
