@@ -1,25 +1,17 @@
 <template>
   <div class="w-100">
-    <div id="not-available" class="d-none d-sm-block d-sm-none d-md-block">
-      <div id="not-available-container" class="bg-white text-center pt-3 pb-3">
-        <fa id="laptop" icon="laptop"></fa>
-        <h1 id="oops" class="font-weight-normal">Oops!</h1>
-        <p class="mt-4 font-weight-normal">Sorry, we're only available in mobile right now. We'll let you know as soon as we are!</p>
-      </div>
-    </div>
-    <div class="d-block d-sm-none d-none d-sm-block d-md-none">
-      <div class="row">
-        <div class="col-lg-8 m-auto">
-          <card class="background-color-black">
+      <div id="resend-container" class="row">
+        <div id="resend-container-3" class="col my-auto">
+          <card id="resend-container-2" class="background-color-black mx-140">
             <div id="container">
               <div id="jumbotron" class="jumbotron p-0 mb-0 background-color-black">
 
                 <!-- Card image -->
-                <div class="view overlay text-center">
-                  <img src="/storage/emailconfirmationhint.svg" id="illustrator" class="img-fluid" alt="Email Confirmation Hint Illustration">
+                <div id="card-image" class="view overlay mt-51 text-center">
+                  <img src="/storage/emailconfirmationhint.svg" id="illustrator" class="img-fluid w-188" alt="Email Confirmation Hint Illustration">
                 </div>
 
-                <h1 class="text-center text-white font-weight-bold">Email Verification</h1>
+                <h1 id="email-verification" class="mt-4 text-center text-white font-weight-bold">Email Verification</h1>
 
                 <!-- Text -->
                 <p id="verification-link-text" class="card-text text-white text-center mt-3 mb-5">We will send you an <span class="text-1">Activation Link</span> to get you started with kitajoin.</p>
@@ -29,23 +21,23 @@
                   <form @submit.prevent="send" @keydown="form.onKeydown($event)">
 
                     <!-- Email -->
-                    <div id="form-email" class="form-group">
-                      <label id="enter-email-label" class="col-md-3 col-form-label text-md-right text-center text-white font-weight-bold p-0">Enter Email</label>
-                      <div>
-                        <input id="email-input" v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control font-weight-bold background-color-black" type="email" name="email">
+                    <div id="form-email" class="form-group text-center">
+                      <label id="enter-email-label" class="col-md-3 col-form-label text-center text-white font-weight-bold p-0">Enter Email</label>
+                      <div id="email-input-container" class="mt-3 mx-101">
+                        <input id="email-input" v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="form-control font-weight-bold background-color-black text-center" type="email" name="email">
                         <hr class="mt-0 border-white">
                         <has-error :form="form" field="email" />
                       </div>
                     </div>
 
                     <!-- Submit Button -->
-                    <div id="form-button">
+                    <div id="form-button" class="text-center">
                       <!-- Button -->
-                      <button id="resend" class="btn btn-secondary btn-block btn-lg mb-4 font-weight-bold" type="submit">
+                      <button id="resend" class="btn btn-1 btn-lg px-53 mb-5 text-white font-weight-bold" type="submit">
                           GET LINK
                       </button>
                     </div>
-                    <alert-success class="alert-dark" :form="form" message="We have sent your verification link!" />
+                    <alert-success id="success-alert" class="alert-dark mx-101" :form="form" message="We have sent your verification link!" />
                   </form>
                 </div>
               </div>
@@ -53,7 +45,6 @@
           </card>
         </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -98,6 +89,65 @@
     border-radius: 4px;
   }
 
+  .mt-51 {
+    margin-top: 51px;
+  }
+
+  .mx-101 {
+    margin-left: 101px;
+    margin-right: 101px;
+  }
+
+  .mx-140 {
+    margin-left: 140px;
+    margin-right: 140px;
+  }
+
+  .w-188 {
+    width: 188px;
+  }
+
+  #resend-container {
+    height: calc(100vh - 56px);
+  }
+
+  #email-verification {
+    font-size: 50px;
+  }
+
+  input {
+    outline: 0;
+    border-width: 0 0 0px;
+    padding: 0;
+    -webkit-text-fill-color: white;
+    background-color: black !important;
+  }
+
+  input:focus{
+    box-shadow: none !important;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus, 
+  input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px black inset !important;
+    border-radius: 0;
+  }
+
+  #success-alert {
+    margin-bottom: 21px;
+  }
+
+  .btn-1 {
+    background-color: #F38704;
+  }
+
+  .px-53 {
+    padding-left: 53px;
+    padding-right: 53px;
+  }
+
   @media screen and (max-width: 1000px) {
     card {
       padding: 86px 27px;
@@ -138,30 +188,6 @@
       font-size: 0.875rem;
     }
 
-    input {
-      outline: 0;
-      border-width: 0 0 0px;
-      padding: 0;
-      -webkit-text-fill-color: white;
-      background-color: black !important;
-    }
-
-    input:focus{
-      box-shadow: none !important;
-    }
-
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover, 
-    input:-webkit-autofill:focus, 
-    input:-webkit-autofill:active  {
-        -webkit-box-shadow: 0 0 0 30px black inset !important;
-        border-radius: 0;
-    }
-
-    hr {
-      border: 1px solid #6c757d;
-    }
-
     #form-email {
       margin-right: 32px;
       margin-left: 32px;
@@ -178,11 +204,50 @@
     }
 
     #verification-link-text {
+      margin-top: 11px !important;
       font-size: 0.825rem;
     }
 
     #verification-link-text span {
       color: black;
+    }
+
+    #resend-container-2 {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    #card-image {
+      margin-top: 0;
+    }
+
+    #illustrator {
+      width: 154px;
+    }
+
+    #email-verification {
+      margin-top: 75px !important;
+      font-size: 20px;
+    }
+
+    #email-input-container {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    #resend-container {
+      margin-bottom: 0;
+    }
+
+    #resend-container-3 {
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+    }
+
+    #resend {
+      margin-bottom: 0 !important;
+      padding-left: 70px;
+      padding-right: 70px;
     }
   }
 </style>

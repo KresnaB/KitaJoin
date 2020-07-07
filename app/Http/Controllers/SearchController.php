@@ -8,32 +8,34 @@ use Illuminate\Http\Request;
 
 class SearchController extends Controller
 {
-    public function search_result(Request $request)
+    public function search_result($teamName)
     {
-        if($request->has('post_name')){
-            $query = $request->get('post_name');
-            $searchResult = Post::where('post_name', 'LIKE', "%$query%")->get();
-
+        if($teamName!=NULL){
+            $searchResult = Post::where('post_name', 'LIKE', '%'.$teamName.'%')->get();
+            $status="found";
             if($searchResult == "[]"){
                 $searchResult = Post::All();
+                $status="not found";
             }
         }else{
             $searchResult = Post::All();
+            $status="empty name";
         }
 
-        return response()->json($searchResult);
+        return response()->json(['status'=>$status,'searchResult'=>$searchResult]);
     }
-    public function filter_result(Request $request){
-        if($request->has('category')){
-            $query = $request->get('category');
-            $searchResult = Post::where('category', $query)->get();
-
-            if($searchResult == "[]"){
-                $searchResult = Post::All();
+    public function filter_result($category){
+        if($category!=NULL){
+            $filterResult = Post::where('category', $category)->get();
+            $status="found";
+            if($filterResult == "[]"){
+                $filterResult = Post::All();
+                $status="not found";
             }
         }else{
-            $searchResult = Post::All();
+            $filterResult = Post::All();
+            $status="empty name";
         }
-        return response()->json($searchResult);
+        return response()->json(['status'=>$status,'searchResult'=>$filterResult]);
     }
 }
