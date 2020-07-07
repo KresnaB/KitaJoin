@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div id="home-card" class="card-body my-56">  
+  <div id="home-container" class="row">
+    <div id="home-card" class="card-body col my-auto">  
       <div v-if="teams.length">
         <div class="row">
           <div class="col my-auto">
@@ -57,8 +57,8 @@
 
   @media (max-width: 1000px) {
     #home-card {
-      margin-top: 28px;
-      margin-bottom: 28px;
+      margin-top: 56px !important;
+      margin-bottom: 56px !important;
     }
 
     #person-heading, #create-button {
@@ -111,6 +111,10 @@
       padding-right: 24px !important;
     }
   }
+
+  #home-container {
+    height: calc(100vh - 56px);
+  } 
 
   .team-name, .team-category, #create-button {
     font-size: 1.25rem;
