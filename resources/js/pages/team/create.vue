@@ -1,10 +1,26 @@
 <template>
     <div>
-        <div id="not-available" class="d-none d-sm-block d-sm-none d-md-block">
-            <div id="not-available-container" class="bg-white text-center pt-3 pb-3">
-                <fa id="laptop" icon="laptop"></fa>
-                <h1 id="oops" class="font-weight-normal">Oops!</h1>
-                <p class="mt-4 font-weight-normal">Sorry, we're only available in mobile right now. We'll let you know as soon as we are!</p>
+        <div class="d-none d-sm-block d-sm-none d-md-block padding-50">
+            <div class="row">
+                <div class="col">
+                    <img class="mt-5" src="/svg/create_team.svg" id="graphic-image"/>
+                    <h4 class="text-center mt-5">Post your team on the #1 site for finding quality teams</h4>
+                </div>
+                <div class="col mr-50">
+                    <card class="disable-border">
+                        <form @submit.prevent="create" @keydown="form.onKeydown($event)">
+                            <label id="team-name-label" class="text-black mb-0">Team name <span class="text-danger">*</span></label>
+                            <input id="team-name-input-desktop" class="form-control mt-2 border-color-grey" type="text" v-model="form.post_name" required>
+                            <label id="contest-category-label" class="mt-10 mb-0 text-black">Contest category <span class="text-danger">*</span></label>
+                            <input id="contest-category-input-desktop" class="form-control mt-2 border-color-grey" type="text" v-model="form.category" required>
+                            <label id="team-description-label" class="mt-10 mb-0 text-black">Team description <span class="text-danger">*</span></label>
+                            <textarea id="team-description-textarea-desktop" class="form-control mt-2 border-color-grey" rows="4" v-model="form.description" required></textarea>
+                            <v-button class="mt-4 py-15 background-color-1" :loading="form.busy">
+                                Save
+                            </v-button>
+                        </form>
+                    </card>
+                </div>
             </div>
         </div>
         <div class="d-block d-sm-none d-none d-sm-block d-md-none">
@@ -35,9 +51,21 @@
         margin-top: 28px;
     }
 
+    .mt-10 {
+        margin-top: 10px;
+    }
+
     .my-40 {
         margin-top: 40px;
         margin-bottom: 40px;
+    }
+
+    .padding-50 {
+        padding: 50px;
+    }
+
+    .mr-50 {
+        margin-left: 50px;
     }
 
     .background-color-black {
@@ -48,17 +76,26 @@
         background-color: #F38704;
     }
 
+    .disable-border {
+        border: none;
+        padding: 0;
+    }
+
+    .border-color-grey {
+        box-shadow: none !important;
+        border-color: grey;
+    }
+
     #team-name-input, #contest-category-input, #team-description-textarea {
         -webkit-text-fill-color: white; 
     }
 
-    input:focus, textarea:focus{
-        box-shadow: none !important;
-        border-color: white;
+    #team-name-input-desktop, #contest-category-input-desktop, #team-description-textarea-desktop {
+        -webkit-text-fill-color: black; 
     }
 
     #not-available {
-        padding: 120px;
+        padding: 50px;
     }
 
     #not-available p {
@@ -72,15 +109,22 @@
         padding-right: 80px;
     }
 
-    #laptop {
-        width: 180px;
-        height: 216px;
+    #graphic-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 340px;
+        height: 240px;
     }
 
     @media (max-width: 1000px) {
         #team-name-label, #contest-category-label, #team-description-label {
             font-size: 0.825rem;
         }
+        input:focus, textarea:focus{
+        box-shadow: none !important;
+        border-color: white;
+    }
     }
 </style>
 
