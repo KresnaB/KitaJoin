@@ -1,24 +1,38 @@
 <template>
   <div>
-    <div id="not-available" class="d-none d-sm-block d-sm-none d-md-block">
-      <div id="not-available-container" class="bg-white text-center pt-3 pb-3">
-        <fa id="laptop" icon="laptop"></fa>
-        <h1 id="oops" class="font-weight-normal">Oops!</h1>
-        <p class="mt-4 font-weight-normal">Sorry, we're only available in mobile right now. We'll let you know as soon as we are!</p>
-      </div>
-    </div>
-    <div id="home-card" class="d-block d-sm-none d-none d-sm-block d-md-none card-body my-28">  
+    <div id="home-card" class="card-body my-56">  
       <div v-if="teams.length">
-        <h5 id="person-heading-xs" class="d-block d-sm-none mb-23 text-black font-weight-bold">Teams</h5>
-        <h6 id="person-heading" class="d-none d-sm-block">Teams</h6>
-        <card v-for="team in teams" v-if="team.user_id !== user.id" v-bind:key="team.id" class="shadow-sm mb-2 mx-1 background-color-black">
-          <div class="person-row my-4-5">
-            <div class="my-auto">
-              <router-link id="person-name" :to="{ name: 'team.details', params: {id: team.id, user_id: team.user_id}}" class="navbar-brand text-white font-weight-bold">
-                {{ team.post_name }}
-              </router-link>
-            </div>
+        <div class="row">
+          <div class="col my-auto">
+            <h2 id="person-heading">All Teams</h2>
           </div>
+          <div class="col">
+            <router-link id="create-button" class="btn btn-1 float-right px-3 border-0 text-white font-weight-bold" :to="{name: 'create.team'}" tag="button">
+              <fa id="plus-icon" icon="plus" class="my-auto"></fa> <span id="create-team">Create Team</span>
+            </router-link>
+          </div>
+        </div>
+        <div id="header" class="row mx-1 mb-3 border-bottom pb-2">
+          <div class="col-6 px-4">
+            <p class="text-secondary">Name</p>
+          </div>
+          <div class="col-6 px-4">
+            <p class="text-secondary">Category</p>
+          </div>
+        </div>
+        <card v-for="team in teams" v-if="team.user_id !== user.id" v-bind:key="team.id" class="mb-3 mx-1 border-1">
+          <router-link id="person-name" :to="{ name: 'team.details', params: {id: team.id, user_id: team.user_id}}" class="d-block navbar-brand text-black">
+            <div class="my-auto">
+              <div class="row">
+                <div class="data col-sm-6 col-xs-12 px-4">
+                  <p class="team-name font-weight-bold">{{ team.post_name }}</p>
+                </div>
+                <div class="team-category-container data col-sm-6 col-xs-12 px-5">
+                  <p class="team-category text-1 font-weight-bold">{{ team.category }}</p>
+                </div>
+              </div>
+            </div>
+          </router-link>
         </card>
       </div>
       <div v-else class="text-center">
@@ -41,25 +55,65 @@
 
 <style scoped>
 
-  @media (min-width: 1025px) {
-    #person-name, #person-interest {
-      font-size: 3vw;
-    }
-  }
-
   @media (max-width: 1000px) {
-    #person-name{
-      font-size: 1.125rem;
+    #home-card {
+      margin-top: 28px;
+      margin-bottom: 28px;
+    }
+
+    #person-heading, #create-button {
+      margin-top: 0 !important;
+      margin-bottom: 16px !important;
+    }
+
+    #person-heading {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .team-name{
+      font-size: 1rem !important;
+      color: white !important;
+    }
+
+    .team-category {
+      font-size: 0.825rem !important;
+      color: white !important;
+      font-weight: normal !important;
     }
 
     #add-button-icon {
       font-size: 24px;
     }
+
+    #create-button {
+      padding: 0 !important;
+      background-color: white;
+      color: #F38704 !important;
+      font-size: 6vw;
+    }
+
+    #create-team {
+      display: none;
+    }
+
+    #header {
+      display: none;
+    }
+
+    .card {
+      border-radius: 4px !important;
+      background-color: black !important;
+    }
+
+    .team-category-container {
+      padding-left: 24px !important;
+      padding-right: 24px !important;
+    }
   }
 
-  #person-name {
-    color: black;
-    padding: 0;
+  .team-name, .team-category, #create-button {
+    font-size: 1.25rem;
   }
 
   .person-row {
@@ -74,22 +128,20 @@
     margin-bottom: 0;
   }
 
-  .card-body {
-    padding: 12px;
-  }
-
   .card {
     margin-top: 0;
-    border-radius: 12px;
+    border-radius: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   #home-card {
     padding: 0;
   }
 
-  #person-heading, #person-heading-xs{
+  #person-heading, #person-heading-xs, #create-button{
     margin-top: 3vh;
-    margin-bottom: 4vh;
+    margin-bottom: 29px;
   }
 
   #person-heading-xs {
@@ -146,9 +198,9 @@
     height: 216px;
   }
 
-  .my-28 {
-    margin-top: 28px;
-    margin-bottom: 28px;
+  .my-56 {
+    margin-top: 56px;
+    margin-bottom: 56px;
   }
 
   .mb-23 {
@@ -162,6 +214,27 @@
 
   .background-color-black {
     background-color: black;
+  }
+
+  .btn-1 {
+    background-color: #F38704;
+  }
+
+  .border-1 {
+    border-color: #dee2e6;
+  }
+
+  .text-1 {
+    color: #F38704;
+  }
+
+  #create-button {
+    border-radius: 0.25rem;
+  }
+
+  #create-button:focus, #create-button:active {
+    outline: none !important;
+    box-shadow: none;
   }
 </style>
 
