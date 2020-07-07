@@ -82,10 +82,6 @@
       font-weight: normal !important;
     }
 
-    #add-button-icon {
-      font-size: 24px;
-    }
-
     #create-button {
       padding: 0 !important;
       background-color: white;
@@ -115,6 +111,10 @@
   #home-container {
     height: calc(100vh - 56px);
   } 
+
+  #add-button-icon {
+    font-size: 24px;
+  }
 
   .team-name, .team-category, #create-button {
     font-size: 1.25rem;
